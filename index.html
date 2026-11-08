@@ -1,0 +1,3158 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sajid Fashion</title>
+
+    <!-- 🔴 [REPLACE FAVICON]: নিচে আপনার ফেভিকন ফাইলের নাম বসান 🔴 -->
+    <link rel="icon" type="image/png" href="logo_and_favicon/Sajid_Fashion_logo_circle.png">
+
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* ================= 🔴 THEME & COLOR VARIABLES 🔴 ================= */
+        :root {
+            --bg-body: #ffffff;
+            --bg-surface: #ffffff;
+            --bg-card: #ffffff;
+            --bg-sidebar: #ffffff;
+            --text-main: #000000;
+            --text-muted: #64748b;
+            --border-color: #e5e7eb;
+            --input-bg: #f9fafb;
+            --input-text: #000000;
+            --primary: #ff6200;
+            /* নির্দেশিত Primary কালার */
+            --primary-hover: #e55800;
+            --primary-gradient: linear-gradient(135deg, #ff6200 0%, #ff7b29 100%);
+            --accent-green: #10b981;
+            --accent-orange: #ff6200;
+            --text-over-primary: #ffffff;
+            /* Text over Primary */
+            --card-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.06);
+            --modal-overlay: rgba(0, 0, 0, 0.72);
+        }
+
+        [data-theme="dark"] {
+            --bg-body: #0d1117;
+            --bg-surface: #161b22;
+            --bg-card: #161b22;
+            --bg-sidebar: #161b22;
+            --text-main: #ffffff;
+            --text-muted: #9ca3af;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --input-bg: #21262d;
+            --input-text: #ffffff;
+            --primary: #ff6200;
+            --primary-hover: #ff751a;
+            --primary-gradient: linear-gradient(135deg, #ff6200 0%, #ff8533 100%);
+            --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.6);
+            --modal-overlay: rgba(0, 0, 0, 0.88);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            width: 100%;
+            overflow-x: clip;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            min-height: 100vh;
+        }
+
+        /* ================= FULL-WIDTH NAVBAR ================= */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--bg-surface);
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px clamp(16px, 2vw, 36px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.04);
+            backdrop-filter: blur(12px);
+            width: 100%;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: clamp(18px, 1.8vw, 22px);
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .brand-logo img {
+            height: 38px;
+            max-width: 140px;
+            object-fit: contain;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .theme-toggle-btn {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .theme-toggle-btn:hover {
+            transform: scale(1.08);
+        }
+
+        .pill-contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            border: 1px solid var(--border-color);
+        }
+
+        .pill-email {
+            background: rgba(234, 67, 53, 0.1);
+            color: #ea4335;
+        }
+
+        .filter-toggle-btn {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .filter-toggle-btn:hover {
+            transform: scale(1.08);
+        }
+
+        .filter-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: var(--modal-overlay);
+            backdrop-filter: blur(4px);
+            z-index: 99;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .filter-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* ================= FULL-WIDTH HERO VIDEO BANNER ================= */
+        .hero-video-banner {
+            position: relative;
+            width: 100%;
+            height: clamp(280px, 24vw, 360px);
+            overflow: hidden;
+            background-color: #0f172a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.46);
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            color: #ffffff;
+            padding: 0 20px;
+            max-width: 780px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-title {
+            font-size: clamp(24px, 3.4vw, 38px);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-desc {
+            font-size: clamp(13px, 1.3vw, 15px);
+            font-weight: 500;
+            opacity: 0.95;
+            margin-bottom: 22px;
+            line-height: 1.5;
+            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            background: var(--primary);
+            color: var(--text-over-primary);
+            padding: 12px 28px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            box-shadow: 0 8px 24px rgba(255, 98, 0, 0.35);
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-2px);
+            background: var(--primary-hover);
+        }
+
+        /* ================= MAIN STORE LAYOUT ================= */
+        .main-wrapper {
+            width: 100%;
+            max-width: 100%;
+            margin: 28px 0 60px 0;
+            padding: 0 clamp(16px, 2vw, 36px);
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        /* ================= LEFT: STICKY FILTER SIDEBAR ================= */
+        .filter-sidebar {
+            background: var(--bg-sidebar);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 22px;
+            box-shadow: var(--card-shadow);
+            position: -webkit-sticky;
+            position: sticky;
+            top: 80px;
+            align-self: start;
+            z-index: 10;
+        }
+
+        .filter-header-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            font-weight: 800;
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .filter-block {
+            margin-bottom: 20px;
+        }
+
+        .filter-label-with-icon {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .search-field-input {
+            width: 100%;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 10px 14px;
+            font-size: 13px;
+            color: var(--input-text);
+            outline: none;
+        }
+
+        .search-field-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 98, 0, 0.15);
+        }
+
+        .category-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .cat-chip {
+            background: var(--input-bg);
+            border: 1px solid transparent;
+            color: var(--text-main);
+            padding: 8px 12px;
+            border-radius: 9px;
+            font-size: 12.5px;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s;
+        }
+
+        .cat-chip:hover,
+        .cat-chip.active {
+            background: var(--primary);
+            color: var(--text-over-primary);
+            transform: translateX(3px);
+        }
+
+        .price-filter input[type="range"] {
+            width: 100%;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+
+        .price-range-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        /* ================= RIGHT: PRODUCTS SECTION ================= */
+        .products-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .products-grid-info {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            width: 100%;
+        }
+
+        .product-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            position: relative;
+            height: 100%;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.16);
+            border-color: rgba(255, 98, 0, 0.35);
+        }
+
+        .card-thumbnail {
+            position: relative;
+            width: 100%;
+            height: 320px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #ffffff;
+            padding: 6px;
+        }
+
+        .card-thumbnail img {
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover .card-thumbnail img {
+            transform: scale(1.05);
+        }
+
+        .discount-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #ef4444;
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
+            z-index: 2;
+        }
+
+        .card-info {
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-cat {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .card-title {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            line-height: 1.35;
+        }
+
+        .card-bottom-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 12px;
+            border-top: 1px solid var(--border-color);
+            margin-top: auto;
+        }
+
+        .price-wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .price-current {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .price-original {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-decoration: line-through;
+            font-weight: 500;
+        }
+
+        .btn-action-buy {
+            background: var(--primary-gradient);
+            color: var(--text-over-primary);
+            border: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: opacity 0.2s;
+        }
+
+        /* ================= POPUP ORDER MODAL ================= */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: var(--modal-overlay);
+            backdrop-filter: blur(14px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-container {
+            width: 100%;
+            max-width: 1160px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 22px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 560px 1fr;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+            position: relative;
+            transform: scale(0.93) translateY(20px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            max-height: 90vh;
+        }
+
+        .modal-overlay.active .modal-container {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 60;
+            transition: all 0.2s;
+        }
+
+        .modal-close-btn:hover {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+
+        .modal-gallery {
+            background: var(--input-bg);
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            border-right: 1px solid var(--border-color);
+            overflow-y: auto;
+            max-height: 90vh;
+            position: relative;
+        }
+
+        .modal-media-layout {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            width: 100%;
+        }
+
+        .modal-thumbnails {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 76px;
+            flex-shrink: 0;
+            max-height: 520px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            padding: 2px;
+        }
+
+        .modal-thumb {
+            width: 100%;
+            height: 76px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: #ffffff;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+        }
+
+        .modal-thumb:hover,
+        .modal-thumb.active {
+            border-color: var(--primary);
+            transform: scale(1.04);
+        }
+
+        .modal-thumb img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        .modal-main-image-wrapper {
+            position: relative;
+            flex: 1;
+            height: 520px;
+            max-height: 520px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #ffffff;
+            cursor: crosshair;
+            padding: 6px;
+        }
+
+        .modal-main-image {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        .modal-zoom-lens {
+            position: absolute;
+            width: 130px;
+            height: 130px;
+            background: rgba(255, 98, 0, 0.25);
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.15s ease;
+            z-index: 10;
+            display: none;
+        }
+
+        .modal-zoom-result {
+            position: absolute;
+            top: 20px;
+            left: 570px;
+            width: 480px;
+            height: 480px;
+            border-radius: 18px;
+            background-color: var(--bg-surface);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+            z-index: 55;
+            display: none;
+            pointer-events: none;
+            border: 2px solid var(--border-color);
+            overflow: hidden;
+            background-repeat: no-repeat;
+        }
+
+        .modal-discount-tag {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: #ef4444;
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 6px 12px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+            z-index: 5;
+        }
+
+        .modal-stock-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 10px;
+            color: #10b981;
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: auto;
+        }
+
+        .modal-details-panel {
+            padding: 28px 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            overflow-y: auto;
+            max-height: 90vh;
+        }
+
+        .modal-product-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .modal-product-info h2 {
+            font-size: clamp(20px, 1.8vw, 24px);
+            font-weight: 800;
+            line-height: 1.3;
+            color: var(--text-main);
+        }
+
+        .modal-product-category {
+            font-size: 12px;
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .modal-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .modal-price-box {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding: 14px 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .modal-price-box .active-price {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .modal-price-box .old-price {
+            font-size: 14px;
+            color: var(--text-muted);
+            text-decoration: line-through;
+        }
+
+        .discount-badge-modal {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: #fff;
+            padding: 5px 12px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-left: auto;
+        }
+
+        /* 🔴 SELECT SIZE & SIZE GUIDE SIDE-BY-SIDE (INLINE) 🔴 */
+        .size-select-section {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .size-guide-inline-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .size-inline-label {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .btn-size-guide-link {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: underline;
+            cursor: pointer;
+            padding: 0;
+            transition: color 0.2s;
+        }
+
+        .btn-size-guide-link:hover {
+            color: var(--primary);
+        }
+
+        .modal-size-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .modal-size-btn {
+            padding: 9px 14px;
+            border: 2px solid var(--border-color);
+            background: var(--bg-surface);
+            color: var(--text-main);
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            min-width: 52px;
+        }
+
+        .modal-size-btn:hover,
+        .modal-size-btn.active {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: var(--text-over-primary);
+        }
+
+        /* 🔴 QUALITY GUARANTEE ACCORDION (EXACT SCREENSHOT STYLE) 🔴 */
+        .quality-accordion {
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            margin: 6px 0;
+            transition: all 0.2s ease;
+        }
+
+        .quality-accordion-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 2px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-main);
+            user-select: none;
+        }
+
+        .quality-accordion-icon {
+            font-size: 20px;
+            font-weight: 400;
+            color: var(--text-main);
+            line-height: 1;
+        }
+
+        .quality-accordion-body {
+            display: none;
+            padding: 0 4px 18px;
+            font-size: 13.5px;
+            line-height: 1.65;
+            color: var(--text-main);
+        }
+
+        .quality-accordion.active .quality-accordion-body {
+            display: block;
+        }
+
+        .quality-accordion-body ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .quality-accordion-body li {
+            position: relative;
+            padding-left: 20px;
+            color: var(--text-main);
+        }
+
+        .quality-accordion-body li::before {
+            content: "•";
+            position: absolute;
+            left: 4px;
+            font-size: 18px;
+            color: var(--text-main);
+            line-height: 1.2;
+        }
+
+        .modal-specs-table {
+            background: var(--input-bg);
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .modal-specs-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .modal-specs-table th,
+        .modal-specs-table td {
+            padding: 11px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 13px;
+        }
+
+        .modal-specs-table th {
+            font-weight: 600;
+            color: var(--text-muted);
+            width: 40%;
+            background: var(--bg-surface);
+        }
+
+        .modal-specs-table td {
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        .modal-divider {
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .modal-quantity-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .modal-section-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+            background: var(--input-bg);
+        }
+
+        .qty-btn {
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .qty-btn:hover {
+            background: var(--border-color);
+        }
+
+        .quantity-selector input {
+            width: 50px;
+            height: 40px;
+            border: none;
+            background: transparent;
+            text-align: center;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-main);
+            outline: none;
+        }
+
+        .modal-order-form {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .form-header-title {
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .form-subtitle {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .input-row {
+            margin-bottom: 10px;
+        }
+
+        .input-row label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        .input-row input,
+        .input-row select,
+        .input-row textarea {
+            width: 100%;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--input-text);
+            padding: 11px 14px;
+            border-radius: 10px;
+            font-size: 13px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .input-row input:focus,
+        .input-row select:focus,
+        .input-row textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 98, 0, 0.15);
+        }
+
+        .checkbox-row .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            color: var(--text-main);
+            text-transform: none !important;
+            letter-spacing: normal !important;
+            font-weight: 500;
+        }
+
+        .checkbox-row input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: #25d366;
+            cursor: pointer;
+        }
+
+        .btn-confirm-wa {
+            background: #25d366;
+            color: #ffffff;
+            border: none;
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn-confirm-wa:hover {
+            background: #1eb954;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+        }
+
+        /* ================= 🔴 SIZE GUIDE MODAL (VIDEO STYLE) 🔴 ================= */
+        .size-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.72);
+            backdrop-filter: blur(8px);
+            z-index: 2200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .size-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .size-modal-container {
+            width: 100%;
+            max-width: 820px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 26px 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .size-modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 14px;
+        }
+
+        .size-modal-title {
+            font-size: 19px;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .unit-switch-box {
+            display: inline-flex;
+            align-items: center;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 100px;
+            padding: 3px;
+            gap: 3px;
+        }
+
+        .unit-switch-btn {
+            background: transparent;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .unit-switch-btn.active {
+            background: var(--primary);
+            color: var(--text-over-primary);
+        }
+
+        .size-guide-main-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 22px;
+            align-items: center;
+        }
+
+        .size-diagram-box {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .size-diagram-svg {
+            width: 100%;
+            height: auto;
+            max-height: 250px;
+        }
+
+        .size-table-wrapper {
+            overflow-x: auto;
+        }
+
+        .size-guide-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13.5px;
+            text-align: center;
+        }
+
+        .size-guide-table th {
+            background: var(--input-bg);
+            padding: 11px 12px;
+            font-weight: 700;
+            color: var(--text-main);
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .size-guide-table td {
+            padding: 9.5px 12px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        .size-guide-table tr:hover td {
+            background: rgba(255, 98, 0, 0.05);
+        }
+
+        .size-measure-notes {
+            background: var(--input-bg);
+            border-radius: 14px;
+            padding: 16px 18px;
+            font-size: 12.5px;
+            line-height: 1.6;
+            color: var(--text-muted);
+            border-left: 4px solid var(--primary);
+        }
+
+        .size-measure-notes strong {
+            color: var(--text-main);
+        }
+
+        /* ================= NEWSLETTER SECTION ================= */
+        .newsletter-section {
+            width: 100%;
+            background: var(--bg-surface);
+            border-top: 1px solid var(--border-color);
+            padding: 65px 20px 75px;
+            text-align: center;
+        }
+
+        .newsletter-title {
+            font-size: clamp(26px, 3vw, 36px);
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 24px;
+            letter-spacing: -0.5px;
+        }
+
+        .newsletter-form-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            max-width: 580px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            background: var(--input-bg);
+            border: 1.5px solid var(--border-color);
+            border-radius: 12px;
+            padding: 14px 20px;
+            font-size: 14px;
+            color: var(--input-text);
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .newsletter-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 98, 0, 0.15);
+        }
+
+        .btn-newsletter-subscribe {
+            background: var(--primary);
+            color: var(--text-over-primary);
+            border: none;
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 14.5px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+            box-shadow: 0 4px 16px rgba(255, 98, 0, 0.3);
+        }
+
+        .btn-newsletter-subscribe:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        /* ================= 🔴 FOOTER (#131921, ONLY FB & YT) 🔴 ================= */
+        footer {
+            background-color: #131921 !important;
+            color: #ffffff;
+            padding: 45px 20px 35px;
+            width: 100%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-social-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 26px;
+            margin-bottom: 22px;
+        }
+
+        .footer-social-link {
+            color: #ffffff;
+            opacity: 0.88;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .footer-social-link:hover {
+            opacity: 1;
+            transform: scale(1.2);
+            color: var(--primary);
+        }
+
+        .footer-copyright {
+            font-size: 13.5px;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 0.3px;
+            font-weight: 500;
+        }
+
+        /* ================= FLOATING WHATSAPP CHAT WIDGET ================= */
+        .wa-floating-anchor {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .wa-chat-window {
+            width: 320px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            margin-bottom: 12px;
+            display: none;
+            flex-direction: column;
+            animation: zoomFade 0.2s ease-out;
+        }
+
+        .wa-chat-window.active {
+            display: flex;
+        }
+
+        @keyframes zoomFade {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .wa-chat-top {
+            background: #25d366;
+            color: #ffffff;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .wa-chat-top h4 {
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .wa-chat-top p {
+            font-size: 11px;
+            opacity: 0.9;
+        }
+
+        .wa-chat-inputs {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .wa-chat-inputs input,
+        .wa-chat-inputs textarea {
+            width: 100%;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 13px;
+            color: var(--input-text);
+            outline: none;
+        }
+
+        .btn-send-wa-chat {
+            background: #25d366;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .wa-round-trigger {
+            width: 58px;
+            height: 58px;
+            background: #25d366;
+            color: #ffffff;
+            border: none;
+            border-radius: 50%;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        .wa-round-trigger:hover {
+            transform: scale(1.08);
+        }
+
+        /* ================= ORDER ALERTS ================= */
+        .order-success-alert {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 2300;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .order-success-alert .alert-content {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 32px;
+            max-width: 380px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+        }
+
+        .order-success-alert .alert-icon {
+            color: #10b981;
+            margin-bottom: 16px;
+        }
+
+        .order-success-alert h3 {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .order-success-alert p {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        .order-success-alert button {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .order-success-alert button:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ================= 🔴 MEDIA QUERIES 🔴 ================= */
+        @media (max-width: 1250px) {
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 1000px) {
+            .modal-container {
+                max-width: 100%;
+                grid-template-columns: 460px 1fr;
+            }
+
+            .modal-zoom-result {
+                left: 470px;
+                width: 380px;
+                height: 380px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .main-wrapper {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0 16px;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .filter-sidebar {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 100;
+                border-radius: 0;
+                border: none;
+                max-height: 100vh;
+                overflow-y: auto;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+            }
+
+            .filter-sidebar.open {
+                transform: translateX(0);
+            }
+
+            .filter-toggle-btn {
+                display: flex !important;
+            }
+
+            .modal-container {
+                grid-template-columns: 1fr;
+                max-width: 95%;
+                max-height: 90vh;
+                border-radius: 20px;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .modal-gallery {
+                padding: 20px;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                max-height: none;
+                overflow: visible;
+            }
+
+            .modal-main-image-wrapper {
+                cursor: default;
+                height: 420px;
+            }
+
+            .modal-zoom-result,
+            .modal-zoom-lens {
+                display: none !important;
+            }
+
+            .size-guide-main-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            header {
+                padding: 10px 14px;
+            }
+
+            .brand-logo {
+                font-size: 16px;
+            }
+
+            .header-actions {
+                gap: 6px;
+            }
+
+            .theme-toggle-btn,
+            .filter-toggle-btn {
+                width: 36px;
+                height: 36px;
+            }
+
+            .pill-contact-btn {
+                padding: 8px;
+                border-radius: 50%;
+            }
+
+            .pill-contact-btn span {
+                display: none;
+            }
+
+            .hero-video-banner {
+                height: 250px;
+            }
+
+            .hero-title {
+                font-size: 21px;
+            }
+
+            .hero-desc {
+                font-size: 12px;
+                margin-bottom: 16px;
+            }
+
+            .hero-btn {
+                padding: 10px 22px;
+                font-size: 13px;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 12px !important;
+            }
+
+            .product-card {
+                border-radius: 14px;
+            }
+
+            .card-thumbnail {
+                height: 210px !important;
+                padding: 6px !important;
+            }
+
+            .card-info {
+                padding: 10px;
+            }
+
+            .card-title {
+                font-size: 12px;
+                margin-bottom: 4px;
+                line-height: 1.3;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+
+            .card-cat {
+                font-size: 9px;
+            }
+
+            .price-current {
+                font-size: 14px;
+            }
+
+            .price-original {
+                font-size: 10px;
+            }
+
+            .btn-action-buy {
+                padding: 6px 10px;
+                font-size: 11px;
+            }
+
+            .newsletter-section {
+                padding: 50px 16px 60px;
+            }
+
+            .newsletter-form-box {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .newsletter-input,
+            .btn-newsletter-subscribe {
+                width: 100%;
+            }
+
+            .modal-container {
+                max-width: 100%;
+                max-height: 92vh;
+                border-radius: 16px;
+            }
+
+            .modal-overlay {
+                padding: 10px;
+            }
+
+            .modal-gallery {
+                padding: 16px;
+            }
+
+            .modal-media-layout {
+                flex-direction: column-reverse;
+                gap: 10px;
+            }
+
+            .modal-thumbnails {
+                flex-direction: row;
+                width: 100%;
+                max-height: none;
+                overflow-x: auto;
+            }
+
+            .modal-thumb {
+                flex: 0 0 62px;
+                width: 62px;
+                height: 62px;
+            }
+
+            .modal-main-image-wrapper {
+                height: 300px;
+            }
+
+            .modal-details-panel {
+                padding: 16px;
+            }
+
+            .modal-product-info h2 {
+                font-size: 18px;
+            }
+
+            .modal-price-box .active-price {
+                font-size: 22px;
+            }
+
+            .modal-order-form {
+                padding-bottom: 25px;
+            }
+
+            .btn-confirm-wa {
+                position: relative !important;
+                bottom: auto !important;
+                width: 100% !important;
+                border-radius: 12px !important;
+                padding: 15px !important;
+                font-size: 15px !important;
+                margin-top: 15px !important;
+                margin-bottom: 20px !important;
+                box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4) !important;
+            }
+
+            .wa-floating-anchor {
+                display: none !important;
+            }
+
+            .size-modal-container {
+                padding: 20px 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <header>
+        <a href="#" class="brand-logo">
+            <!-- 🔴 [REPLACE LOGO]: নিচে src-এ আপনার ব্র্যান্ড লোগো ফাইলের পাথ বসান 🔴 -->
+            <img src="logo_and_favicon/transparent logo.png" alt="Sajid Fashion Logo">
+        </a>
+
+        <div class="header-actions">
+            <!-- LIGHT / DARK MODE TOGGLE (Moon/Sun) -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Toggle Light/Dark">
+                <i data-lucide="moon" style="width:18px; height:18px;"></i>
+            </button>
+
+            <!-- Mobile Filter Toggle -->
+            <button class="filter-toggle-btn" id="filterToggle" title="Open Filters">
+                <i data-lucide="sliders-horizontal" style="width:18px; height:18px;"></i>
+            </button>
+
+            <!-- WhatsApp -->
+            <a href="https://wa.me/8801782416596" target="_blank" class="pill-contact-btn"
+                style="background: rgba(37, 211, 102, 0.1); color: #25d366; border-color: rgba(37, 211, 102, 0.3);">
+                <i data-lucide="message-square" style="width:15px; height:15px;"></i>
+                <span>WhatsApp</span>
+            </a>
+
+            <!-- Email -->
+            <a href="mailto:support@aurastore.com?subject=Inquiry" class="pill-contact-btn pill-email">
+                <i data-lucide="mail" style="width:15px; height:15px;"></i>
+                <span>Email</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- ================= FULL-WIDTH HERO VIDEO BANNER ================= -->
+    <section class="hero-video-banner">
+        <!-- 🔴 [REPLACE VIDEO]: নিচে src-এ আপনার ভিডিও লিঙ্ক বসাবেন 🔴 -->
+        <video class="hero-video" autoplay muted loop playsinline
+            poster="website_banner_video/Hands_holding_beige_t-shirt_1080p_20261008190220.mp4">
+            <source src="website_banner_video/Hands_holding_beige_t-shirt_1080p_20261008190220.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Welcome to Sajid Fashion!</h1>
+            <p class="hero-desc">We're a clothing brand committed to quality, inspired by your trust.</p>
+            <a href="#productsGrid" class="hero-btn">
+                <i data-lucide="shirt" style="width:18px; height:18px;"></i>
+                <span>Browse new merch</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ================= MAIN STORE SECTION ================= -->
+    <div class="main-wrapper" id="shopSection">
+
+        <!-- ================= LEFT: STICKY FILTER SIDEBAR ================= -->
+        <aside class="filter-sidebar">
+            <div class="filter-header-title">
+                <i data-lucide="sliders-horizontal" style="width:18px; height:18px;"></i>
+                <span>Filter Products</span>
+            </div>
+
+            <div class="filter-block">
+                <label class="filter-label-with-icon">
+                    <i data-lucide="search" style="width:15px; height:15px; color:var(--primary);"></i>
+                    <span>Search by Name</span>
+                </label>
+                <input type="text" id="searchInput" class="search-field-input" placeholder="Type keywords..."
+                    oninput="applyFilters()">
+            </div>
+
+            <div class="filter-block">
+                <label class="filter-label-with-icon">
+                    <i data-lucide="layout-grid" style="width:15px; height:15px; color:var(--primary);"></i>
+                    <span>Filter by Category</span>
+                </label>
+                <div class="category-list">
+                    <button class="cat-chip active" data-cat="all" onclick="setCategory('all', this)">
+                        <span>All Items</span>
+                        <span id="badge-all">17</span>
+                    </button>
+                    <button class="cat-chip" data-cat="bold-statements" onclick="setCategory('bold-statements', this)">
+                        <span>Bold Statements</span>
+                        <span>1</span>
+                    </button>
+                    <button class="cat-chip" data-cat="dad-life" onclick="setCategory('dad-life', this)">
+                        <span>Dad Life</span>
+                        <span>4</span>
+                    </button>
+                    <button class="cat-chip" data-cat="nature-adventure"
+                        onclick="setCategory('nature-adventure', this)">
+                        <span>Nature & Adventure</span>
+                        <span>2</span>
+                    </button>
+                    <button class="cat-chip" data-cat="daily-inspiration"
+                        onclick="setCategory('daily-inspiration', this)">
+                        <span>Daily Inspiration</span>
+                        <span>4</span>
+                    </button>
+                    <button class="cat-chip" data-cat="daily-life" onclick="setCategory('daily-life', this)">
+                        <span>Daily Life</span>
+                        <span>2</span>
+                    </button>
+                    <button class="cat-chip" data-cat="growth-mindset" onclick="setCategory('growth-mindset', this)">
+                        <span>Growth Mindset</span>
+                        <span>4</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="filter-block price-filter">
+                <label class="filter-label-with-icon">
+                    <i data-lucide="tag" style="width:15px; height:15px; color:var(--primary);"></i>
+                    <span>Filter by Price</span>
+                </label>
+                <input type="range" id="priceRange" min="450" max="1000" step="50" value="1000"
+                    oninput="applyFilters()">
+                <div class="price-range-info">
+                    <span>৳ 450</span>
+                    <span>Max: ৳ <strong id="priceDisplay">1,000</strong></span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Filter Overlay (Mobile) -->
+        <div class="filter-overlay" id="filterOverlay" onclick="closeFilterSidebar()"></div>
+
+        <!-- ================= RIGHT: PRODUCTS SECTION ================= -->
+        <main class="products-section">
+            <div class="products-grid-info">
+                Showing <strong id="visibleProductsCount">6</strong> Products
+            </div>
+
+            <div class="products-grid" id="productsGrid"></div>
+        </main>
+    </div>
+
+    <!-- ================= NEWSLETTER SECTION ================= -->
+    <section class="newsletter-section">
+        <h2 class="newsletter-title">Join our newsletter</h2>
+        <form class="newsletter-form-box" onsubmit="handleNewsletterSubmit(event)">
+            <input type="email" id="newsletterEmailInput" class="newsletter-input" placeholder="Email address" required>
+            <button type="submit" class="btn-newsletter-subscribe">Subscribe</button>
+        </form>
+    </section>
+
+    <!-- ================= 🔴 FOOTER (#131921, ONLY FACEBOOK & YOUTUBE) 🔴 ================= -->
+    <footer>
+        <div class="footer-social-row">
+            <!-- 🔴 [REPLACE LINKS]: ফেসবুক ও ইউটিউব লিঙ্ক বসাবেন 🔴 -->
+            <a href="https://facebook.com" target="_blank" class="footer-social-link" title="Facebook">
+                <i data-lucide="facebook" style="width:22px; height:22px;"></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" class="footer-social-link" title="YouTube">
+                <i data-lucide="youtube" style="width:22px; height:22px;"></i>
+            </a>
+        </div>
+        <div class="footer-copyright">
+            © 2026 Sajid Fashion
+        </div>
+    </footer>
+
+    <!-- ================= MODAL: POPUP ORDER FORM ================= -->
+    <div class="modal-overlay" id="orderModal">
+        <div class="modal-container">
+            <button class="modal-close-btn" onclick="closeOrderModal()">
+                <i data-lucide="x" style="width:18px; height:18px;"></i>
+            </button>
+
+            <!-- DARAZ STYLE FLYOUT ZOOM RESULT PANEL -->
+            <div class="modal-zoom-result" id="zoomResult"></div>
+
+            <div class="modal-gallery">
+                <div class="modal-media-layout">
+                    <div class="modal-thumbnails" id="modalThumbnails"></div>
+                    <div class="modal-main-image-wrapper" id="mainImageWrapper">
+                        <span class="modal-discount-tag" id="modalDiscount">SAVE 20%</span>
+                        <img id="modalProductImg" src="" alt="Product Image" class="modal-main-image">
+                        <div class="modal-zoom-lens" id="zoomLens"></div>
+                    </div>
+                </div>
+
+                <div class="modal-stock-status" id="modalStockStatus">
+                    <i data-lucide="check-circle" style="width:16px; height:16px;"></i>
+                    <span>Made to order, just for you!</span>
+                </div>
+            </div>
+
+            <div class="modal-details-panel">
+                <div class="modal-product-info">
+                    <h2 id="modalProductTitle">Product Title</h2>
+                    <p class="modal-product-category" id="modalProductCategory">Category</p>
+                    <p id="modalProductDesc" class="modal-desc"></p>
+
+                    <div class="modal-price-box">
+                        <span class="active-price">৳ <span id="modalProductPrice">0</span></span>
+                        <span class="old-price">৳ <span id="modalProductOldPrice">0</span></span>
+                        <span class="discount-badge-modal" id="modalDiscountBadge">SAVE 20%</span>
+                    </div>
+                </div>
+
+                <!-- 🔴 SELECT SIZE & SIZE GUIDE INLINE (হুবহু ভিডিওর মতো পাশাপাশি) 🔴 -->
+                <div class="size-select-section" id="sizeRow" style="display: none;">
+                    <div class="size-guide-inline-row">
+                        <span class="size-inline-label">Select size:</span>
+                        <button type="button" class="btn-size-guide-link" onclick="openSizeGuideModal()">Size
+                            guide</button>
+                    </div>
+                    <div class="modal-size-buttons" id="modalSizeButtons"></div>
+                </div>
+
+                <!-- 🔴 QUALITY GUARANTEE & RETURNS ACCORDION (স্ক্রিনশটের মতো ক্লিন লুক) 🔴 -->
+                <div class="quality-accordion" id="qualityAccordion">
+                    <div class="quality-accordion-header" onclick="toggleQualityAccordion()">
+                        <span>Quality Guarantee & Returns</span>
+                        <span class="quality-accordion-icon" id="accordionIcon">+</span>
+                    </div>
+                    <div class="quality-accordion-body">
+                        <ul>
+                            <li>Quality is guaranteed. If your order arrives with a printing error or a visible defect,
+                                tell us and we will replace it or refund you, whichever you prefer.</li>
+                            <li>Every item is made to order, so we cannot accept returns or exchanges for sizing issues
+                                or a change of mind.</li>
+                            <li><strong>Before you order:</strong> Please check the Size guide carefully to choose the
+                                right fit.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="modal-specs-table" id="modalSpecsTable"></div>
+                <div class="modal-divider"></div>
+
+                <div class="modal-quantity-section">
+                    <label class="modal-section-label">Quantity</label>
+                    <div class="quantity-selector">
+                        <button type="button" class="qty-btn" onclick="changeQty(-1)" aria-label="Decrease">−</button>
+                        <input type="number" id="modalQty" value="1" min="1" max="99" readonly>
+                        <button type="button" class="qty-btn" onclick="changeQty(1)" aria-label="Increase">+</button>
+                    </div>
+                </div>
+
+                <div class="modal-divider"></div>
+
+                <div class="modal-order-form">
+                    <h4 class="form-header-title">Confirm Your Order</h4>
+                    <p class="form-subtitle">Fill in minimal details to instantly confirm via WhatsApp.</p>
+
+                    <form id="orderForm" onsubmit="handleOrderSubmit(event)">
+                        <input type="hidden" id="selectedSize" name="size">
+
+                        <div class="input-row">
+                            <label>Your Full Name *</label>
+                            <input type="text" id="custName" placeholder="e.g. Tanvir Ahmed" required>
+                        </div>
+
+                        <div class="input-row">
+                            <label>Contact Phone Number *</label>
+                            <input type="tel" id="custPhone" placeholder="017XXXXXXXX" required>
+                        </div>
+
+                        <div class="input-row">
+                            <label>Email Address</label>
+                            <input type="email" id="custEmail" placeholder="you@example.com">
+                        </div>
+
+                        <div class="input-row checkbox-row">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="custNewsletter" checked>
+                                <span>Email me with news and offers</span>
+                            </label>
+                        </div>
+
+                        <div class="input-row" id="variantRow">
+                            <label id="dynamicVariantLabel">Select Option *</label>
+                            <select id="dynamicVariantSelect" required></select>
+                        </div>
+
+                        <div class="input-row">
+                            <label>Delivery Address *</label>
+                            <textarea id="custAddress" rows="2" placeholder="House, Road, Area, City"
+                                required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-confirm-wa">
+                            <i data-lucide="send" style="width:16px; height:16px;"></i>
+                            <span>Confirm</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= 🔴 SIZE GUIDE MODAL (REALISTIC TEE & ACCURATE DATA) 🔴 ================= -->
+    <div class="size-modal-overlay" id="sizeGuideModal" onclick="closeSizeGuideOnOverlay(event)">
+        <div class="size-modal-container">
+            <div class="size-modal-header">
+                <h3 class="size-modal-title" id="sizeGuideModalTitle">Tee Size Guide</h3>
+                <div style="display: flex; align-items: center; gap: 14px;">
+                    <!-- IN / CM SWITCH -->
+                    <div class="unit-switch-box">
+                        <button type="button" class="unit-switch-btn" id="unitInBtn"
+                            onclick="setSizeUnit('in')">in</button>
+                        <button type="button" class="unit-switch-btn active" id="unitCmBtn"
+                            onclick="setSizeUnit('cm')">cm</button>
+                    </div>
+                    <button class="modal-close-btn" style="position: static; width:34px; height:34px;"
+                        onclick="closeSizeGuideModal()">
+                        <i data-lucide="x" style="width:16px; height:16px;"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="size-guide-main-layout">
+                <!-- 🔴 নিখুঁত বাস্তবধর্মী ফ্ল্যাট-লে টি-শার্ট ডায়াগ্রাম (A, B, C লাইনসহ) 🔴 -->
+                <div class="size-diagram-box">
+                    <img src="t_shirt_mockup_with_size_guide_image/Garment_measurement_diagram_with…_012e479c_2K.jpg"
+                        alt="T-Shirt Size Guide Diagram"
+                        style="width: 100%; height: auto; max-width: 100%; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+                </div>
+
+                <!-- 🔴 ডায়নামিক সাইজ টেবিল 🔴 -->
+                <div class="size-table-wrapper">
+                    <table class="size-guide-table" id="sizeGuideTable">
+                        <!-- JS দ্বারা রেন্ডার হবে -->
+                    </table>
+                </div>
+            </div>
+
+            <!-- 🔴 পরিমাপের সঠিক তথ্য ও নির্দেশিকা 🔴 -->
+            <div class="size-measure-notes">
+                <p style="margin-bottom: 6px;"><strong>Measurement Guide:</strong> These are garment measurements (laid
+                    flat), not body measurements. For the best fit, lay a T-shirt that fits you well on a flat surface
+                    and compare it with the chart.</p>
+                <p><strong>A (Length):</strong> Measured from the highest point of the shoulder, next to the collar,
+                    straight down to the bottom hem.</p>
+                <p><strong>B (Width):</strong> Measured straight across the chest, from one side seam to the other,
+                    about 1 inch (2.5 cm) below the armpit.</p>
+                <p><strong>C (Sleeve Length):</strong> Measured from the center of the back neck seam to the end of the
+                    sleeve hem.</p>
+                <p style="font-size: 11.5px; margin-top: 6px; opacity: 0.85;">* Measurements may vary by up to &plusmn;1
+                    inch (&plusmn;2.5 cm) due to the manufacturing process and natural fabric relaxation.</p>
+                <p style="font-size: 11.5px; margin-top: 6px; opacity: 0.85;"><strong>Fit:</strong> Unisex, regular fit.
+                    If you are between two sizes, we recommend choosing the larger size.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= FLOATING WHATSAPP CHAT WIDGET ================= -->
+    <div class="wa-floating-anchor">
+        <div class="wa-chat-window" id="waChatBox">
+            <div class="wa-chat-top">
+                <div>
+                    <h4>Direct Support</h4>
+                    <p>Typically replies immediately</p>
+                </div>
+                <button onclick="toggleWaChat()" style="background:none; border:none; color:white; cursor:pointer;">
+                    <i data-lucide="x" style="width:18px; height:18px;"></i>
+                </button>
+            </div>
+            <div class="wa-chat-inputs">
+                <input type="text" id="waDirectName" placeholder="Your Name" required>
+                <textarea id="waDirectMsg" rows="3" placeholder="Write your question or request..." required></textarea>
+                <button class="btn-send-wa-chat" onclick="sendDirectChatMessage()">
+                    <i data-lucide="send" style="width:14px; height:14px;"></i>
+                    <span>Send Message</span>
+                </button>
+            </div>
+        </div>
+
+        <button class="wa-round-trigger" onclick="toggleWaChat()" title="Chat with us on WhatsApp">
+            <i data-lucide="message-square" style="width:26px; height:26px;"></i>
+        </button>
+    </div>
+
+    <!-- ================= SCRIPTS ================= -->
+    <script>
+        const MY_WHATSAPP_NUMBER = "8801782416596";
+
+        const productsData = [
+            {
+                id: 1,
+                name: "No Time for Debate Graphic Tee",
+                category: "bold-statements",
+                price: 450,
+                oldPrice: 600,
+                discount: "SAVE 25%",
+                image: "T_shirts_image/no_time_for_debates/no_time_for_debate_t_shirt_black_mockup.png",
+                images: ["T_shirts_image/no_time_for_debates/no_time_for_debate_t_shirt_black_mockup.png"],
+                desc: "Bold black-and-purple typography tee featuring \"NO TIME FOR DEBATE\" and \"ACTION SPEAKS LOUDER THAN WORDS.\" This Comfort Colors garment-dyed heavyweight t-shirt blends streetwear attitude with a powerful message for everyday casual style.",
+                variantType: "Color",
+                variants: ["Black"],
+                sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"],
+                specs: {
+                    "Fabric": "100% Ring-Spun Cotton",
+                    "Weight": "Heavyweight (6.1 oz / 206 GSM)",
+                    "Fit": "Relaxed Fit",
+                    "Features": "Garment-Dyed, Pre-Shrunk",
+                    "Care": "Machine Wash Cold",
+                    "Origin": "Ethically Made"
+                }
+            },
+            {
+                id: 2,
+                name: "Dad Mode On Graphic Tee",
+                category: "dad-life",
+                price: 450,
+                oldPrice: 600,
+                discount: "SAVE 25%",
+                image: "T_shirts_image/dad_mode_on_t_shirt_black_mockup/dad_mode_on_t_shirt_black_mockup.png",
+                images: ["T_shirts_image/dad_mode_on_t_shirt_black_mockup/dad_mode_on_t_shirt_black_mockup.png"],
+                desc: "Celebrate fatherhood with this bold \"DAD MODE ON\" graphic tee. Perfect for dads who wear their role with pride. Comfort Colors garment-dyed heavyweight t-shirt for everyday casual style.",
+                variantType: "Color",
+                variants: ["Black"],
+                sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"],
+                specs: {
+                    "Fabric": "100% Ring-Spun Cotton",
+                    "Weight": "Heavyweight (6.1 oz / 206 GSM)",
+                    "Fit": "Relaxed Fit",
+                    "Features": "Garment-Dyed, Pre-Shrunk",
+                    "Care": "Machine Wash Cold",
+                    "Origin": "Ethically Made"
+                }
+            },
+            {
+                id: 3,
+                name: "The Mountains Are Calling Graphic Tee",
+                category: "nature-adventure",
+                price: 450,
+                oldPrice: 600,
+                discount: "SAVE 25%",
+                image: "T_shirts_image/the_mountains_are_calling_t_shirt_black_mockup/the_mountains_are_calling_t_shirt_black_mockup.png",
+                images: ["T_shirts_image/the_mountains_are_calling_t_shirt_black_mockup/the_mountains_are_calling_t_shirt_black_mockup.png"],
+                desc: "Answer the call of the wild with this adventure-inspired \"THE MOUNTAINS ARE CALLING\" graphic tee. Perfect for outdoor enthusiasts and nature lovers. Comfort Colors garment-dyed heavyweight t-shirt.",
+                variantType: "Color",
+                variants: ["Black"],
+                sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"],
+                specs: {
+                    "Fabric": "100% Ring-Spun Cotton",
+                    "Weight": "Heavyweight (6.1 oz / 206 GSM)",
+                    "Fit": "Relaxed Fit",
+                    "Features": "Garment-Dyed, Pre-Shrunk",
+                    "Care": "Machine Wash Cold",
+                    "Origin": "Ethically Made"
+                }
+            },
+            {
+                id: 4,
+                name: "Be The Change Graphic Tee",
+                category: "daily-inspiration",
+                price: 450,
+                oldPrice: 600,
+                discount: "SAVE 25%",
+                image: "T_shirts_image/be_the_change_t_shirt_black_mockup/be_the_change_t_shirt_black_mockup.png",
+                images: ["T_shirts_image/be_the_change_t_shirt_black_mockup/be_the_change_t_shirt_black_mockup.png"],
+                desc: "Inspire positive change with this motivational \"BE THE CHANGE\" graphic tee. A powerful message for everyday wear. Comfort Colors garment-dyed heavyweight t-shirt with relaxed streetwear fit.",
+                variantType: "Color",
+                variants: ["Black"],
+                sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"],
+                specs: {
+                    "Fabric": "100% Ring-Spun Cotton",
+                    "Weight": "Heavyweight (6.1 oz / 206 GSM)",
+                    "Fit": "Relaxed Fit",
+                    "Features": "Garment-Dyed, Pre-Shrunk",
+                    "Care": "Machine Wash Cold",
+                    "Origin": "Ethically Made"
+                }
+            },
+            {
+                id: 5,
+                name: "Coffee Time Graphic Tee",
+                category: "daily-life",
+                price: 450,
+                oldPrice: 600,
+                discount: "SAVE 25%",
+                image: "T_shirts_image/coffee_time_t_shirt_black_mockup/coffee_time_t_shirt_black_mockup.png",
+                images: ["T_shirts_image/coffee_time_t_shirt_black_mockup/coffee_time_t_shirt_black_mockup.png"],
+                desc: "Fuel your day with this coffee lover's \"COFFEE TIME\" graphic tee. Perfect for morning routines and caffeine enthusiasts. Comfort Colors garment-dyed heavyweight t-shirt with relaxed fit.",
+                variantType: "Color",
+                variants: ["Black"],
+                sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"],
+                specs: {
+                    "Fabric": "100% Ring-Spun Cotton",
+                    "Weight": "Heavyweight (6.1 oz / 206 GSM)",
+                    "Fit": "Relaxed Fit",
+                    "Features": "Garment-Dyed, Pre-Shrunk",
+                    "Care": "Machine Wash Cold",
+                    "Origin": "Ethically Made"
+                }
+            },
+            {
+                id: 6,
+                name: "Dad Jokes Loading Graphic Tee",
+                category: "dad-life",
+                price: 450,
+                oldPrice: 600,
+                discount: "SAVE 25%",
+                image: "T_shirts_image/dad_jokes_loading_t_shirt_black_mockup/dad_jokes_loading_t_shirt_black_mockup.png",
+                images: ["T_shirts_image/dad_jokes_loading_t_shirt_black_mockup/dad_jokes_loading_t_shirt_black_mockup.png"],
+                desc: "Warning: Dad jokes loading! This humorous \"DAD JOKES LOADING\" graphic tee is perfect for the pun-loving father. Comfort Colors garment-dyed heavyweight t-shirt with relaxed streetwear style.",
+                variantType: "Color",
+                variants: ["Black"],
+                sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"],
+                specs: {
+                    "Fabric": "100% Ring-Spun Cotton",
+                    "Weight": "Heavyweight (6.1 oz / 206 GSM)",
+                    "Fit": "Relaxed Fit",
+                    "Features": "Garment-Dyed, Pre-Shrunk",
+                    "Care": "Machine Wash Cold",
+                    "Origin": "Ethically Made"
+                }
+            },
+            {
+                id: 7,
+                name: "Papa Duties Never Retire Graphic Tee",
+                category: "dad-life",
+                price: 450,
+                oldPrice: 600,
+                discount: "SAVE 25%",
+                image: "T_shirts_image/papa_duties_never_retire_t_shirt_black_mockup/papa_duties_never_retire_t_shirt_black_mockup.png",
+                images: ["T_shirts_image/papa_duties_never_retire_t_shirt_black_mockup/papa_duties_never_retire_t_shirt_black_mockup.png"],
+                desc: "Honor the lifelong commitment of fatherhood with this \"PAPA DUTIES NEVER RETIRE\" graphic tee. A tribute to dads who never stop caring. Comfort Colors garment-dyed heavyweight t-shirt.",
+                variantType: "Color",
+                variants: ["Black"],
+                sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"],
+                specs: {
+                    "Fabric": "100% Ring-Spun Cotton",
+                    "Weight": "Heavyweight (6.1 oz / 206 GSM)",
+                    "Fit": "Relaxed Fit",
+                    "Features": "Garment-Dyed, Pre-Shrunk",
+                    "Care": "Machine Wash Cold",
+                    "Origin": "Ethically Made"
+                }
+            },
+            {
+                id: 8,
+                name: "Progress Over Perfection Graphic Tee",
+                category: "growth-mindset",
+                price: 450,
+                oldPrice: 600,
+                discount: "SAVE 25%",
+                image: "T_shirts_image/progress_over_perfection_t_shirt_black_mockup/progress_over_perfection_t_shirt_black_mockup.png",
+                images: ["T_shirts_image/progress_over_perfection_t_shirt_black_mockup/progress_over_perfection_t_shirt_black_mockup.png"],
+                desc: "Embrace growth with this motivational \"PROGRESS OVER PERFECTION\" graphic tee. Perfect for those who value continuous improvement over flawless results. Comfort Colors garment-dyed heavyweight t-shirt.",
+                variantType: "Color",
+                variants: ["Black"],
+                sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"],
+                specs: {
+                    "Fabric": "100% Ring-Spun Cotton",
+                    "Weight": "Heavyweight (6.1 oz / 206 GSM)",
+                    "Fit": "Relaxed Fit",
+                    "Features": "Garment-Dyed, Pre-Shrunk",
+                    "Care": "Machine Wash Cold",
+                    "Origin": "Ethically Made"
+                }
+            },
+            {
+                id: 9,
+                name: "Proud To Be Cool Dad Graphic Tee",
+                category: "dad-life",
+                price: 450,
+                oldPrice: 600,
+                discount: "SAVE 25%",
+                image: "T_shirts_image/proud_to_be_cool_dad_t_shirt_black_mockup/proud_to_be_cool_dad_t_shirt_black_mockup.png",
+                images: ["T_shirts_image/proud_to_be_cool_dad_t_shirt_black_mockup/proud_to_be_cool_dad_t_shirt_black_mockup.png"],
+                desc: "Show off your cool dad status with this \"PROUD TO BE COOL DAD\" graphic tee. Perfect for fathers who bring the fun. Comfort Colors garment-dyed heavyweight t-shirt with relaxed streetwear fit.",
+                variantType: "Color",
+                variants: ["Black"],
+                sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"],
+                specs: {
+                    "Fabric": "100% Ring-Spun Cotton",
+                    "Weight": "Heavyweight (6.1 oz / 206 GSM)",
+                    "Fit": "Relaxed Fit",
+                    "Features": "Garment-Dyed, Pre-Shrunk",
+                    "Care": "Machine Wash Cold",
+                    "Origin": "Ethically Made"
+                }
+            },
+            {
+                id: 10,
+                name: "Stronger Every Day Graphic Tee",
+                category: "daily-inspiration",
+                price: 450,
+                oldPrice: 600,
+                discount: "SAVE 25%",
+                image: "T_shirts_image/stronger_every_day_t_shirt_black_mockup/stronger_every_day_t_shirt_black_mockup.png",
+                images: ["T_shirts_image/stronger_every_day_t_shirt_black_mockup/stronger_every_day_t_shirt_black_mockup.png"],
+                desc: "Celebrate daily growth with this empowering \"STRONGER EVERY DAY\" graphic tee. A reminder that small steps lead to big gains. Comfort Colors garment-dyed heavyweight t-shirt.",
+                variantType: "Color",
+                variants: ["Black"],
+                sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"],
+                specs: {
+                    "Fabric": "100% Ring-Spun Cotton",
+                    "Weight": "Heavyweight (6.1 oz / 206 GSM)",
+                    "Fit": "Relaxed Fit",
+                    "Features": "Garment-Dyed, Pre-Shrunk",
+                    "Care": "Machine Wash Cold",
+                    "Origin": "Ethically Made"
+                }
+            },
+            {
+                id: 11,
+                name: "We Are On A Break Graphic Tee",
+                category: "daily-life",
+                price: 450,
+                oldPrice: 600,
+                discount: "SAVE 25%",
+                image: "T_shirts_image/we_are_on_a_break_t_shirt_black_mockup/we_are_on_a_break_t_shirt_black_mockup.png",
+                images: ["T_shirts_image/we_are_on_a_break_t_shirt_black_mockup/we_are_on_a_break_t_shirt_black_mockup.png"],
+                desc: "Take a breather with this fun \"WE ARE ON A BREAK\" graphic tee. Perfect for relaxation mode and downtime vibes. Comfort Colors garment-dyed heavyweight t-shirt with relaxed fit.",
+                variantType: "Color",
+                variants: ["Black"],
+                sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"],
+                specs: {
+                    "Fabric": "100% Ring-Spun Cotton",
+                    "Weight": "Heavyweight (6.1 oz / 206 GSM)",
+                    "Fit": "Relaxed Fit",
+                    "Features": "Garment-Dyed, Pre-Shrunk",
+                    "Care": "Machine Wash Cold",
+                    "Origin": "Ethically Made"
+                }
+            },
+            {
+                id: 12,
+                name: "Every Step Starts Today Graphic Tee",
+                category: "daily-inspiration",
+                price: 450,
+                oldPrice: 600,
+                discount: "SAVE 25%",
+                image: "T_shirts_image/every_step_starts_today_t_shirt_black_mockup/every_step_starts_today_t_shirt_black_mockup.png",
+                images: ["T_shirts_image/every_step_starts_today_t_shirt_black_mockup/every_step_starts_today_t_shirt_black_mockup.png"],
+                desc: "Begin your journey with this inspiring \"EVERY STEP STARTS TODAY\" graphic tee. Motivation to take that first step towards your goals. Comfort Colors garment-dyed heavyweight t-shirt.",
+                variantType: "Color",
+                variants: ["Black"],
+                sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"],
+                specs: {
+                    "Fabric": "100% Ring-Spun Cotton",
+                    "Weight": "Heavyweight (6.1 oz / 206 GSM)",
+                    "Fit": "Relaxed Fit",
+                    "Features": "Garment-Dyed, Pre-Shrunk",
+                    "Care": "Machine Wash Cold",
+                    "Origin": "Ethically Made"
+                }
+            },
+            {
+                id: 13,
+                name: "Everyday Is A New Chance Graphic Tee",
+                category: "daily-inspiration",
+                price: 450,
+                oldPrice: 600,
+                discount: "SAVE 25%",
+                image: "T_shirts_image/everyday_is_a_new_chance_t_shirt_black_mockup/everyday_is_a_new_chance_t_shirt_black_mockup.png",
+                images: ["T_shirts_image/everyday_is_a_new_chance_t_shirt_black_mockup/everyday_is_a_new_chance_t_shirt_black_mockup.png"],
+                desc: "Embrace fresh beginnings with this uplifting \"EVERYDAY IS A NEW CHANCE\" graphic tee. A daily reminder that each day brings new opportunities. Comfort Colors garment-dyed heavyweight t-shirt.",
+                variantType: "Color",
+                variants: ["Black"],
+                sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"],
+                specs: {
+                    "Fabric": "100% Ring-Spun Cotton",
+                    "Weight": "Heavyweight (6.1 oz / 206 GSM)",
+                    "Fit": "Relaxed Fit",
+                    "Features": "Garment-Dyed, Pre-Shrunk",
+                    "Care": "Machine Wash Cold",
+                    "Origin": "Ethically Made"
+                }
+            },
+            {
+                id: 14,
+                name: "Garden Graphic Tee",
+                category: "nature-adventure",
+                price: 450,
+                oldPrice: 600,
+                discount: "SAVE 25%",
+                image: "T_shirts_image/garden_t_shirt_black_mockup/garden_t_shirt_black_mockup.png",
+                images: ["T_shirts_image/garden_t_shirt_black_mockup/garden_t_shirt_black_mockup.png"],
+                desc: "Cultivate your style with this nature-inspired \"GARDEN\" graphic tee. Perfect for plant lovers and green thumbs. Comfort Colors garment-dyed heavyweight t-shirt with relaxed fit.",
+                variantType: "Color",
+                variants: ["Black"],
+                sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"],
+                specs: {
+                    "Fabric": "100% Ring-Spun Cotton",
+                    "Weight": "Heavyweight (6.1 oz / 206 GSM)",
+                    "Fit": "Relaxed Fit",
+                    "Features": "Garment-Dyed, Pre-Shrunk",
+                    "Care": "Machine Wash Cold",
+                    "Origin": "Ethically Made"
+                }
+            },
+            {
+                id: 15,
+                name: "Growth And Belive Graphic Tee",
+                category: "growth-mindset",
+                price: 450,
+                oldPrice: 600,
+                discount: "SAVE 25%",
+                image: "T_shirts_image/growth_and_belive_t_shirt_black_mockup/growth_and_belive_t_shirt_black_mockup.png",
+                images: ["T_shirts_image/growth_and_belive_t_shirt_black_mockup/growth_and_belive_t_shirt_black_mockup.png"],
+                desc: "Trust the process with this motivational \"GROWTH AND BELIVE\" graphic tee. A reminder that growth requires belief in yourself. Comfort Colors garment-dyed heavyweight t-shirt.",
+                variantType: "Color",
+                variants: ["Black"],
+                sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"],
+                specs: {
+                    "Fabric": "100% Ring-Spun Cotton",
+                    "Weight": "Heavyweight (6.1 oz / 206 GSM)",
+                    "Fit": "Relaxed Fit",
+                    "Features": "Garment-Dyed, Pre-Shrunk",
+                    "Care": "Machine Wash Cold",
+                    "Origin": "Ethically Made"
+                }
+            },
+            {
+                id: 16,
+                name: "Invest In Yourself Graphic Tee",
+                category: "growth-mindset",
+                price: 450,
+                oldPrice: 600,
+                discount: "SAVE 25%",
+                image: "T_shirts_image/invest_in_yourself_t_shirt_black_mockup/invest_in_yourself_t_shirt_black_mockup.png",
+                images: ["T_shirts_image/invest_in_yourself_t_shirt_black_mockup/invest_in_yourself_t_shirt_black_mockup.png"],
+                desc: "Prioritize self-growth with this empowering \"INVEST IN YOURSELF\" graphic tee. The best investment you'll ever make. Comfort Colors garment-dyed heavyweight t-shirt with relaxed streetwear style.",
+                variantType: "Color",
+                variants: ["Black"],
+                sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"],
+                specs: {
+                    "Fabric": "100% Ring-Spun Cotton",
+                    "Weight": "Heavyweight (6.1 oz / 206 GSM)",
+                    "Fit": "Relaxed Fit",
+                    "Features": "Garment-Dyed, Pre-Shrunk",
+                    "Care": "Machine Wash Cold",
+                    "Origin": "Ethically Made"
+                }
+            },
+            {
+                id: 17,
+                name: "Never Stop Growing Graphic Tee",
+                category: "growth-mindset",
+                price: 450,
+                oldPrice: 600,
+                discount: "SAVE 25%",
+                image: "T_shirts_image/never_stop_growing_t_shirt_black_mockup/never_stop_growing_t_shirt_black_mockup.png",
+                images: ["T_shirts_image/never_stop_growing_t_shirt_black_mockup/never_stop_growing_t_shirt_black_mockup.png"],
+                desc: "Keep evolving with this inspiring \"NEVER STOP GROWING\" graphic tee. A lifelong commitment to personal development. Comfort Colors garment-dyed heavyweight t-shirt.",
+                variantType: "Color",
+                variants: ["Black"],
+                sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"],
+                specs: {
+                    "Fabric": "100% Ring-Spun Cotton",
+                    "Weight": "Heavyweight (6.1 oz / 206 GSM)",
+                    "Fit": "Relaxed Fit",
+                    "Features": "Garment-Dyed, Pre-Shrunk",
+                    "Care": "Machine Wash Cold",
+                    "Origin": "Ethically Made"
+                }
+            }
+        ];
+
+        let selectedCategory = 'all';
+        let currentModalProduct = null;
+
+        const gridElem = document.getElementById('productsGrid');
+
+        function renderProducts(items) {
+            gridElem.innerHTML = '';
+            items.forEach(prod => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.setAttribute('data-id', prod.id);
+                card.onclick = () => openOrderModal(prod.id);
+
+                card.innerHTML = `
+                    <div class="card-thumbnail">
+                        <span class="discount-badge">${prod.discount}</span>
+                        <img src="${prod.image}" alt="${prod.name}" onerror="this.src='https://via.placeholder.com/700x500?text=Image+Not+Found'">
+                    </div>
+                    <div class="card-info">
+                        <span class="card-cat">${prod.category}</span>
+                        <h3 class="card-title">${prod.name}</h3>
+                        <div class="card-bottom-row">
+                            <div class="price-wrapper">
+                                <span class="price-current">৳ ${prod.price.toLocaleString()}</span>
+                                <span class="price-original">৳ ${prod.oldPrice.toLocaleString()}</span>
+                            </div>
+                            <button class="btn-action-buy" onclick="event.stopPropagation(); openOrderModal(${prod.id});">
+                                <span>Buy</span>
+                                <i data-lucide="shopping-bag" style="width:12px; height:12px;"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                gridElem.appendChild(card);
+            });
+            lucide.createIcons();
+            document.getElementById('visibleProductsCount').innerText = items.length;
+        }
+
+        renderProducts(getRandomProducts(productsData, 16));
+
+        function setCategory(cat, btn) {
+            selectedCategory = cat;
+            document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            else {
+                const targetBtn = document.querySelector(`.cat-chip[data-cat="${cat}"]`);
+                if (targetBtn) targetBtn.classList.add('active');
+            }
+            applyFilters();
+        }
+
+        function getRandomProducts(items, count) {
+            const shuffled = [...items].sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        }
+
+        function applyFilters() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const maxPrice = parseFloat(document.getElementById('priceRange').value);
+            document.getElementById('priceDisplay').innerText = maxPrice.toLocaleString();
+
+            const filtered = productsData.filter(prod => {
+                const matchesCat = (selectedCategory === 'all' || prod.category === selectedCategory);
+                const matchesSearch = prod.name.toLowerCase().includes(query);
+                const matchesPrice = prod.price <= maxPrice;
+                return matchesCat && matchesSearch && matchesPrice;
+            });
+
+            renderProducts(filtered);
+        }
+
+        let selectedSize = null;
+
+        function openOrderModal(productId) {
+            const prod = productsData.find(p => p.id === productId);
+            if (!prod) return;
+
+            currentModalProduct = prod;
+            selectedSize = null;
+
+            document.getElementById('orderForm').reset();
+            document.getElementById('selectedSize').value = '';
+            document.getElementById('modalQty').value = 1;
+
+            // Reset Quality Accordion
+            const acc = document.getElementById('qualityAccordion');
+            acc.classList.remove('active');
+            document.getElementById('accordionIcon').innerText = '+';
+
+            document.getElementById('modalProductTitle').innerText = prod.name;
+            document.getElementById('modalProductCategory').innerText = prod.category.charAt(0).toUpperCase() + prod.category.slice(1);
+            document.getElementById('modalProductDesc').innerText = prod.desc;
+            document.getElementById('modalProductPrice').innerText = prod.price.toLocaleString();
+            document.getElementById('modalProductOldPrice').innerText = prod.oldPrice.toLocaleString();
+            document.getElementById('modalDiscount').innerText = prod.discount;
+            document.getElementById('modalDiscountBadge').innerText = prod.discount;
+
+            const mainImg = document.getElementById('modalProductImg');
+            mainImg.src = prod.image;
+            mainImg.alt = prod.name;
+
+            const thumbContainer = document.getElementById('modalThumbnails');
+            thumbContainer.innerHTML = '';
+            if (prod.images && prod.images.length > 0) {
+                prod.images.forEach((imgSrc, index) => {
+                    const thumb = document.createElement('div');
+                    thumb.className = 'modal-thumb' + (index === 0 ? ' active' : '');
+                    thumb.innerHTML = `<img src="${imgSrc}" alt="${prod.name} - View ${index + 1}">`;
+                    thumb.onclick = () => switchMainImage(imgSrc, thumb);
+                    thumb.onmouseenter = () => switchMainImage(imgSrc, thumb);
+                    thumbContainer.appendChild(thumb);
+                });
+            }
+
+            const sizeRow = document.getElementById('sizeRow');
+            const sizeButtons = document.getElementById('modalSizeButtons');
+            if (prod.sizes && prod.sizes.length > 0) {
+                sizeRow.style.display = 'flex';
+                sizeButtons.innerHTML = '';
+                prod.sizes.forEach((size, index) => {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = 'modal-size-btn' + (index === 0 ? ' active' : '');
+                    btn.innerText = size;
+                    btn.onclick = () => selectSize(size, btn);
+                    sizeButtons.appendChild(btn);
+                });
+                selectSize(prod.sizes[0], sizeButtons.firstElementChild);
+            } else {
+                sizeRow.style.display = 'none';
+            }
+
+            const specsTable = document.getElementById('modalSpecsTable');
+            if (prod.specs) {
+                let tableHTML = '<table><tbody>';
+                for (const [key, value] of Object.entries(prod.specs)) {
+                    tableHTML += `<tr><th>${key}</th><td>${value}</td></tr>`;
+                }
+                tableHTML += '</tbody></table>';
+                specsTable.innerHTML = tableHTML;
+            } else {
+                specsTable.innerHTML = '';
+            }
+
+            const variantLabel = document.getElementById('dynamicVariantLabel');
+            const variantSelect = document.getElementById('dynamicVariantSelect');
+            const variantRow = document.getElementById('variantRow');
+
+            variantLabel.innerText = `Select ${prod.variantType} *`;
+            variantSelect.innerHTML = '';
+            prod.variants.forEach(variant => {
+                const opt = document.createElement('option');
+                opt.value = variant;
+                opt.innerText = variant;
+                variantSelect.appendChild(opt);
+            });
+
+            if (prod.sizes) {
+                variantRow.style.display = 'none';
+            } else {
+                variantRow.style.display = 'block';
+            }
+
+            setupDarazZoom();
+
+            document.getElementById('orderModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            lucide.createIcons();
+        }
+
+        function switchMainImage(src, thumbEl) {
+            document.getElementById('modalProductImg').src = src;
+            document.querySelectorAll('.modal-thumb').forEach(t => t.classList.remove('active'));
+            thumbEl.classList.add('active');
+
+            const zoomResult = document.getElementById('zoomResult');
+            if (zoomResult) {
+                zoomResult.style.backgroundImage = `url("${src}")`;
+            }
+        }
+
+        function selectSize(size, btnEl) {
+            selectedSize = size;
+            document.getElementById('selectedSize').value = size;
+
+            document.querySelectorAll('.modal-size-btn').forEach(b => b.classList.remove('active'));
+            btnEl.classList.add('active');
+
+            updateVariantSelect();
+        }
+
+        function updateVariantSelect() {
+            const variantSelect = document.getElementById('dynamicVariantSelect');
+            const variantRow = document.getElementById('variantRow');
+            if (variantRow.style.display !== 'none') return;
+
+            let variantParts = [];
+            if (selectedSize) variantParts.push(`Size: ${selectedSize}`);
+            const combined = variantParts.join(' / ') || currentModalProduct.variants[0];
+
+            variantSelect.innerHTML = '';
+            const opt = document.createElement('option');
+            opt.value = combined;
+            opt.innerText = combined;
+            opt.selected = true;
+            variantSelect.appendChild(opt);
+        }
+
+        /* 🔴 QUALITY GUARANTEE ACCORDION TOGGLE 🔴 */
+        function toggleQualityAccordion() {
+            const acc = document.getElementById('qualityAccordion');
+            const icon = document.getElementById('accordionIcon');
+            acc.classList.toggle('active');
+            icon.innerText = acc.classList.contains('active') ? '−' : '+';
+        }
+
+        /* 🔴 COMFORT COLORS 1717 ACCURATE SIZE GUIDE DATA (AS SEEN IN VIDEO) 🔴 */
+        const sizeDataCM = [
+            { size: "S", length: "68", width: "46", sleeve: "41" },
+            { size: "M", length: "71", width: "52", sleeve: "45" },
+            { size: "L", length: "75", width: "56", sleeve: "48" },
+            { size: "XL", length: "78", width: "61", sleeve: "52" },
+            { size: "2XL", length: "80", width: "66", sleeve: "55" },
+            { size: "3XL", length: "83", width: "71", sleeve: "59" },
+            { size: "4XL", length: "85", width: "76", sleeve: "62" }
+        ];
+
+        const sizeDataIN = [
+            { size: "S", length: "26.6", width: "18.3", sleeve: "16.3" },
+            { size: "M", length: "28.0", width: "20.3", sleeve: "17.8" },
+            { size: "L", length: "29.4", width: "22.0", sleeve: "19.0" },
+            { size: "XL", length: "30.8", width: "24.0", sleeve: "20.5" },
+            { size: "2XL", length: "31.6", width: "26.0", sleeve: "21.8" },
+            { size: "3XL", length: "32.5", width: "27.8", sleeve: "23.3" },
+            { size: "4XL", length: "33.5", width: "29.8", sleeve: "24.6" }
+        ];
+
+        let currentSizeUnit = 'cm';
+
+        function renderSizeTable(unit) {
+            const table = document.getElementById('sizeGuideTable');
+            const data = (unit === 'in') ? sizeDataIN : sizeDataCM;
+            const unitLabel = (unit === 'in') ? '(in)' : '(cm)';
+
+            let html = `
+                <thead>
+                    <tr>
+                        <th>Size label</th>
+                        <th>Length ${unitLabel}</th>
+                        <th>Width ${unitLabel}</th>
+                        <th>Sleeve length ${unitLabel}</th>
+                    </tr>
+                </thead>
+                <tbody>
+            `;
+
+            data.forEach(row => {
+                html += `
+                    <tr>
+                        <td><strong>${row.size}</strong></td>
+                        <td>${row.length}</td>
+                        <td>${row.width}</td>
+                        <td>${row.sleeve}</td>
+                    </tr>
+                `;
+            });
+
+            html += `</tbody>`;
+            table.innerHTML = html;
+        }
+
+        function setSizeUnit(unit) {
+            currentSizeUnit = unit;
+            document.getElementById('unitInBtn').classList.toggle('active', unit === 'in');
+            document.getElementById('unitCmBtn').classList.toggle('active', unit === 'cm');
+            renderSizeTable(unit);
+        }
+
+        function openSizeGuideModal() {
+            if (currentModalProduct) {
+                document.getElementById('sizeGuideModalTitle').innerText = `${currentModalProduct.name} Size Guide`;
+            } else {
+                document.getElementById('sizeGuideModalTitle').innerText = `Tee Size Guide`;
+            }
+            renderSizeTable(currentSizeUnit);
+            document.getElementById('sizeGuideModal').classList.add('active');
+            lucide.createIcons();
+        }
+
+        function closeSizeGuideModal() {
+            document.getElementById('sizeGuideModal').classList.remove('active');
+        }
+
+        function closeSizeGuideOnOverlay(e) {
+            if (e.target.id === 'sizeGuideModal') {
+                closeSizeGuideModal();
+            }
+        }
+
+        /* 🔴 DARAZ STYLE DYNAMIC ZOOM LOGIC 🔴 */
+        function setupDarazZoom() {
+            const wrapper = document.getElementById('mainImageWrapper');
+            const mainImg = document.getElementById('modalProductImg');
+            const zoomLens = document.getElementById('zoomLens');
+            const zoomResult = document.getElementById('zoomResult');
+
+            if (!wrapper || !mainImg || !zoomLens || !zoomResult) return;
+
+            if (window.innerWidth <= 900 || ('ontouchstart' in window)) {
+                zoomLens.style.display = 'none';
+                zoomResult.style.display = 'none';
+                return;
+            }
+
+            zoomLens.style.display = 'block';
+
+            wrapper.onmouseenter = () => {
+                if (window.innerWidth <= 900) return;
+                zoomResult.style.display = 'block';
+                zoomLens.style.opacity = '1';
+                zoomResult.style.backgroundImage = `url("${mainImg.src}")`;
+            };
+
+            wrapper.onmouseleave = () => {
+                zoomResult.style.display = 'none';
+                zoomLens.style.opacity = '0';
+            };
+
+            wrapper.onmousemove = (e) => {
+                if (window.innerWidth <= 900) return;
+                const rect = wrapper.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const lensW = zoomLens.offsetWidth || 130;
+                const lensH = zoomLens.offsetHeight || 130;
+
+                let posX = x - (lensW / 2);
+                let posY = y - (lensH / 2);
+
+                if (posX < 0) posX = 0;
+                if (posY < 0) posY = 0;
+                if (posX > rect.width - lensW) posX = rect.width - lensW;
+                if (posY > rect.height - lensH) posY = rect.height - lensH;
+
+                zoomLens.style.left = posX + 'px';
+                zoomLens.style.top = posY + 'px';
+
+                const nw = mainImg.naturalWidth || rect.width;
+                const nh = mainImg.naturalHeight || rect.height;
+                const imgRatio = nw / nh;
+                const containerRatio = rect.width / rect.height;
+
+                let renderedW, renderedH, renderLeft, renderTop;
+                if (imgRatio > containerRatio) {
+                    renderedW = rect.width;
+                    renderedH = rect.width / imgRatio;
+                    renderLeft = 0;
+                    renderTop = (rect.height - renderedH) / 2;
+                } else {
+                    renderedH = rect.height;
+                    renderedW = rect.height * imgRatio;
+                    renderTop = 0;
+                    renderLeft = (rect.width - renderedW) / 2;
+                }
+
+                const zoomW = zoomResult.offsetWidth || 480;
+                const zoomH = zoomResult.offsetHeight || 480;
+                const magX = zoomW / lensW;
+                const magY = zoomH / lensH;
+
+                const bgW = renderedW * magX;
+                const bgH = renderedH * magY;
+
+                zoomResult.style.backgroundSize = `${bgW}px ${bgH}px`;
+                const bgPosX = (posX - renderLeft) * magX;
+                const bgPosY = (posY - renderTop) * magY;
+                zoomResult.style.backgroundPosition = `-${bgPosX}px -${bgPosY}px`;
+            };
+        }
+
+        function changeQty(delta) {
+            const qtyInput = document.getElementById('modalQty');
+            let val = parseInt(qtyInput.value) + delta;
+            if (val < 1) val = 1;
+            if (val > 99) val = 99;
+            qtyInput.value = val;
+        }
+
+        function closeOrderModal() {
+            document.getElementById('orderModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+            const zoomResult = document.getElementById('zoomResult');
+            if (zoomResult) zoomResult.style.display = 'none';
+        }
+
+        document.getElementById('orderModal').addEventListener('click', (e) => {
+            if (e.target.id === 'orderModal') closeOrderModal();
+        });
+
+        function handleOrderSubmit(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('custName').value.trim();
+            const phone = document.getElementById('custPhone').value.trim();
+            const email = document.getElementById('custEmail').value.trim();
+            const newsletter = document.getElementById('custNewsletter').checked;
+            const selectedVariant = document.getElementById('dynamicVariantSelect').value;
+            const address = document.getElementById('custAddress').value.trim();
+            const qty = document.getElementById('modalQty').value;
+            const size = document.getElementById('selectedSize').value;
+
+            let variantDetails = selectedVariant;
+            if (size) {
+                variantDetails = `Size: ${size}`;
+            }
+
+            const totalPrice = currentModalProduct.price * qty;
+            const orderDate = new Date().toLocaleString('en-BD', { timeZone: 'Asia/Dhaka' });
+
+            const whatsappMessage = `🛍️ *NEW ORDER - SAJID FASHION*
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+📦 *PRODUCT DETAILS*
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+🏷️ *Product:* ${currentModalProduct.name}
+📂 *Category:* ${currentModalProduct.category.charAt(0).toUpperCase() + currentModalProduct.category.slice(1)}
+💰 *Price:* ৳ ${currentModalProduct.price.toLocaleString()} (Original: ৳${currentModalProduct.oldPrice.toLocaleString()})
+🎨 *${currentModalProduct.variantType}:* ${variantDetails}
+🔢 *Quantity:* ${qty}
+💵 *Subtotal:* ৳ ${totalPrice.toLocaleString()}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+👤 *CUSTOMER INFORMATION*
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+👤 *Name:* ${name}
+📱 *Phone:* ${phone}
+📧 *Email:* ${email || 'Not provided'}
+📬 *Newsletter:* ${newsletter ? '✅ Subscribed' : '❌ Not subscribed'}
+📍 *Address:* ${address}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+📅 *ORDER METADATA*
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+🕐 *Order Time:* ${orderDate}
+🌐 *Source:* SAJID FASHION Website
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ *Please confirm availability & delivery schedule.*`;
+
+            const whatsappUrl = `https://wa.me/${MY_WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
+            window.open(whatsappUrl, '_blank');
+
+            showSuccessAlert();
+            closeOrderModal();
+            document.getElementById('orderForm').reset();
+        }
+
+        /* 🔴 NEWSLETTER TO WHATSAPP 🔴 */
+        function handleNewsletterSubmit(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('newsletterEmailInput');
+            const emailVal = emailInput.value.trim();
+            if (!emailVal) return;
+
+            const nlMessage = `📬 *NEW NEWSLETTER SUBSCRIPTION*\n\n` +
+                `Hello Sajid Fashion, I would like to subscribe to your newsletter for new offers and merch updates.\n\n` +
+                `📧 *Subscriber Email:* ${emailVal}`;
+
+            const waLink = `https://wa.me/${MY_WHATSAPP_NUMBER}?text=${encodeURIComponent(nlMessage)}`;
+            window.open(waLink, '_blank');
+
+            emailInput.value = '';
+            alert('Thank you! WhatsApp opened to confirm your newsletter subscription.');
+        }
+
+        function showSuccessAlert() {
+            const alert = document.createElement('div');
+            alert.className = 'order-success-alert';
+            alert.innerHTML = `
+                <div class="alert-content">
+                    <div class="alert-icon"><i data-lucide="check-circle" style="width:48px;height:48px;"></i></div>
+                    <h3>Order Placed Successfully!</h3>
+                    <p>WhatsApp opened with your order details. Click <strong>Send</strong> to complete.</p>
+                    <button onclick="this.closest('.order-success-alert').remove()">Got It</button>
+                </div>
+            `;
+            document.body.appendChild(alert);
+            lucide.createIcons();
+            setTimeout(() => { if (alert.parentNode) alert.remove(); }, 5000);
+        }
+
+        function toggleWaChat() {
+            document.getElementById('waChatBox').classList.toggle('active');
+        }
+
+        function sendDirectChatMessage() {
+            const name = document.getElementById('waDirectName').value.trim();
+            const msg = document.getElementById('waDirectMsg').value.trim();
+
+            if (!name || !msg) {
+                alert("Please fill both name and inquiry message.");
+                return;
+            }
+
+            const queryText = `💬 *CUSTOMER GENERAL INQUIRY*\n` +
+                `------------------------------------\n` +
+                `👤 *Name:* ${name}\n` +
+                `📝 *Message:* ${msg}\n` +
+                `------------------------------------`;
+
+            const link = `https://wa.me/${MY_WHATSAPP_NUMBER}?text=${encodeURIComponent(queryText)}`;
+            window.open(link, '_blank');
+            document.getElementById('waDirectMsg').value = '';
+            toggleWaChat();
+        }
+
+        const themeBtn = document.getElementById('themeToggle');
+        const html = document.documentElement;
+
+        themeBtn.addEventListener('click', () => {
+            const current = html.getAttribute('data-theme');
+            const targetTheme = current === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', targetTheme);
+
+            themeBtn.innerHTML = targetTheme === 'dark'
+                ? '<i data-lucide="sun" style="width:18px; height:18px;"></i>'
+                : '<i data-lucide="moon" style="width:18px; height:18px;"></i>';
+
+            lucide.createIcons();
+        });
+
+        const filterToggle = document.getElementById('filterToggle');
+        const filterSidebar = document.querySelector('.filter-sidebar');
+        const filterOverlay = document.getElementById('filterOverlay');
+
+        filterToggle?.addEventListener('click', () => {
+            const isOpen = filterSidebar.classList.contains('open');
+            if (isOpen) {
+                closeFilterSidebar();
+            } else {
+                filterSidebar.classList.add('open');
+                filterOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+
+        function closeFilterSidebar() {
+            filterSidebar.classList.remove('open');
+            filterOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        filterOverlay?.addEventListener('click', closeFilterSidebar);
+
+        document.querySelectorAll('.cat-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                if (window.innerWidth <= 900) {
+                    closeFilterSidebar();
+                }
+            });
+        });
+
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

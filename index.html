@@ -1854,7 +1854,7 @@
         <div class="hero-content">
             <h1 class="hero-title">Welcome to Sajid Fashion!</h1>
             <p class="hero-desc">We're a clothing brand committed to quality, inspired by your trust.</p>
-            <a href="#productsGrid" class="hero-btn">
+            <a href="#productsGrid" class="hero-btn" onclick="scrollToProducts(event)">
                 <i data-lucide="shirt" style="width:18px; height:18px;"></i>
                 <span>Browse new merch</span>
             </a>
@@ -1938,10 +1938,6 @@
 
         <!-- ================= RIGHT: PRODUCTS SECTION ================= -->
         <main class="products-section">
-            <div class="products-grid-info">
-                Showing <strong id="visibleProductsCount">6</strong> Products
-            </div>
-
             <div class="products-grid" id="productsGrid"></div>
         </main>
     </div>
@@ -2597,7 +2593,6 @@
                 gridElem.appendChild(card);
             });
             lucide.createIcons();
-            document.getElementById('visibleProductsCount').innerText = items.length;
         }
 
         renderProducts(getRandomProducts(productsData, 16));
@@ -3152,6 +3147,20 @@
                 }
             });
         });
+
+        function scrollToProducts(e) {
+            e.preventDefault();
+            const target = document.getElementById('productsGrid');
+            if (target) {
+                const header = document.querySelector('header');
+                const headerHeight = header ? header.offsetHeight : 80;
+                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
 
         lucide.createIcons();
     </script>

@@ -31,13 +31,11 @@
             --input-bg: #f9fafb;
             --input-text: #000000;
             --primary: #ff6200;
-            /* নির্দেশিত Primary কালার */
             --primary-hover: #e55800;
             --primary-gradient: linear-gradient(135deg, #ff6200 0%, #ff7b29 100%);
             --accent-green: #10b981;
             --accent-orange: #ff6200;
             --text-over-primary: #ffffff;
-            /* Text over Primary */
             --card-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.06);
             --modal-overlay: rgba(0, 0, 0, 0.72);
         }
@@ -368,6 +366,59 @@
             width: 100%;
             accent-color: var(--primary);
             cursor: pointer;
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            height: 8px;
+        }
+
+        .price-filter input[type="range"]::-webkit-slider-runnable-track {
+            height: 6px;
+            background: linear-gradient(var(--primary), var(--primary)) left/0% 100% no-repeat,
+                var(--border-color);
+            background-size: var(--range-progress, 0%) 100%;
+            border-radius: 4px;
+        }
+
+        .price-filter input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            background: var(--primary);
+            border-radius: 50%;
+            cursor: pointer;
+            margin-top: -6px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .price-filter input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .price-filter input[type="range"]::-moz-range-track {
+            height: 6px;
+            background: var(--border-color);
+            border-radius: 4px;
+            border: none;
+        }
+
+        .price-filter input[type="range"]::-moz-range-progress {
+            height: 6px;
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        .price-filter input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            background: var(--primary);
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
         }
 
         .price-range-info {
@@ -393,134 +444,82 @@
             color: var(--text-muted);
         }
 
+        /* 🔴 ৪-কলাম বিশিষ্ট প্রোডাক্ট গ্রিড 🔴 */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 18px;
+            gap: 28px 20px;
             width: 100%;
         }
 
+        /* 🔴 ক্লিন প্রোডাক্ট কার্ড 🔴 */
         .product-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: var(--card-shadow);
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            overflow: visible;
+            box-shadow: none;
             display: flex;
             flex-direction: column;
             cursor: pointer;
             position: relative;
             height: 100%;
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s;
+            transition: transform 0.25s ease;
         }
 
         .product-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.16);
-            border-color: rgba(255, 98, 0, 0.35);
+            transform: translateY(-5px);
         }
 
+        /* 🔴 বড় ফুল-সাইজ থাম্বনেইল বক্স 🔴 */
         .card-thumbnail {
             position: relative;
             width: 100%;
-            height: 320px;
+            aspect-ratio: 1 / 1.15;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            background: #ffffff;
-            padding: 6px;
+            background: transparent;
+            border-radius: 18px;
+            padding: 0;
         }
 
         .card-thumbnail img {
             width: 100%;
             height: 100%;
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            transition: transform 0.4s ease;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.35s ease;
         }
 
         .product-card:hover .card-thumbnail img {
             transform: scale(1.05);
         }
 
-        .discount-badge {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: #ef4444;
-            color: #ffffff;
-            font-size: 11px;
-            font-weight: 800;
-            padding: 3px 8px;
-            border-radius: 6px;
-            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
-            z-index: 2;
-        }
-
+        /* 🔴 সেন্টার অ্যালাইন প্রোডাক্ট নেম এবং প্রাইজ 🔴 */
         .card-info {
-            padding: 14px;
+            padding: 14px 4px 6px;
             display: flex;
             flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .card-cat {
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--text-muted);
-            margin-bottom: 4px;
+            align-items: center;
+            text-align: center;
+            gap: 6px;
         }
 
         .card-title {
-            font-size: 14px;
+            font-size: 14.5px;
             font-weight: 700;
-            margin-bottom: 6px;
-            line-height: 1.35;
-        }
-
-        .card-bottom-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding-top: 12px;
-            border-top: 1px solid var(--border-color);
-            margin-top: auto;
-        }
-
-        .price-wrapper {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .price-current {
-            font-size: 16px;
-            font-weight: 800;
             color: var(--text-main);
+            line-height: 1.35;
+            margin: 0;
         }
 
-        .price-original {
-            font-size: 11px;
-            color: var(--text-muted);
-            text-decoration: line-through;
-            font-weight: 500;
-        }
-
-        .btn-action-buy {
-            background: var(--primary-gradient);
-            color: var(--text-over-primary);
-            border: none;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            transition: opacity 0.2s;
+        .card-price {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-main);
+            letter-spacing: -0.2px;
         }
 
         /* ================= POPUP ORDER MODAL ================= */
@@ -801,7 +800,7 @@
             margin-left: auto;
         }
 
-        /* 🔴 SELECT SIZE & SIZE GUIDE SIDE-BY-SIDE (INLINE) 🔴 */
+        /* 🔴 SELECT SIZE & SIZE GUIDE INLINE (পাশাপাশি) 🔴 */
         .size-select-section {
             display: flex;
             flex-direction: column;
@@ -862,7 +861,7 @@
             color: var(--text-over-primary);
         }
 
-        /* 🔴 QUALITY GUARANTEE ACCORDION (EXACT SCREENSHOT STYLE) 🔴 */
+        /* 🔴 QUALITY GUARANTEE ACCORDION (ক্লিন লুক) 🔴 */
         .quality-accordion {
             border-top: 1px solid var(--border-color);
             border-bottom: 1px solid var(--border-color);
@@ -1112,7 +1111,7 @@
             box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
         }
 
-        /* ================= 🔴 SIZE GUIDE MODAL (VIDEO STYLE) 🔴 ================= */
+        /* ================= SIZE GUIDE MODAL ================= */
         .size-modal-overlay {
             position: fixed;
             inset: 0;
@@ -1205,12 +1204,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        .size-diagram-svg {
-            width: 100%;
-            height: auto;
-            max-height: 250px;
         }
 
         .size-table-wrapper {
@@ -1320,11 +1313,11 @@
             transform: translateY(-2px);
         }
 
-        /* ================= 🔴 FOOTER (#131921, ONLY FB & YT) 🔴 ================= */
+        /* ================= FOOTER (#131921, ONLY FB & YT) ================= */
         footer {
             background-color: #131921 !important;
             color: #ffffff;
-            padding: 45px 20px 35px;
+            padding: 20px 20px 16px;
             width: 100%;
             text-align: center;
             display: flex;
@@ -1362,6 +1355,10 @@
             color: rgba(255, 255, 255, 0.7);
             letter-spacing: 0.3px;
             font-weight: 500;
+        }
+
+        .footer-copyright a:hover {
+            color: var(--primary) !important;
         }
 
         /* ================= FLOATING WHATSAPP CHAT WIDGET ================= */
@@ -1567,6 +1564,7 @@
         @media (max-width: 1250px) {
             .products-grid {
                 grid-template-columns: repeat(3, 1fr);
+                gap: 22px 16px;
             }
         }
 
@@ -1592,6 +1590,7 @@
 
             .products-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 20px 16px;
             }
 
             .filter-sidebar {
@@ -1696,49 +1695,28 @@
                 font-size: 13px;
             }
 
+            /* 🔴 মোবাইলে ২-কলাম বিশিষ্ট বড় সাইজের প্রোডাক্ট ভিউ 🔴 */
             .products-grid {
                 grid-template-columns: repeat(2, 1fr) !important;
-                gap: 12px !important;
-            }
-
-            .product-card {
-                border-radius: 14px;
+                gap: 18px 12px !important;
             }
 
             .card-thumbnail {
-                height: 210px !important;
-                padding: 6px !important;
+                border-radius: 14px !important;
             }
 
             .card-info {
-                padding: 10px;
+                padding: 10px 2px 4px !important;
+                gap: 4px !important;
             }
 
             .card-title {
-                font-size: 12px;
-                margin-bottom: 4px;
-                line-height: 1.3;
-                display: -webkit-box;
-                -webkit-line-clamp: 2;
-                -webkit-box-orient: vertical;
-                overflow: hidden;
+                font-size: 13px !important;
+                line-height: 1.3 !important;
             }
 
-            .card-cat {
-                font-size: 9px;
-            }
-
-            .price-current {
-                font-size: 14px;
-            }
-
-            .price-original {
-                font-size: 10px;
-            }
-
-            .btn-action-buy {
-                padding: 6px 10px;
-                font-size: 11px;
+            .card-price {
+                font-size: 13.5px !important;
             }
 
             .newsletter-section {
@@ -1858,7 +1836,7 @@
             </a>
 
             <!-- Email -->
-            <a href="mailto:support@aurastore.com?subject=Inquiry" class="pill-contact-btn pill-email">
+            <a href="mailto:contact@sajidfashionbd.com?subject=Inquiry" class="pill-contact-btn pill-email">
                 <i data-lucide="mail" style="width:15px; height:15px;"></i>
                 <span>Email</span>
             </a>
@@ -1977,7 +1955,7 @@
         </form>
     </section>
 
-    <!-- ================= 🔴 FOOTER (#131921, ONLY FACEBOOK & YOUTUBE) 🔴 ================= -->
+    <!-- ================= FOOTER (#131921, ONLY FB & YT) ================= -->
     <footer>
         <div class="footer-social-row">
             <!-- 🔴 [REPLACE LINKS]: ফেসবুক ও ইউটিউব লিঙ্ক বসাবেন 🔴 -->
@@ -1990,6 +1968,12 @@
         </div>
         <div class="footer-copyright">
             © 2026 Sajid Fashion
+            <div style="margin-top: 8px; font-size: 12px; color: rgba(255, 255, 255, 0.6);">
+                Designed by <a href="https://www.facebook.com/mdsajidmahmudofficial" target="_blank"
+                    style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-weight: 600; transition: color 0.2s;">MD
+                    SAJID MAHMUD</a>
+            </div>
+        </div>
         </div>
     </footer>
 
@@ -2032,7 +2016,7 @@
                     </div>
                 </div>
 
-                <!-- 🔴 SELECT SIZE & SIZE GUIDE INLINE (হুবহু ভিডিওর মতো পাশাপাশি) 🔴 -->
+                <!-- 🔴 SELECT SIZE & SIZE GUIDE INLINE 🔴 -->
                 <div class="size-select-section" id="sizeRow" style="display: none;">
                     <div class="size-guide-inline-row">
                         <span class="size-inline-label">Select size:</span>
@@ -2040,9 +2024,12 @@
                             guide</button>
                     </div>
                     <div class="modal-size-buttons" id="modalSizeButtons"></div>
+                    <p class="size-error-msg" id="sizeErrorMsg"
+                        style="display: none; color: #ef4444; font-size: 12px; font-weight: 600; margin-top: 8px;">
+                        Please select Size</p>
                 </div>
 
-                <!-- 🔴 QUALITY GUARANTEE & RETURNS ACCORDION (স্ক্রিনশটের মতো ক্লিন লুক) 🔴 -->
+                <!-- 🔴 QUALITY GUARANTEE & RETURNS ACCORDION 🔴 -->
                 <div class="quality-accordion" id="qualityAccordion">
                     <div class="quality-accordion-header" onclick="toggleQualityAccordion()">
                         <span>Quality Guarantee & Returns</span>
@@ -2114,7 +2101,7 @@
                                 required></textarea>
                         </div>
 
-                        <button type="submit" class="btn-confirm-wa">
+                        <button type="submit" class="btn-confirm-wa" id="confirmOrderBtn">
                             <i data-lucide="send" style="width:16px; height:16px;"></i>
                             <span>Confirm</span>
                         </button>
@@ -2124,11 +2111,11 @@
         </div>
     </div>
 
-    <!-- ================= 🔴 SIZE GUIDE MODAL (REALISTIC TEE & ACCURATE DATA) 🔴 ================= -->
+    <!-- ================= SIZE GUIDE MODAL ================= -->
     <div class="size-modal-overlay" id="sizeGuideModal" onclick="closeSizeGuideOnOverlay(event)">
         <div class="size-modal-container">
             <div class="size-modal-header">
-                <h3 class="size-modal-title" id="sizeGuideModalTitle">Tee Size Guide</h3>
+                <h3 class="size-modal-title" id="sizeGuideModalTitle">Unisex T-Shirt Size Guide</h3>
                 <div style="display: flex; align-items: center; gap: 14px;">
                     <!-- IN / CM SWITCH -->
                     <div class="unit-switch-box">
@@ -2145,14 +2132,12 @@
             </div>
 
             <div class="size-guide-main-layout">
-                <!-- 🔴 নিখুঁত বাস্তবধর্মী ফ্ল্যাট-লে টি-শার্ট ডায়াগ্রাম (A, B, C লাইনসহ) 🔴 -->
                 <div class="size-diagram-box">
                     <img src="t_shirt_mockup_with_size_guide_image/Garment_measurement_diagram_with…_012e479c_2K.jpg"
                         alt="T-Shirt Size Guide Diagram"
                         style="width: 100%; height: auto; max-width: 100%; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
                 </div>
 
-                <!-- 🔴 ডায়নামিক সাইজ টেবিল 🔴 -->
                 <div class="size-table-wrapper">
                     <table class="size-guide-table" id="sizeGuideTable">
                         <!-- JS দ্বারা রেন্ডার হবে -->
@@ -2160,7 +2145,6 @@
                 </div>
             </div>
 
-            <!-- 🔴 পরিমাপের সঠিক তথ্য ও নির্দেশিকা 🔴 -->
             <div class="size-measure-notes">
                 <p style="margin-bottom: 6px;"><strong>Measurement Guide:</strong> These are garment measurements (laid
                     flat), not body measurements. For the best fit, lay a T-shirt that fits you well on a flat surface
@@ -2592,6 +2576,7 @@
 
         const gridElem = document.getElementById('productsGrid');
 
+        /* 🔴 ইনিশিয়াল ভিউ: SAVE 25% ব্যাজ ছাড়া ক্লিন বড় ইমেজ ও সেন্টারড নেম ও প্রাইজ 🔴 */
         function renderProducts(items) {
             gridElem.innerHTML = '';
             items.forEach(prod => {
@@ -2602,22 +2587,11 @@
 
                 card.innerHTML = `
                     <div class="card-thumbnail">
-                        <span class="discount-badge">${prod.discount}</span>
-                        <img src="${prod.image}" alt="${prod.name}" onerror="this.src='https://via.placeholder.com/700x500?text=Image+Not+Found'">
+                        <img src="${prod.image}" alt="${prod.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/700x500?text=Image+Not+Found'">
                     </div>
                     <div class="card-info">
-                        <span class="card-cat">${prod.category}</span>
                         <h3 class="card-title">${prod.name}</h3>
-                        <div class="card-bottom-row">
-                            <div class="price-wrapper">
-                                <span class="price-current">৳ ${prod.price.toLocaleString()}</span>
-                                <span class="price-original">৳ ${prod.oldPrice.toLocaleString()}</span>
-                            </div>
-                            <button class="btn-action-buy" onclick="event.stopPropagation(); openOrderModal(${prod.id});">
-                                <span>Buy</span>
-                                <i data-lucide="shopping-bag" style="width:12px; height:12px;"></i>
-                            </button>
-                        </div>
+                        <div class="card-price">৳ ${prod.price.toLocaleString()}</div>
                     </div>
                 `;
                 gridElem.appendChild(card);
@@ -2627,6 +2601,14 @@
         }
 
         renderProducts(getRandomProducts(productsData, 16));
+
+        // Initialize price range progress
+        const priceRangeInit = document.getElementById('priceRange');
+        const minInit = parseFloat(priceRangeInit.min);
+        const maxInit = parseFloat(priceRangeInit.max);
+        const valInit = parseFloat(priceRangeInit.value);
+        const progressInit = ((valInit - minInit) / (maxInit - minInit)) * 100;
+        priceRangeInit.style.setProperty('--range-progress', `${progressInit}%`);
 
         function setCategory(cat, btn) {
             selectedCategory = cat;
@@ -2646,8 +2628,15 @@
 
         function applyFilters() {
             const query = document.getElementById('searchInput').value.toLowerCase().trim();
-            const maxPrice = parseFloat(document.getElementById('priceRange').value);
+            const priceRange = document.getElementById('priceRange');
+            const maxPrice = parseFloat(priceRange.value);
             document.getElementById('priceDisplay').innerText = maxPrice.toLocaleString();
+
+            // Update range progress for visual feedback
+            const min = parseFloat(priceRange.min);
+            const max = parseFloat(priceRange.max);
+            const progress = ((maxPrice - min) / (max - min)) * 100;
+            priceRange.style.setProperty('--range-progress', `${progress}%`);
 
             const filtered = productsData.filter(prod => {
                 const matchesCat = (selectedCategory === 'all' || prod.category === selectedCategory);
@@ -2671,6 +2660,7 @@
             document.getElementById('orderForm').reset();
             document.getElementById('selectedSize').value = '';
             document.getElementById('modalQty').value = 1;
+            document.getElementById('sizeErrorMsg').style.display = 'none';
 
             // Reset Quality Accordion
             const acc = document.getElementById('qualityAccordion');
@@ -2710,12 +2700,11 @@
                 prod.sizes.forEach((size, index) => {
                     const btn = document.createElement('button');
                     btn.type = 'button';
-                    btn.className = 'modal-size-btn' + (index === 0 ? ' active' : '');
+                    btn.className = 'modal-size-btn';
                     btn.innerText = size;
                     btn.onclick = () => selectSize(size, btn);
                     sizeButtons.appendChild(btn);
                 });
-                selectSize(prod.sizes[0], sizeButtons.firstElementChild);
             } else {
                 sizeRow.style.display = 'none';
             }
@@ -2776,6 +2765,12 @@
             document.querySelectorAll('.modal-size-btn').forEach(b => b.classList.remove('active'));
             btnEl.classList.add('active');
 
+            // Hide error message when size is selected
+            document.getElementById('sizeErrorMsg').style.display = 'none';
+
+            // Smooth scroll to confirm button
+            document.getElementById('confirmOrderBtn').scrollIntoView({ behavior: 'smooth', block: 'center' });
+
             updateVariantSelect();
         }
 
@@ -2804,7 +2799,7 @@
             icon.innerText = acc.classList.contains('active') ? '−' : '+';
         }
 
-        /* 🔴 COMFORT COLORS 1717 ACCURATE SIZE GUIDE DATA (AS SEEN IN VIDEO) 🔴 */
+        /* 🔴 COMFORT COLORS 1717 ACCURATE SIZE GUIDE DATA 🔴 */
         const sizeDataCM = [
             { size: "S", length: "68", width: "46", sleeve: "41" },
             { size: "M", length: "71", width: "52", sleeve: "45" },
@@ -2867,11 +2862,7 @@
         }
 
         function openSizeGuideModal() {
-            if (currentModalProduct) {
-                document.getElementById('sizeGuideModalTitle').innerText = `${currentModalProduct.name} Size Guide`;
-            } else {
-                document.getElementById('sizeGuideModalTitle').innerText = `Tee Size Guide`;
-            }
+            document.getElementById('sizeGuideModalTitle').innerText = `Unisex T-Shirt Size Guide`;
             renderSizeTable(currentSizeUnit);
             document.getElementById('sizeGuideModal').classList.add('active');
             lucide.createIcons();
@@ -2999,6 +2990,17 @@
             const address = document.getElementById('custAddress').value.trim();
             const qty = document.getElementById('modalQty').value;
             const size = document.getElementById('selectedSize').value;
+
+            if (!size) {
+                const sizeRow = document.getElementById('sizeRow');
+                const sizeErrorMsg = document.getElementById('sizeErrorMsg');
+                sizeErrorMsg.style.display = 'block';
+                sizeRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+
+            // Hide error message if size is selected
+            document.getElementById('sizeErrorMsg').style.display = 'none';
 
             let variantDetails = selectedVariant;
             if (size) {

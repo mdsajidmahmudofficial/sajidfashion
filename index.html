@@ -1212,37 +1212,6 @@
             line-height: 1.2;
         }
 
-        .modal-specs-table {
-            background: var(--input-bg);
-            border-radius: 14px;
-            overflow: hidden;
-        }
-
-        .modal-specs-table table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .modal-specs-table th,
-        .modal-specs-table td {
-            padding: 11px 16px;
-            text-align: left;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 13px;
-        }
-
-        .modal-specs-table th {
-            font-weight: 600;
-            color: var(--text-muted);
-            width: 40%;
-            background: var(--bg-surface);
-        }
-
-        .modal-specs-table td {
-            font-weight: 500;
-            color: var(--text-main);
-        }
-
         .modal-divider {
             height: 1px;
             background: var(--border-color);
@@ -2485,7 +2454,6 @@
                     </div>
                 </div>
 
-                <div class="modal-specs-table" id="modalSpecsTable"></div>
                 <div class="modal-divider"></div>
 
                 <div class="modal-quantity-section">
@@ -3282,18 +3250,6 @@
                 });
             } else {
                 sizeRow.style.display = 'none';
-            }
-
-            const specsTable = document.getElementById('modalSpecsTable');
-            if (prod.specs) {
-                let tableHTML = '<table><tbody>';
-                for (const [key, value] of Object.entries(prod.specs)) {
-                    tableHTML += `<tr><th>${key}</th><td>${value}</td></tr>`;
-                }
-                tableHTML += '</tbody></table>';
-                specsTable.innerHTML = tableHTML;
-            } else {
-                specsTable.innerHTML = '';
             }
 
             const variantLabel = document.getElementById('dynamicVariantLabel');

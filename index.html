@@ -25,6 +25,7 @@
             --bg-surface: #ffffff;
             --bg-card: #ffffff;
             --bg-sidebar: #ffffff;
+            --product-card-bg: #eceff2;
             --text-main: #000000;
             --text-muted: #64748b;
             --border-color: #e5e7eb;
@@ -38,6 +39,9 @@
             --text-over-primary: #ffffff;
             --card-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.06);
             --modal-overlay: rgba(0, 0, 0, 0.72);
+            /* ব্যানার ব্যাকগ্রাউন্ড - লাইট মোডে সম্পূর্ণ নিউট্রাল স্টুডিও লুক (কমলা আভা নেই) */
+            --banner-bg: radial-gradient(circle at 50% 50%, #ffffff 0%, #f1f5f9 100%);
+            --grid-dot-color: rgba(0, 0, 0, 0.05);
         }
 
         [data-theme="dark"] {
@@ -45,6 +49,7 @@
             --bg-surface: #161b22;
             --bg-card: #161b22;
             --bg-sidebar: #161b22;
+            --product-card-bg: #21262d;
             --text-main: #ffffff;
             --text-muted: #9ca3af;
             --border-color: rgba(255, 255, 255, 0.1);
@@ -55,6 +60,9 @@
             --primary-gradient: linear-gradient(135deg, #ff6200 0%, #ff8533 100%);
             --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.6);
             --modal-overlay: rgba(0, 0, 0, 0.88);
+            /* ব্যানার ব্যাকগ্রাউন্ড - ডার্ক মোডে ডিপ নিউট্রাল স্লেট লুক (কমলা আভা নেই) */
+            --banner-bg: radial-gradient(circle at 50% 50%, #161f2e 0%, #090d16 100%);
+            --grid-dot-color: rgba(255, 255, 255, 0.06);
         }
 
         * {
@@ -185,83 +193,177 @@
             opacity: 1;
         }
 
-        /* ================= FULL-WIDTH HERO VIDEO BANNER ================= */
-        .hero-video-banner {
+        /* ================= 🔴 3D CARD FLOW MOTION HERO BANNER 🔴 ================= */
+        .hero-flow-banner {
             position: relative;
             width: 100%;
-            height: clamp(280px, 24vw, 360px);
+            height: clamp(360px, 32vw, 440px);
             overflow: hidden;
-            background-color: #0f172a;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: var(--banner-bg);
+            perspective: 1200px;
+            user-select: none;
         }
 
-        .hero-video {
+        /* 🔴 মোশন গ্রাফিক্স ব্যাকগ্রাউন্ড: কমলা আভা সম্পূর্ণ রিমুভ করে নিউট্রাল অ্যাম্বিয়েন্ট লুক 🔴 */
+        .banner-motion-bg {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
             z-index: 1;
         }
 
-        .hero-overlay {
+        .motion-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.38;
+            animation: orbFloat 14s ease-in-out infinite alternate;
+        }
+
+        [data-theme="dark"] .motion-orb {
+            opacity: 0.22;
+        }
+
+        /* নিউট্রাল সফট লাইট অরবস (কোনো কমলা কালার নেই) */
+        .orb-neutral-1 {
+            width: 330px;
+            height: 330px;
+            background: #cbd5e1;
+            top: -40px;
+            left: 20%;
+            animation-duration: 13s;
+        }
+
+        .orb-neutral-2 {
+            width: 300px;
+            height: 300px;
+            background: #e2e8f0;
+            bottom: -50px;
+            right: 22%;
+            animation-duration: 17s;
+            animation-delay: -5s;
+        }
+
+        [data-theme="dark"] .orb-neutral-1 {
+            background: #1e293b;
+        }
+
+        [data-theme="dark"] .orb-neutral-2 {
+            background: #334155;
+        }
+
+        @keyframes orbFloat {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(30px, 20px) scale(1.1);
+            }
+
+            100% {
+                transform: translate(-20px, -15px) scale(0.92);
+            }
+        }
+
+        .banner-grid-overlay {
             position: absolute;
             inset: 0;
-            background: rgba(0, 0, 0, 0.46);
-            z-index: 2;
+            background-image: radial-gradient(var(--grid-dot-color) 1.2px, transparent 1.2px);
+            background-size: 26px 26px;
+            opacity: 0.8;
         }
 
-        .hero-content {
+        /* ৩ডি স্টেজ */
+        .hero-flow-stage {
             position: relative;
-            z-index: 3;
-            text-align: center;
-            color: #ffffff;
-            padding: 0 20px;
-            max-width: 780px;
+            width: 100%;
+            height: 100%;
             display: flex;
-            flex-direction: column;
             align-items: center;
+            justify-content: center;
+            z-index: 5;
+            transform-style: preserve-3d;
         }
 
-        .hero-title {
-            font-size: clamp(24px, 3.4vw, 38px);
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            line-height: 1.2;
-            margin-bottom: 10px;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
-        }
-
-        .hero-desc {
-            font-size: clamp(13px, 1.3vw, 15px);
-            font-weight: 500;
-            opacity: 0.95;
-            margin-bottom: 22px;
-            line-height: 1.5;
-            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
-        }
-
-        .hero-btn {
-            display: inline-flex;
+        /* 🔴 ৩ডি কার্ড: বড় ফুল-সাইজ এবং পারফেক্ট রেশিও 🔴 */
+        .flow-card {
+            position: absolute;
+            width: clamp(210px, 17vw, 255px);
+            aspect-ratio: 1 / 1.22;
+            /* ব্যাজের সাথে যাতে ধাক্কা না লাগে তাই পর্যাপ্ত জায়গা দেওয়া হয়েছে */
+            border-radius: 22px;
+            cursor: pointer;
+            display: flex;
             align-items: center;
-            gap: 9px;
+            justify-content: center;
+            padding: 0;
+            background: transparent;
+            box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.28);
+            transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                opacity 0.65s ease,
+                filter 0.65s ease,
+                box-shadow 0.65s ease;
+            overflow: hidden;
+            border: none;
+        }
+
+        /* 🔴 টি-শার্টকে উপরে উঠানো হয়েছে যাতে নিচে থাকা ব্যাজের সাথে না লাগে 🔴 */
+        .flow-card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 10%;
+            /* ফোকাস উপরে রেখে টি-শার্টকে ন্যাচারালি উপরে তোলা হয়েছে */
+            display: block;
+            transition: transform 0.35s ease;
+        }
+
+        .flow-card:hover .flow-card-img {
+            transform: scale(1.04);
+        }
+
+        /* ফ্লো ন্যাভিগেশন কন্ট্রোল অ্যারো */
+        .flow-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 15;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+        }
+
+        [data-theme="dark"] .flow-nav-btn {
+            background: rgba(22, 27, 34, 0.85);
+        }
+
+        .flow-nav-btn:hover {
             background: var(--primary);
-            color: var(--text-over-primary);
-            padding: 12px 28px;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 14px;
-            text-decoration: none;
-            transition: all 0.25s ease;
-            box-shadow: 0 8px 24px rgba(255, 98, 0, 0.35);
+            color: #ffffff;
+            transform: translateY(-50%) scale(1.1);
         }
 
-        .hero-btn:hover {
-            transform: translateY(-2px);
-            background: var(--primary-hover);
+        .flow-prev {
+            left: 24px;
+        }
+
+        .flow-next {
+            right: 24px;
         }
 
         /* ================= MAIN STORE LAYOUT ================= */
@@ -438,13 +540,6 @@
             width: 100%;
         }
 
-        .products-grid-info {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-muted);
-        }
-
-        /* 🔴 ৪-কলাম বিশিষ্ট প্রোডাক্ট গ্রিড 🔴 */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -452,7 +547,6 @@
             width: 100%;
         }
 
-        /* 🔴 ক্লিন প্রোডাক্ট কার্ড 🔴 */
         .product-card {
             background: transparent;
             border: none;
@@ -471,7 +565,6 @@
             transform: translateY(-5px);
         }
 
-        /* 🔴 বড় ফুল-সাইজ থাম্বনেইল বক্স 🔴 */
         .card-thumbnail {
             position: relative;
             width: 100%;
@@ -497,7 +590,6 @@
             transform: scale(1.05);
         }
 
-        /* 🔴 সেন্টার অ্যালাইন প্রোডাক্ট নেম এবং প্রাইজ 🔴 */
         .card-info {
             padding: 14px 4px 6px;
             display: flex;
@@ -800,7 +892,6 @@
             margin-left: auto;
         }
 
-        /* 🔴 SELECT SIZE & SIZE GUIDE INLINE (পাশাপাশি) 🔴 */
         .size-select-section {
             display: flex;
             flex-direction: column;
@@ -861,7 +952,6 @@
             color: var(--text-over-primary);
         }
 
-        /* 🔴 QUALITY GUARANTEE ACCORDION (ক্লিন লুক) 🔴 */
         .quality-accordion {
             border-top: 1px solid var(--border-color);
             border-bottom: 1px solid var(--border-color);
@@ -1677,25 +1767,29 @@
                 display: none;
             }
 
-            .hero-video-banner {
-                height: 250px;
+            .hero-flow-banner {
+                height: 290px;
             }
 
-            .hero-title {
-                font-size: 21px;
+            .flow-card {
+                width: 175px;
+                aspect-ratio: 1 / 1.22;
+                border-radius: 18px;
             }
 
-            .hero-desc {
-                font-size: 12px;
-                margin-bottom: 16px;
+            .flow-nav-btn {
+                width: 34px;
+                height: 34px;
             }
 
-            .hero-btn {
-                padding: 10px 22px;
-                font-size: 13px;
+            .flow-prev {
+                left: 10px;
             }
 
-            /* 🔴 মোবাইলে ২-কলাম বিশিষ্ট বড় সাইজের প্রোডাক্ট ভিউ 🔴 */
+            .flow-next {
+                right: 10px;
+            }
+
             .products-grid {
                 grid-template-columns: repeat(2, 1fr) !important;
                 gap: 18px 12px !important;
@@ -1843,22 +1937,27 @@
         </div>
     </header>
 
-    <!-- ================= FULL-WIDTH HERO VIDEO BANNER ================= -->
-    <section class="hero-video-banner">
-        <!-- 🔴 [REPLACE VIDEO]: নিচে src-এ আপনার ভিডিও লিঙ্ক বসাবেন 🔴 -->
-        <video class="hero-video" autoplay muted loop playsinline
-            poster="website_banner_video/Hands_holding_beige_t-shirt_1080p_20261008190220.mp4">
-            <source src="website_banner_video/Hands_holding_beige_t-shirt_1080p_20261008190220.mp4" type="video/mp4">
-        </video>
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h1 class="hero-title">Welcome to Sajid Fashion!</h1>
-            <p class="hero-desc">We're a clothing brand committed to quality, inspired by your trust.</p>
-            <a href="#productsGrid" class="hero-btn" onclick="scrollToProducts(event)">
-                <i data-lucide="shirt" style="width:18px; height:18px;"></i>
-                <span>Browse new merch</span>
-            </a>
+    <!-- ================= 🔴 3D PRODUCT CARD FLOW HERO BANNER 🔴 ================= -->
+    <section class="hero-flow-banner" id="heroFlowBanner">
+        <!-- 🔴 মোশন গ্রাফিক্স ব্যাকগ্রাউন্ড: কমলা আভা সম্পূর্ণ মুক্ত নিউট্রাল স্টুডিও লুক 🔴 -->
+        <div class="banner-motion-bg">
+            <div class="motion-orb orb-neutral-1"></div>
+            <div class="motion-orb orb-neutral-2"></div>
+            <div class="banner-grid-overlay"></div>
         </div>
+
+        <!-- ৩ডি কার্ড ফ্লো স্টেজ -->
+        <div class="hero-flow-stage" id="flowStage">
+            <!-- জাভাস্ক্রিপ্ট দ্বারা কার্ডগুলো কোনো অতিরিক্ত ব্যাকগ্রাউন্ড ছাড়া বড় আকারে রেন্ডার হবে -->
+        </div>
+
+        <!-- ন্যাভিগেশন অ্যারো -->
+        <button class="flow-nav-btn flow-prev" onclick="prevFlowCard()" aria-label="Previous">
+            <i data-lucide="chevron-left" style="width:20px; height:20px;"></i>
+        </button>
+        <button class="flow-nav-btn flow-next" onclick="nextFlowCard()" aria-label="Next">
+            <i data-lucide="chevron-right" style="width:20px; height:20px;"></i>
+        </button>
     </section>
 
     <!-- ================= MAIN STORE SECTION ================= -->
@@ -1969,7 +2068,6 @@
                     style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-weight: 600; transition: color 0.2s;">MD
                     SAJID MAHMUD</a>
             </div>
-        </div>
         </div>
     </footer>
 
@@ -2113,7 +2211,6 @@
             <div class="size-modal-header">
                 <h3 class="size-modal-title" id="sizeGuideModalTitle">Unisex T-Shirt Size Guide</h3>
                 <div style="display: flex; align-items: center; gap: 14px;">
-                    <!-- IN / CM SWITCH -->
                     <div class="unit-switch-box">
                         <button type="button" class="unit-switch-btn" id="unitInBtn"
                             onclick="setSizeUnit('in')">in</button>
@@ -2572,7 +2669,6 @@
 
         const gridElem = document.getElementById('productsGrid');
 
-        /* 🔴 ইনিশিয়াল ভিউ: SAVE 25% ব্যাজ ছাড়া ক্লিন বড় ইমেজ ও সেন্টারড নেম ও প্রাইজ 🔴 */
         function renderProducts(items) {
             gridElem.innerHTML = '';
             items.forEach(prod => {
@@ -2627,7 +2723,6 @@
             const maxPrice = parseFloat(priceRange.value);
             document.getElementById('priceDisplay').innerText = maxPrice.toLocaleString();
 
-            // Update range progress for visual feedback
             const min = parseFloat(priceRange.min);
             const max = parseFloat(priceRange.max);
             const progress = ((maxPrice - min) / (max - min)) * 100;
@@ -2643,6 +2738,142 @@
             renderProducts(filtered);
         }
 
+        /* ================= 🔴 3D CARD FLOW CAROUSEL LOGIC 🔴 ================= */
+        // Shuffle products randomly for banner on each page load
+        const shuffledProducts = [...productsData].sort(() => Math.random() - 0.5);
+        const bannerProductList = shuffledProducts.slice(0, 7);
+        let flowCurrentIndex = 0;
+        let flowAutoTimer = null;
+        const flowStage = document.getElementById('flowStage');
+
+        function init3DFlowCarousel() {
+            flowStage.innerHTML = '';
+            bannerProductList.forEach((prod, idx) => {
+                const card = document.createElement('div');
+                card.className = 'flow-card';
+                card.setAttribute('data-index', idx);
+
+                const shortName = prod.name.replace(/ Graphic Tee| Tee/gi, '');
+
+                card.innerHTML = `
+                    <img src="${prod.image}" alt="${prod.name}" class="flow-card-img">
+                `;
+
+                card.onclick = () => {
+                    if (idx === flowCurrentIndex) {
+                        openOrderModal(prod.id);
+                    } else {
+                        flowCurrentIndex = idx;
+                        update3DFlowPositions();
+                        resetFlowTimer();
+                    }
+                };
+
+                flowStage.appendChild(card);
+            });
+
+            update3DFlowPositions();
+            startFlowTimer();
+            initTouchSwipe();
+        }
+
+        function update3DFlowPositions() {
+            const cards = document.querySelectorAll('.flow-card');
+            const total = cards.length;
+            const isMobile = window.innerWidth <= 640;
+            const stepX = isMobile ? 100 : 185;
+
+            cards.forEach((card, idx) => {
+                let diff = (idx - flowCurrentIndex) % total;
+                if (diff > total / 2) diff -= total;
+                if (diff < -total / 2) diff += total;
+
+                if (diff === 0) {
+                    card.style.transform = `translateX(0px) translateZ(${isMobile ? '30px' : '55px'}) scale(1.06) rotateY(0deg)`;
+                    card.style.zIndex = '10';
+                    card.style.opacity = '1';
+                    card.style.filter = 'drop-shadow(0 20px 30px rgba(0,0,0,0.22))';
+                    card.style.pointerEvents = 'auto';
+                } else if (diff === 1) {
+                    card.style.transform = `translateX(${stepX}px) translateZ(0px) scale(${isMobile ? 0.82 : 0.86}) rotateY(-6deg)`;
+                    card.style.zIndex = '8';
+                    card.style.opacity = '0.92';
+                    card.style.filter = 'brightness(0.96)';
+                    card.style.pointerEvents = 'auto';
+                } else if (diff === -1) {
+                    card.style.transform = `translateX(-${stepX}px) translateZ(0px) scale(${isMobile ? 0.82 : 0.86}) rotateY(6deg)`;
+                    card.style.zIndex = '8';
+                    card.style.opacity = '0.92';
+                    card.style.filter = 'brightness(0.96)';
+                    card.style.pointerEvents = 'auto';
+                } else if (diff === 2) {
+                    card.style.transform = `translateX(${stepX * 1.85}px) translateZ(-50px) scale(${isMobile ? 0.65 : 0.72}) rotateY(-12deg)`;
+                    card.style.zIndex = '6';
+                    card.style.opacity = isMobile ? '0.35' : '0.65';
+                    card.style.filter = 'brightness(0.9)';
+                    card.style.pointerEvents = 'auto';
+                } else if (diff === -2) {
+                    card.style.transform = `translateX(-${stepX * 1.85}px) translateZ(-50px) scale(${isMobile ? 0.65 : 0.72}) rotateY(12deg)`;
+                    card.style.zIndex = '6';
+                    card.style.opacity = isMobile ? '0.35' : '0.65';
+                    card.style.filter = 'brightness(0.9)';
+                    card.style.pointerEvents = 'auto';
+                } else {
+                    const dir = diff > 0 ? 1 : -1;
+                    card.style.transform = `translateX(${dir * stepX * 2.6}px) scale(0.5)`;
+                    card.style.zIndex = '1';
+                    card.style.opacity = '0';
+                    card.style.pointerEvents = 'none';
+                }
+            });
+        }
+
+        function nextFlowCard() {
+            flowCurrentIndex = (flowCurrentIndex + 1) % bannerProductList.length;
+            update3DFlowPositions();
+            resetFlowTimer();
+        }
+
+        function prevFlowCard() {
+            flowCurrentIndex = (flowCurrentIndex - 1 + bannerProductList.length) % bannerProductList.length;
+            update3DFlowPositions();
+            resetFlowTimer();
+        }
+
+        function startFlowTimer() {
+            clearInterval(flowAutoTimer);
+            flowAutoTimer = setInterval(nextFlowCard, 3000);
+        }
+
+        function resetFlowTimer() {
+            clearInterval(flowAutoTimer);
+            startFlowTimer();
+        }
+
+        const bannerElem = document.getElementById('heroFlowBanner');
+        bannerElem.addEventListener('mouseenter', () => clearInterval(flowAutoTimer));
+        bannerElem.addEventListener('mouseleave', startFlowTimer);
+
+        function initTouchSwipe() {
+            let startX = 0;
+            bannerElem.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+            }, { passive: true });
+
+            bannerElem.addEventListener('touchend', (e) => {
+                const endX = e.changedTouches[0].clientX;
+                const diff = startX - endX;
+                if (Math.abs(diff) > 40) {
+                    if (diff > 0) nextFlowCard();
+                    else prevFlowCard();
+                }
+            }, { passive: true });
+        }
+
+        window.addEventListener('resize', update3DFlowPositions);
+
+        init3DFlowCarousel();
+
         let selectedSize = null;
 
         function openOrderModal(productId) {
@@ -2657,7 +2888,6 @@
             document.getElementById('modalQty').value = 1;
             document.getElementById('sizeErrorMsg').style.display = 'none';
 
-            // Reset Quality Accordion
             const acc = document.getElementById('qualityAccordion');
             acc.classList.remove('active');
             document.getElementById('accordionIcon').innerText = '+';
@@ -2760,10 +2990,7 @@
             document.querySelectorAll('.modal-size-btn').forEach(b => b.classList.remove('active'));
             btnEl.classList.add('active');
 
-            // Hide error message when size is selected
             document.getElementById('sizeErrorMsg').style.display = 'none';
-
-            // Smooth scroll to confirm button
             document.getElementById('confirmOrderBtn').scrollIntoView({ behavior: 'smooth', block: 'center' });
 
             updateVariantSelect();
@@ -2786,7 +3013,6 @@
             variantSelect.appendChild(opt);
         }
 
-        /* 🔴 QUALITY GUARANTEE ACCORDION TOGGLE 🔴 */
         function toggleQualityAccordion() {
             const acc = document.getElementById('qualityAccordion');
             const icon = document.getElementById('accordionIcon');
@@ -2794,7 +3020,6 @@
             icon.innerText = acc.classList.contains('active') ? '−' : '+';
         }
 
-        /* 🔴 COMFORT COLORS 1717 ACCURATE SIZE GUIDE DATA 🔴 */
         const sizeDataCM = [
             { size: "S", length: "68", width: "46", sleeve: "41" },
             { size: "M", length: "71", width: "52", sleeve: "45" },
@@ -2873,7 +3098,6 @@
             }
         }
 
-        /* 🔴 DARAZ STYLE DYNAMIC ZOOM LOGIC 🔴 */
         function setupDarazZoom() {
             const wrapper = document.getElementById('mainImageWrapper');
             const mainImg = document.getElementById('modalProductImg');
@@ -2994,7 +3218,6 @@
                 return;
             }
 
-            // Hide error message if size is selected
             document.getElementById('sizeErrorMsg').style.display = 'none';
 
             let variantDetails = selectedVariant;
@@ -3147,20 +3370,6 @@
                 }
             });
         });
-
-        function scrollToProducts(e) {
-            e.preventDefault();
-            const target = document.getElementById('productsGrid');
-            if (target) {
-                const header = document.querySelector('header');
-                const headerHeight = header ? header.offsetHeight : 80;
-                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        }
 
         lucide.createIcons();
     </script>

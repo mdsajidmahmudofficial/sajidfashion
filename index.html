@@ -1,0 +1,3312 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sajid Fashion</title>
+
+    <link rel="icon" type="image/png" href="logo_and_favicon/Sajid_Fashion_logo_circle.png">
+
+    <!-- Google Fonts: Plus Jakarta Sans & Hind Siliguri (প্রিমিয়াম বাংলা ফন্ট) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Lucide Icons (ভার্সন পিনড এবং defer সহ ফাস্টার লোড) -->
+    <script src="https://unpkg.com/lucide@0.344.0/dist/umd/lucide.min.js" defer></script>
+
+    <style>
+        :root {
+            --bg-body: #ffffff;
+            --bg-surface: #ffffff;
+            --bg-card: #ffffff;
+            --bg-sidebar: #ffffff;
+            --product-card-bg: #eceff2;
+            --text-main: #090d16;
+            --text-muted: #64748b;
+            --border-color: #e5e7eb;
+            --input-bg: #f8fafc;
+            --input-text: #000000;
+            --primary: #ff6200;
+            --primary-hover: #e55800;
+            --primary-gradient: linear-gradient(135deg, #ff6200 0%, #ff7b29 100%);
+            --accent-green: #10b981;
+            --accent-orange: #ff6200;
+            --text-over-primary: #ffffff;
+            --card-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.06);
+            --modal-overlay: rgba(0, 0, 0, 0.72);
+            --banner-bg: radial-gradient(ellipse 90% 70% at 50% -10%, rgba(255, 98, 0, 0.08) 0%, rgba(255, 255, 255, 0) 70%), linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+            --grid-line-color: rgba(15, 23, 42, 0.06);
+        }
+
+        [data-theme="dark"] {
+            --bg-body: #0a0d14;
+            --bg-surface: #121722;
+            --bg-card: #121722;
+            --bg-sidebar: #121722;
+            --product-card-bg: #1a202c;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --input-bg: #161d2b;
+            --input-text: #ffffff;
+            --primary: #ff6200;
+            --primary-hover: #ff751a;
+            --primary-gradient: linear-gradient(135deg, #ff6200 0%, #ff8533 100%);
+            --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.6);
+            --modal-overlay: rgba(0, 0, 0, 0.88);
+            --banner-bg: radial-gradient(ellipse 90% 70% at 50% -10%, rgba(255, 98, 0, 0.12) 0%, rgba(10, 13, 20, 0) 70%), linear-gradient(180deg, #0a0d14 0%, #121722 100%);
+            --grid-line-color: rgba(255, 255, 255, 0.045);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', 'Hind Siliguri', sans-serif;
+        }
+
+        body,
+        header,
+        aside,
+        .product-card,
+        .flow-card,
+        .btn-confirm-wa,
+        .cat-chip,
+        .theme-toggle-btn {
+            transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            width: 100%;
+            overflow-x: clip;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            min-height: 100vh;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--bg-surface);
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px clamp(16px, 2vw, 36px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.04);
+            backdrop-filter: blur(12px);
+            width: 100%;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: clamp(18px, 1.8vw, 22px);
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .brand-logo picture,
+        .brand-logo img {
+            height: 38px;
+            max-width: 140px;
+            width: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .lang-switch-box {
+            display: inline-flex;
+            align-items: center;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 100px;
+            padding: 2px;
+            gap: 2px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 12px;
+            font-weight: 700;
+            padding: 6px 11px;
+            border-radius: 100px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .lang-btn:hover {
+            color: var(--text-main);
+        }
+
+        .lang-btn.active {
+            background: var(--primary);
+            color: #ffffff;
+        }
+
+        .theme-toggle-btn,
+        .filter-toggle-btn {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .filter-toggle-btn {
+            display: none;
+        }
+
+        .theme-toggle-btn:hover,
+        .filter-toggle-btn:hover {
+            transform: scale(1.08);
+        }
+
+        .pill-contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            border: 1px solid var(--border-color);
+        }
+
+        .pill-email {
+            background: rgba(234, 67, 53, 0.1);
+            color: #ea4335;
+        }
+
+        .filter-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: var(--modal-overlay);
+            backdrop-filter: blur(4px);
+            z-index: 99;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .filter-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* ================= HERO BANNER ================= */
+        .hero-flow-banner {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            background: var(--banner-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+            border-bottom: 1px solid var(--border-color);
+            padding: 4px 0;
+        }
+
+        .banner-motion-bg {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .motion-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.35;
+            animation: orbFloat 14s ease-in-out infinite alternate;
+        }
+
+        [data-theme="dark"] .motion-orb {
+            opacity: 0.25;
+        }
+
+        .orb-neutral-1 {
+            width: 340px;
+            height: 340px;
+            background: rgba(255, 98, 0, 0.14);
+            top: -50px;
+            left: 8%;
+            animation-duration: 13s;
+        }
+
+        .orb-neutral-2 {
+            width: 300px;
+            height: 300px;
+            background: rgba(148, 163, 184, 0.2);
+            bottom: -60px;
+            right: 12%;
+            animation-duration: 17s;
+            animation-delay: -5s;
+        }
+
+        [data-theme="dark"] .orb-neutral-1 {
+            background: rgba(255, 98, 0, 0.16);
+        }
+
+        [data-theme="dark"] .orb-neutral-2 {
+            background: rgba(30, 41, 59, 0.4);
+        }
+
+        @keyframes orbFloat {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(25px, 18px) scale(1.08);
+            }
+
+            100% {
+                transform: translate(-20px, -15px) scale(0.92);
+            }
+        }
+
+        .banner-grid-overlay {
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(to right, var(--grid-line-color) 1px, transparent 1px), linear-gradient(to bottom, var(--grid-line-color) 1px, transparent 1px);
+            background-size: 32px 32px;
+            mask-image: radial-gradient(ellipse 85% 75% at 50% 50%, black 40%, transparent 95%);
+            -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 50%, black 40%, transparent 95%);
+            opacity: 0.9;
+            pointer-events: none;
+        }
+
+        .hero-banner-inner {
+            position: relative;
+            z-index: 5;
+            width: 100%;
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 10px clamp(16px, 2.5vw, 36px);
+            display: grid;
+            grid-template-columns: 1.05fr 1fr;
+            align-items: center;
+            gap: clamp(16px, 2.5vw, 36px);
+        }
+
+        .hero-left-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 13px;
+            max-width: 520px;
+        }
+
+        .hero-collection-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: var(--primary);
+        }
+
+        .tag-bullet {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--primary);
+        }
+
+        .hero-headline {
+            font-size: clamp(28px, 3.4vw, 44px);
+            font-weight: 900;
+            line-height: 1.15;
+            letter-spacing: -0.5px;
+            color: var(--text-main);
+            text-transform: uppercase;
+        }
+
+        .hero-headline .dot-accent {
+            color: var(--primary);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(12.5px, 1.1vw, 14px);
+            color: var(--text-muted);
+            line-height: 1.6;
+            max-width: 450px;
+        }
+
+        .hero-action-cluster {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-top: 4px;
+            flex-wrap: wrap;
+        }
+
+        .hero-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary);
+            color: var(--text-over-primary);
+            padding: 11px 24px;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 13.5px;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            box-shadow: 0 6px 20px rgba(255, 98, 0, 0.32);
+        }
+
+        .hero-cta-btn:hover {
+            transform: translateY(-2px);
+            background: var(--primary-hover);
+        }
+
+        .hero-price-strip-pro {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            padding: 7px 15px;
+            border-radius: 100px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+        }
+
+        .pro-price-badge {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.8px;
+            color: var(--primary);
+            background: rgba(255, 98, 0, 0.12);
+            padding: 3px 8px;
+            border-radius: 100px;
+            text-transform: uppercase;
+        }
+
+        .pro-price-now {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .pro-price-was {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-decoration: line-through;
+        }
+
+        .hero-trust-bar {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            font-size: 12.5px;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-top: 2px;
+            flex-wrap: wrap;
+        }
+
+        .trust-feature-point {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hero-right-stage {
+            position: relative;
+            width: 100%;
+            height: clamp(290px, 24vw, 345px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1200px;
+        }
+
+        .hero-rotating-badge {
+            position: absolute;
+            top: -6px;
+            right: 8px;
+            width: 84px;
+            height: 84px;
+            z-index: 25;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            color: var(--text-main);
+        }
+
+        .rotating-badge-svg {
+            width: 100%;
+            height: 100%;
+            transform-origin: center center;
+            animation: spinBadge 14s linear infinite;
+        }
+
+        .rotating-badge-center {
+            position: absolute;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        @keyframes spinBadge {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .hero-flow-stage {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform-style: preserve-3d;
+        }
+
+        .flow-card {
+            position: absolute;
+            width: clamp(175px, 14vw, 220px);
+            aspect-ratio: 1 / 1.22;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            background: transparent;
+            box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.26);
+            transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.65s ease, filter 0.65s ease, box-shadow 0.65s ease;
+            overflow: hidden;
+            border: none;
+        }
+
+        .flow-card picture,
+        .flow-card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 10%;
+            display: block;
+            transition: transform 0.35s ease;
+        }
+
+        .flow-card:hover .flow-card-img {
+            transform: scale(1.04);
+        }
+
+        .flow-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 15;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+        }
+
+        [data-theme="dark"] .flow-nav-btn {
+            background: rgba(18, 23, 34, 0.85);
+        }
+
+        .flow-nav-btn:hover {
+            background: var(--primary);
+            color: #ffffff;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .flow-prev {
+            left: 4px;
+        }
+
+        .flow-next {
+            right: 4px;
+        }
+
+        /* ================= MAIN STORE LAYOUT ================= */
+        .main-wrapper {
+            width: 100%;
+            max-width: 100%;
+            margin: 28px 0 60px 0;
+            padding: 0 clamp(16px, 2vw, 36px);
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        .filter-sidebar {
+            background: var(--bg-sidebar);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 22px;
+            box-shadow: var(--card-shadow);
+            position: -webkit-sticky;
+            position: sticky;
+            top: 80px;
+            align-self: start;
+            z-index: 10;
+        }
+
+        .filter-header-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            font-weight: 800;
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .filter-block {
+            margin-bottom: 20px;
+        }
+
+        .filter-label-with-icon {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .search-field-input {
+            width: 100%;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 10px 14px;
+            font-size: 13px;
+            color: var(--input-text);
+            outline: none;
+        }
+
+        .search-field-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 98, 0, 0.15);
+        }
+
+        .category-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .cat-chip {
+            background: var(--input-bg);
+            border: 1px solid transparent;
+            color: var(--text-main);
+            padding: 8px 12px;
+            border-radius: 9px;
+            font-size: 12.5px;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s;
+        }
+
+        .cat-chip:hover,
+        .cat-chip.active {
+            background: var(--primary);
+            color: var(--text-over-primary);
+            transform: translateX(3px);
+        }
+
+        .price-filter input[type="range"] {
+            width: 100%;
+            accent-color: var(--primary);
+            cursor: pointer;
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            height: 8px;
+        }
+
+        .price-filter input[type="range"]::-webkit-slider-runnable-track {
+            height: 6px;
+            background: linear-gradient(var(--primary), var(--primary)) left/0% 100% no-repeat, var(--border-color);
+            background-size: var(--range-progress, 0%) 100%;
+            border-radius: 4px;
+        }
+
+        .price-filter input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            background: var(--primary);
+            border-radius: 50%;
+            cursor: pointer;
+            margin-top: -6px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .price-range-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        .products-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 28px 20px;
+            width: 100%;
+        }
+
+        .product-card {
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            overflow: visible;
+            box-shadow: none;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            position: relative;
+            height: 100%;
+            transition: transform 0.25s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-thumbnail {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1.15;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: transparent;
+            border-radius: 18px;
+            padding: 0;
+        }
+
+        .card-thumbnail picture,
+        .card-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.35s ease;
+        }
+
+        .product-card:hover .card-thumbnail img {
+            transform: scale(1.05);
+        }
+
+        .card-info {
+            padding: 14px 4px 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 6px;
+        }
+
+        .card-title {
+            font-size: 14.5px;
+            font-weight: 700;
+            color: var(--text-main);
+            line-height: 1.35;
+            margin: 0;
+        }
+
+        .card-price {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-main);
+            letter-spacing: -0.2px;
+        }
+
+        /* ================= POPUP MODALS ================= */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: var(--modal-overlay);
+            backdrop-filter: blur(14px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-container {
+            width: 100%;
+            max-width: 1160px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 22px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 560px 1fr;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+            position: relative;
+            transform: scale(0.93) translateY(20px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            max-height: 90vh;
+        }
+
+        .modal-overlay.active .modal-container {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 60;
+            transition: all 0.2s;
+        }
+
+        .modal-close-btn:hover {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+
+        .modal-gallery {
+            background: var(--input-bg);
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            border-right: 1px solid var(--border-color);
+            overflow-y: auto;
+            max-height: 90vh;
+            position: relative;
+        }
+
+        .modal-media-layout {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            width: 100%;
+        }
+
+        .modal-thumbnails {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 76px;
+            flex-shrink: 0;
+            max-height: 520px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            padding: 2px;
+        }
+
+        .modal-thumb {
+            width: 100%;
+            height: 76px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: #ffffff;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+        }
+
+        .modal-thumb:hover,
+        .modal-thumb.active {
+            border-color: var(--primary);
+            transform: scale(1.04);
+        }
+
+        .modal-thumb img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        .modal-main-image-wrapper {
+            position: relative;
+            flex: 1;
+            height: 520px;
+            max-height: 520px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #ffffff;
+            cursor: crosshair;
+            padding: 6px;
+        }
+
+        .modal-main-image-wrapper picture,
+        .modal-main-image {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        .modal-zoom-lens {
+            position: absolute;
+            width: 130px;
+            height: 130px;
+            background: rgba(255, 98, 0, 0.25);
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.15s ease;
+            z-index: 10;
+            display: none;
+        }
+
+        .modal-zoom-result {
+            position: absolute;
+            top: 20px;
+            left: 570px;
+            width: 480px;
+            height: 480px;
+            border-radius: 18px;
+            background-color: var(--bg-surface);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+            z-index: 55;
+            display: none;
+            pointer-events: none;
+            border: 2px solid var(--border-color);
+            overflow: hidden;
+            background-repeat: no-repeat;
+        }
+
+        .modal-discount-tag {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: #ef4444;
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 6px 12px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+            z-index: 5;
+        }
+
+        .modal-stock-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 10px;
+            color: #10b981;
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: auto;
+        }
+
+        .modal-details-panel {
+            padding: 28px 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            overflow-y: auto;
+            max-height: 90vh;
+        }
+
+        .modal-product-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .modal-product-info h2 {
+            font-size: clamp(20px, 1.8vw, 24px);
+            font-weight: 800;
+            line-height: 1.3;
+            color: var(--text-main);
+        }
+
+        .modal-product-category {
+            font-size: 12px;
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .modal-desc {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            line-height: 1.65;
+        }
+
+        .modal-price-box {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding: 14px 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .modal-price-box .active-price {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .modal-price-box .old-price {
+            font-size: 14px;
+            color: var(--text-muted);
+            text-decoration: line-through;
+        }
+
+        .discount-badge-modal {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: #fff;
+            padding: 5px 12px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-left: auto;
+        }
+
+        .size-select-section {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .size-guide-inline-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .size-inline-label {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .btn-size-guide-link {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: underline;
+            cursor: pointer;
+            padding: 0;
+            transition: color 0.2s;
+        }
+
+        .btn-size-guide-link:hover {
+            color: var(--primary);
+        }
+
+        .modal-size-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .modal-size-btn {
+            padding: 9px 14px;
+            border: 2px solid var(--border-color);
+            background: var(--bg-surface);
+            color: var(--text-main);
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            min-width: 52px;
+        }
+
+        .modal-size-btn:hover,
+        .modal-size-btn.active {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: var(--text-over-primary);
+        }
+
+        .quality-accordion {
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            margin: 6px 0;
+            transition: all 0.2s ease;
+        }
+
+        .quality-accordion-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 2px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-main);
+            user-select: none;
+        }
+
+        .quality-accordion-icon {
+            font-size: 20px;
+            font-weight: 400;
+            color: var(--text-main);
+            line-height: 1;
+        }
+
+        .quality-accordion-body {
+            display: none;
+            padding: 0 4px 18px;
+            font-size: 13.5px;
+            line-height: 1.65;
+            color: var(--text-main);
+        }
+
+        .quality-accordion.active .quality-accordion-body {
+            display: block;
+        }
+
+        .quality-accordion-body ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .quality-accordion-body li {
+            position: relative;
+            padding-left: 20px;
+            color: var(--text-main);
+        }
+
+        .quality-accordion-body li::before {
+            content: "•";
+            position: absolute;
+            left: 4px;
+            font-size: 18px;
+            color: var(--text-main);
+            line-height: 1.2;
+        }
+
+        .modal-divider {
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .modal-quantity-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .modal-section-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+            background: var(--input-bg);
+        }
+
+        .qty-btn {
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qty-btn:hover {
+            background: var(--border-color);
+        }
+
+        .quantity-selector input {
+            width: 50px;
+            height: 40px;
+            border: none;
+            background: transparent;
+            text-align: center;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-main);
+            outline: none;
+        }
+
+        .modal-order-form {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .form-header-title {
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .form-subtitle {
+            font-size: 12.5px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .input-row {
+            margin-bottom: 10px;
+        }
+
+        .input-row label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        .input-row input,
+        .input-row select,
+        .input-row textarea {
+            width: 100%;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--input-text);
+            padding: 11px 14px;
+            border-radius: 10px;
+            font-size: 13px;
+            outline: none;
+        }
+
+        .input-row input:focus,
+        .input-row select:focus,
+        .input-row textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 98, 0, 0.15);
+        }
+
+        .checkbox-row .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        .checkbox-row input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: #25d366;
+            cursor: pointer;
+        }
+
+        .btn-confirm-wa {
+            background: #25d366;
+            color: #ffffff;
+            border: none;
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn-confirm-wa:hover {
+            background: #1eb954;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+        }
+
+        /* ================= SIZE GUIDE MODAL ================= */
+        .size-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.72);
+            backdrop-filter: blur(8px);
+            z-index: 2200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .size-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .size-modal-container {
+            width: 100%;
+            max-width: 820px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 26px 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .size-modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 14px;
+        }
+
+        .size-modal-title {
+            font-size: 19px;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .unit-switch-box {
+            display: inline-flex;
+            align-items: center;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 100px;
+            padding: 3px;
+            gap: 3px;
+        }
+
+        .unit-switch-btn {
+            background: transparent;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        .unit-switch-btn.active {
+            background: var(--primary);
+            color: var(--text-over-primary);
+        }
+
+        .size-guide-main-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 22px;
+            align-items: center;
+        }
+
+        .size-diagram-box {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .size-diagram-box picture,
+        .size-diagram-box img {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            display: block;
+        }
+
+        .size-table-wrapper {
+            overflow-x: auto;
+        }
+
+        .size-guide-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13.5px;
+            text-align: center;
+        }
+
+        .size-guide-table th {
+            background: var(--input-bg);
+            padding: 11px 12px;
+            font-weight: 700;
+            color: var(--text-main);
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .size-guide-table td {
+            padding: 9.5px 12px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        .size-guide-table tr:hover td {
+            background: rgba(255, 98, 0, 0.05);
+        }
+
+        .size-measure-notes {
+            background: var(--input-bg);
+            border-radius: 14px;
+            padding: 16px 18px;
+            font-size: 12.8px;
+            line-height: 1.65;
+            color: var(--text-muted);
+            border-left: 4px solid var(--primary);
+        }
+
+        .size-measure-notes strong {
+            color: var(--text-main);
+        }
+
+        /* ================= NEWSLETTER & FOOTER ================= */
+        .newsletter-section {
+            width: 100%;
+            background: var(--bg-surface);
+            border-top: 1px solid var(--border-color);
+            padding: 65px 20px 75px;
+            text-align: center;
+        }
+
+        .newsletter-title {
+            font-size: clamp(26px, 3vw, 36px);
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 24px;
+            letter-spacing: -0.5px;
+        }
+
+        .newsletter-form-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            max-width: 580px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            background: var(--input-bg);
+            border: 1.5px solid var(--border-color);
+            border-radius: 12px;
+            padding: 14px 20px;
+            font-size: 14px;
+            color: var(--input-text);
+            outline: none;
+        }
+
+        .newsletter-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 98, 0, 0.15);
+        }
+
+        .btn-newsletter-subscribe {
+            background: var(--primary);
+            color: var(--text-over-primary);
+            border: none;
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 14.5px;
+            cursor: pointer;
+            white-space: nowrap;
+            box-shadow: 0 4px 16px rgba(255, 98, 0, 0.3);
+        }
+
+        footer {
+            background-color: #131921 !important;
+            color: #ffffff;
+            padding: 20px 20px 16px;
+            width: 100%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-social-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 26px;
+            margin-bottom: 22px;
+        }
+
+        .footer-social-link {
+            color: #ffffff;
+            opacity: 0.88;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .footer-social-link:hover {
+            opacity: 1;
+            transform: scale(1.2);
+            color: var(--primary);
+        }
+
+        .footer-copyright {
+            font-size: 13.5px;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 0.3px;
+            font-weight: 500;
+        }
+
+        /* ================= FLOATING CHAT & ALERTS ================= */
+        .wa-floating-anchor {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .wa-chat-window {
+            width: 320px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            margin-bottom: 12px;
+            display: none;
+            flex-direction: column;
+        }
+
+        .wa-chat-window.active {
+            display: flex;
+        }
+
+        .wa-chat-top {
+            background: #25d366;
+            color: #ffffff;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .wa-chat-top h4 {
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .wa-chat-top p {
+            font-size: 11px;
+            opacity: 0.9;
+        }
+
+        .wa-chat-inputs {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .wa-chat-inputs input,
+        .wa-chat-inputs textarea {
+            width: 100%;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 13px;
+            color: var(--input-text);
+            outline: none;
+        }
+
+        .btn-send-wa-chat {
+            background: #25d366;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .wa-round-trigger {
+            width: 58px;
+            height: 58px;
+            background: #25d366;
+            color: #ffffff;
+            border: none;
+            border-radius: 50%;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .order-success-alert {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 2300;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .order-success-alert .alert-content {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 32px;
+            max-width: 380px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .order-success-alert button {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* ================= MEDIA QUERIES ================= */
+        @media (max-width: 1250px) {
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 22px 16px;
+            }
+        }
+
+        @media (max-width: 1000px) {
+            .modal-container {
+                max-width: 100%;
+                grid-template-columns: 460px 1fr;
+            }
+
+            .modal-zoom-result {
+                left: 470px;
+                width: 380px;
+                height: 380px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .motion-orb {
+                animation: none !important;
+            }
+
+            .hero-flow-banner {
+                padding: 10px 0 16px;
+            }
+
+            .hero-banner-inner {
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                padding: 12px 16px;
+                text-align: center;
+            }
+
+            .hero-right-stage {
+                order: 1;
+                width: 100%;
+                height: 250px;
+            }
+
+            .hero-rotating-badge {
+                top: -4px;
+                right: 4px;
+                width: 66px;
+                height: 66px;
+            }
+
+            .hero-left-content {
+                order: 2;
+                align-items: center;
+                max-width: 100%;
+                margin: 0 auto;
+                gap: 10px;
+            }
+
+            .hero-headline {
+                font-size: 29px;
+            }
+
+            .hero-subtitle {
+                max-width: 100%;
+            }
+
+            .hero-action-cluster,
+            .hero-trust-bar {
+                justify-content: center;
+            }
+
+            .main-wrapper {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0 16px;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px 16px;
+            }
+
+            .filter-sidebar {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 100;
+                border-radius: 0;
+                border: none;
+                max-height: 100vh;
+                overflow-y: auto;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+
+            .filter-sidebar.open {
+                transform: translateX(0);
+            }
+
+            .filter-toggle-btn {
+                display: flex !important;
+            }
+
+            .modal-container {
+                grid-template-columns: 1fr;
+                max-width: 95%;
+                max-height: 90vh;
+                border-radius: 20px;
+                overflow-y: auto;
+            }
+
+            .modal-gallery {
+                padding: 20px;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                max-height: none;
+                overflow: visible;
+            }
+
+            .modal-main-image-wrapper {
+                cursor: default;
+                height: 420px;
+            }
+
+            .modal-details-panel {
+                max-height: none;
+                overflow: visible;
+                padding: 20px;
+            }
+
+            .modal-zoom-result,
+            .modal-zoom-lens {
+                display: none !important;
+            }
+
+            .size-guide-main-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            header {
+                padding: 10px 14px;
+            }
+
+            .brand-logo {
+                font-size: 16px;
+            }
+
+            .header-actions {
+                gap: 6px;
+            }
+
+            .lang-btn {
+                padding: 5px 8px;
+                font-size: 11px;
+            }
+
+            .theme-toggle-btn,
+            .filter-toggle-btn {
+                width: 36px;
+                height: 36px;
+            }
+
+            .pill-contact-btn {
+                padding: 8px;
+                border-radius: 50%;
+            }
+
+            .pill-contact-btn span {
+                display: none;
+            }
+
+            .hero-flow-banner {
+                padding: 4px 0 14px;
+            }
+
+            .hero-right-stage {
+                order: 1;
+                height: 220px;
+            }
+
+            .hero-rotating-badge {
+                top: -6px;
+                right: 2px;
+                width: 58px;
+                height: 58px;
+            }
+
+            .hero-left-content {
+                order: 2;
+                gap: 8px;
+            }
+
+            .hero-headline {
+                font-size: 24px;
+            }
+
+            .flow-card {
+                width: 140px;
+                aspect-ratio: 1 / 1.22;
+                border-radius: 16px;
+            }
+
+            .flow-nav-btn {
+                width: 30px;
+                height: 30px;
+            }
+
+            .flow-prev {
+                left: 2px;
+            }
+
+            .flow-next {
+                right: 2px;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 18px 12px !important;
+            }
+
+            .card-thumbnail {
+                border-radius: 14px !important;
+            }
+
+            .card-info {
+                padding: 10px 2px 4px !important;
+                gap: 4px !important;
+            }
+
+            .card-title {
+                font-size: 13px !important;
+                line-height: 1.3 !important;
+            }
+
+            .card-price {
+                font-size: 13.5px !important;
+            }
+
+            .newsletter-section {
+                padding: 50px 16px 60px;
+            }
+
+            .newsletter-form-box {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .newsletter-input,
+            .btn-newsletter-subscribe {
+                width: 100%;
+            }
+
+            .modal-container {
+                max-width: 100%;
+                max-height: 92vh;
+                border-radius: 16px;
+            }
+
+            .modal-overlay {
+                padding: 10px;
+            }
+
+            .modal-gallery {
+                padding: 16px;
+            }
+
+            .modal-media-layout {
+                flex-direction: column-reverse;
+                gap: 10px;
+            }
+
+            .modal-thumbnails {
+                flex-direction: row;
+                width: 100%;
+                max-height: none;
+                overflow-x: auto;
+            }
+
+            .modal-thumb {
+                flex: 0 0 62px;
+                width: 62px;
+                height: 62px;
+            }
+
+            .modal-main-image-wrapper {
+                height: 300px;
+            }
+
+            .modal-details-panel {
+                padding: 16px;
+            }
+
+            .modal-product-info h2 {
+                font-size: 18px;
+            }
+
+            .modal-price-box .active-price {
+                font-size: 22px;
+            }
+
+            .modal-order-form {
+                padding-bottom: 25px;
+            }
+
+            .btn-confirm-wa {
+                border-radius: 12px !important;
+                padding: 15px !important;
+                font-size: 15px !important;
+                margin-top: 15px !important;
+                margin-bottom: 20px !important;
+            }
+
+            .wa-floating-anchor {
+                display: none !important;
+            }
+
+            .size-modal-container {
+                padding: 20px 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ================= NAVBAR ================= -->
+    <header>
+        <a href="#" class="brand-logo">
+            <img src="logo_and_favicon/transparent logo.png" alt="Sajid Fashion Logo" width="140" height="38"
+                fetchpriority="high">
+        </a>
+
+        <div class="header-actions">
+            <!-- 🔴 LANGUAGE SWITCHER (বাং | EN) 🔴 -->
+            <div class="lang-switch-box" id="langSwitch">
+                <button type="button" class="lang-btn active" data-lang="bn" onclick="changeLanguage('bn')">বাং</button>
+                <button type="button" class="lang-btn" data-lang="en" onclick="changeLanguage('en')">EN</button>
+            </div>
+
+            <button class="theme-toggle-btn" id="themeToggle" title="Toggle Light/Dark">
+                <i data-lucide="moon" style="width:18px; height:18px;"></i>
+            </button>
+
+            <button class="filter-toggle-btn" id="filterToggle" title="Open Filters">
+                <i data-lucide="sliders-horizontal" style="width:18px; height:18px;"></i>
+            </button>
+
+            <a href="https://wa.me/8801782416596" target="_blank" class="pill-contact-btn"
+                style="background: rgba(37, 211, 102, 0.1); color: #25d366; border-color: rgba(37, 211, 102, 0.3);">
+                <i data-lucide="message-square" style="width:15px; height:15px;"></i>
+                <span>WhatsApp</span>
+            </a>
+
+            <a href="mailto:contact@sajidfashionbd.com?subject=Inquiry" class="pill-contact-btn pill-email">
+                <i data-lucide="mail" style="width:15px; height:15px;"></i>
+                <span>Email</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- ================= HERO BANNER ================= -->
+    <section class="hero-flow-banner" id="heroFlowBanner">
+        <div class="banner-motion-bg">
+            <div class="motion-orb orb-neutral-1"></div>
+            <div class="motion-orb orb-neutral-2"></div>
+            <div class="banner-grid-overlay"></div>
+        </div>
+
+        <div class="hero-banner-inner">
+            <div class="hero-left-content">
+                <div class="hero-collection-tag">
+                    <span class="tag-bullet"></span>
+                    <span id="txt-hero-tag">পরার মতো সেরা ডিজাইন</span>
+                </div>
+                <h1 class="hero-headline" id="txt-hero-headline">
+                    আস্থা রাখার মতো<br>প্রিমিয়াম কোয়ালিটি<span class="dot-accent">.</span>
+                </h1>
+                <p class="hero-subtitle" id="txt-hero-subtitle">
+                    প্রিমিয়াম প্রিন্ট, আরামদায়ক ফেব্রিক এবং দীর্ঘস্থায়ী ডিজাইন। প্রতিদিনের ব্যবহারের জন্য নিখুঁতভাবে
+                    তৈরি।
+                </p>
+
+                <div class="hero-action-cluster">
+                    <a href="#productsGrid" class="hero-cta-btn" onclick="scrollToProducts(event)">
+                        <span id="txt-hero-shopbtn">অর্ডার করুন</span>
+                        <i data-lucide="arrow-right" style="width:16px; height:16px;"></i>
+                    </a>
+
+                    <div class="hero-price-strip-pro">
+                        <span class="pro-price-badge" id="txt-hero-offer">স্পেশাল অফার</span>
+                        <span class="pro-price-now">৳ 450</span>
+                        <span class="pro-price-was">৳ 600</span>
+                    </div>
+                </div>
+
+                <div class="hero-trust-bar">
+                    <div class="trust-feature-point">
+                        <i data-lucide="truck" style="width:15px; height:15px; color:var(--primary);"></i>
+                        <span id="txt-hero-delivery">সারাদেশে দ্রুত ডেলিভারি</span>
+                    </div>
+                    <div class="trust-feature-point">
+                        <i data-lucide="shield-check" style="width:15px; height:15px; color:var(--primary);"></i>
+                        <span id="txt-hero-guarantee">কোয়ালিটি গ্যারান্টি</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-right-stage">
+                <div class="hero-rotating-badge" title="Sajid Fashion">
+                    <svg viewBox="0 0 120 120" class="rotating-badge-svg" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <defs>
+                            <path id="badgeCirclePath" d="M 60, 60 m -46, 0 a 46,46 0 1,1 92,0 a 46,46 0 1,1 -92,0"
+                                fill="none" />
+                        </defs>
+                        <text font-size="8.5" font-weight="800" letter-spacing="2px" fill="currentColor">
+                            <textPath href="#badgeCirclePath" xlink:href="#badgeCirclePath" startOffset="0%">
+                                • PREMIUM QUALITY • T-SHIRT • SAJID FASHION •
+                            </textPath>
+                        </text>
+                    </svg>
+                    <div class="rotating-badge-center">
+                        <i data-lucide="sparkles" style="width:13px; height:13px;"></i>
+                    </div>
+                </div>
+
+                <div class="hero-flow-stage" id="flowStage"></div>
+
+                <button class="flow-nav-btn flow-prev" onclick="prevFlowCard()" aria-label="Previous">
+                    <i data-lucide="chevron-left" style="width:18px; height:18px;"></i>
+                </button>
+                <button class="flow-nav-btn flow-next" onclick="nextFlowCard()" aria-label="Next">
+                    <i data-lucide="chevron-right" style="width:18px; height:18px;"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= MAIN STORE SECTION ================= -->
+    <div class="main-wrapper" id="shopSection">
+        <aside class="filter-sidebar">
+            <div class="filter-header-title">
+                <i data-lucide="sliders-horizontal" style="width:18px; height:18px;"></i>
+                <span>Filter Products</span>
+            </div>
+
+            <div class="filter-block">
+                <label class="filter-label-with-icon">
+                    <i data-lucide="search" style="width:15px; height:15px; color:var(--primary);"></i>
+                    <span>Search by Name</span>
+                </label>
+                <input type="text" id="searchInput" class="search-field-input" placeholder="Type keywords..."
+                    oninput="applyFilters()">
+            </div>
+
+            <div class="filter-block">
+                <label class="filter-label-with-icon">
+                    <i data-lucide="layout-grid" style="width:15px; height:15px; color:var(--primary);"></i>
+                    <span>Filter by Category</span>
+                </label>
+                <div class="category-list">
+                    <button class="cat-chip active" data-cat="all" onclick="setCategory('all', this)"><span>All
+                            Items</span><span id="badge-all">17</span></button>
+                    <button class="cat-chip" data-cat="bold-statements"
+                        onclick="setCategory('bold-statements', this)"><span>Bold
+                            Statements</span><span>1</span></button>
+                    <button class="cat-chip" data-cat="dad-life" onclick="setCategory('dad-life', this)"><span>Dad
+                            Life</span><span>4</span></button>
+                    <button class="cat-chip" data-cat="nature-adventure"
+                        onclick="setCategory('nature-adventure', this)"><span>Nature &
+                            Adventure</span><span>2</span></button>
+                    <button class="cat-chip" data-cat="daily-inspiration"
+                        onclick="setCategory('daily-inspiration', this)"><span>Daily
+                            Inspiration</span><span>4</span></button>
+                    <button class="cat-chip" data-cat="daily-life" onclick="setCategory('daily-life', this)"><span>Daily
+                            Life</span><span>2</span></button>
+                    <button class="cat-chip" data-cat="growth-mindset"
+                        onclick="setCategory('growth-mindset', this)"><span>Growth Mindset</span><span>4</span></button>
+                </div>
+            </div>
+
+            <div class="filter-block price-filter">
+                <label class="filter-label-with-icon">
+                    <i data-lucide="tag" style="width:15px; height:15px; color:var(--primary);"></i>
+                    <span>Filter by Price</span>
+                </label>
+                <input type="range" id="priceRange" min="450" max="1000" step="50" value="1000"
+                    oninput="applyFilters()">
+                <div class="price-range-info">
+                    <span>৳ 450</span>
+                    <span>Max: ৳ <strong id="priceDisplay">1,000</strong></span>
+                </div>
+            </div>
+        </aside>
+
+        <div class="filter-overlay" id="filterOverlay" onclick="closeFilterSidebar()"></div>
+
+        <main class="products-section">
+            <div class="products-grid" id="productsGrid"></div>
+        </main>
+    </div>
+
+    <!-- ================= NEWSLETTER SECTION ================= -->
+    <section class="newsletter-section">
+        <h2 class="newsletter-title" id="txt-nl-title">আমাদের নিউজলেটারে যুক্ত থাকুন</h2>
+        <form class="newsletter-form-box" onsubmit="handleNewsletterSubmit(event)">
+            <input type="email" id="newsletterEmailInput" class="newsletter-input" placeholder="আপনার ইমেইল অ্যাড্রেস"
+                required>
+            <button type="submit" class="btn-newsletter-subscribe" id="txt-nl-btn">সাবস্ক্রাইব</button>
+        </form>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+        <div class="footer-social-row">
+            <a href="https://www.facebook.com/sajidfashionbd" target="_blank" class="footer-social-link"
+                title="Facebook"><i data-lucide="facebook" style="width:22px; height:22px;"></i></a>
+            <a href="https://www.youtube.com/@sajidfashionbd" target="_blank" class="footer-social-link"
+                title="YouTube"><i data-lucide="youtube" style="width:22px; height:22px;"></i></a>
+        </div>
+        <div class="footer-copyright">
+            © 2026 Sajid Fashion
+            <div style="margin-top: 8px; font-size: 12px; color: rgba(255, 255, 255, 0.6);">
+                Designed by <a href="https://www.facebook.com/mdsajidmahmudofficial" target="_blank"
+                    style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-weight: 600;">MD SAJID
+                    MAHMUD</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= MODAL: ORDER FORM ================= -->
+    <div class="modal-overlay" id="orderModal">
+        <div class="modal-container">
+            <button class="modal-close-btn" onclick="closeOrderModal()"><i data-lucide="x"
+                    style="width:18px; height:18px;"></i></button>
+
+            <div class="modal-zoom-result" id="zoomResult"></div>
+
+            <div class="modal-gallery">
+                <div class="modal-media-layout">
+                    <div class="modal-thumbnails" id="modalThumbnails"></div>
+                    <div class="modal-main-image-wrapper" id="mainImageWrapper">
+                        <span class="modal-discount-tag" id="modalDiscount">SAVE 20%</span>
+                        <div id="modalMainPictureContainer"
+                            style="width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
+                        </div>
+                        <div class="modal-zoom-lens" id="zoomLens"></div>
+                    </div>
+                </div>
+
+                <div class="modal-stock-status" id="modalStockStatus">
+                    <i data-lucide="check-circle" style="width:16px; height:16px;"></i>
+                    <span id="txt-modal-stock">অর্ডার অনুযায়ী আপনার জন্যই যত্নসহকারে তৈরি!</span>
+                </div>
+            </div>
+
+            <div class="modal-details-panel">
+                <div class="modal-product-info">
+                    <h2 id="modalProductTitle">Product Title</h2>
+                    <p class="modal-product-category" id="modalProductCategory">Category</p>
+                    <p id="modalProductDesc" class="modal-desc"></p>
+
+                    <div class="modal-price-box">
+                        <span class="active-price">৳ <span id="modalProductPrice">0</span></span>
+                        <span class="old-price">৳ <span id="modalProductOldPrice">0</span></span>
+                        <span class="discount-badge-modal" id="modalDiscountBadge">SAVE 20%</span>
+                    </div>
+                </div>
+
+                <div class="size-select-section" id="sizeRow" style="display: none;">
+                    <div class="size-guide-inline-row">
+                        <span class="size-inline-label" id="txt-modal-size-lbl">সাইজ নির্বাচন করুন:</span>
+                        <button type="button" class="btn-size-guide-link" id="txt-modal-sizeguide-btn"
+                            onclick="openSizeGuideModal()">সাইজ গাইড</button>
+                    </div>
+                    <div class="modal-size-buttons" id="modalSizeButtons"></div>
+                    <p class="size-error-msg" id="sizeErrorMsg"
+                        style="display: none; color: #ef4444; font-size: 12px; font-weight: 600; margin-top: 8px;">
+                        অনুগ্রহ করে সাইজ নির্বাচন করুন</p>
+                </div>
+
+                <div class="quality-accordion" id="qualityAccordion">
+                    <div class="quality-accordion-header" onclick="toggleQualityAccordion()">
+                        <span id="txt-accordion-title">কোয়ালিটি গ্যারান্টি ও রিটার্ন পলিসি</span>
+                        <span class="quality-accordion-icon" id="accordionIcon">+</span>
+                    </div>
+                    <div class="quality-accordion-body" id="accordionBodyContent"></div>
+                </div>
+
+                <div class="modal-divider"></div>
+
+                <div class="modal-quantity-section">
+                    <label class="modal-section-label" id="txt-modal-qty-lbl">পরিমাণ</label>
+                    <div class="quantity-selector">
+                        <button type="button" class="qty-btn" onclick="changeQty(-1)" aria-label="Decrease">−</button>
+                        <input type="number" id="modalQty" value="1" min="1" max="99" readonly>
+                        <button type="button" class="qty-btn" onclick="changeQty(1)" aria-label="Increase">+</button>
+                    </div>
+                </div>
+
+                <div class="modal-divider"></div>
+
+                <div class="modal-order-form">
+                    <h4 class="form-header-title" id="txt-form-title">অর্ডার কনফার্ম করুন</h4>
+                    <p class="form-subtitle" id="txt-form-subtitle">নিচের তথ্যগুলো দিয়ে হোয়াটসঅ্যাপের মাধ্যমে তাৎক্ষণিক
+                        অর্ডার নিশ্চিত করুন।</p>
+
+                    <form id="orderForm" onsubmit="handleOrderSubmit(event)">
+                        <input type="hidden" id="selectedSize" name="size">
+
+                        <div class="input-row">
+                            <label id="lbl-custName">আপনার পূর্ণ নাম *</label>
+                            <input type="text" id="custName" placeholder="যেমন: তানভীর আহমেদ" required>
+                        </div>
+
+                        <div class="input-row">
+                            <label id="lbl-custPhone">মোবাইল ফোন নম্বর *</label>
+                            <input type="tel" id="custPhone" placeholder="০১XXXXXXXXX" required>
+                        </div>
+
+                        <div class="input-row">
+                            <label id="lbl-custEmail">ইমেইল অ্যাড্রেস</label>
+                            <input type="email" id="custEmail" placeholder="you@example.com">
+                        </div>
+
+                        <div class="input-row checkbox-row">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="custNewsletter" checked>
+                                <span id="txt-custNewsletter">নতুন অফার ও আপডেটের তথ্য পেতে চাই</span>
+                            </label>
+                        </div>
+
+                        <div class="input-row" id="variantRow">
+                            <label id="dynamicVariantLabel">Select Option *</label>
+                            <select id="dynamicVariantSelect" required></select>
+                        </div>
+
+                        <div class="input-row">
+                            <label id="lbl-custAddress">ডেলিভারি ঠিকানা *</label>
+                            <textarea id="custAddress" rows="2" placeholder="বাসা, রোড, এলাকা, জেলা/শহর"
+                                required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-confirm-wa" id="confirmOrderBtn">
+                            <i data-lucide="send" style="width:16px; height:16px;"></i>
+                            <span id="txt-confirm-btn">অর্ডার নিশ্চিত করুন</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= SIZE GUIDE MODAL ================= -->
+    <div class="size-modal-overlay" id="sizeGuideModal" onclick="closeSizeGuideOnOverlay(event)">
+        <div class="size-modal-container">
+            <div class="size-modal-header">
+                <h3 class="size-modal-title" id="sizeGuideModalTitle">Unisex T-Shirt Size Guide</h3>
+                <div style="display: flex; align-items: center; gap: 14px;">
+                    <div class="unit-switch-box">
+                        <button type="button" class="unit-switch-btn" id="unitInBtn"
+                            onclick="setSizeUnit('in')">in</button>
+                        <button type="button" class="unit-switch-btn active" id="unitCmBtn"
+                            onclick="setSizeUnit('cm')">cm</button>
+                    </div>
+                    <button class="modal-close-btn" style="position: static; width:34px; height:34px;"
+                        onclick="closeSizeGuideModal()">
+                        <i data-lucide="x" style="width:16px; height:16px;"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="size-guide-main-layout">
+                <div class="size-diagram-box">
+                    <img src="t_shirt_mockup_with_size_guide_image/Garment_measurement_diagram.jpg"
+                        alt="T-Shirt Size Guide Diagram" width="500" height="500" loading="lazy" decoding="async">
+                </div>
+
+                <div class="size-table-wrapper">
+                    <table class="size-guide-table" id="sizeGuideTable"></table>
+                </div>
+            </div>
+
+            <div class="size-measure-notes" id="sizeMeasureNotes"></div>
+        </div>
+    </div>
+
+    <!-- ================= FLOATING WHATSAPP CHAT WIDGET ================= -->
+    <div class="wa-floating-anchor">
+        <div class="wa-chat-window" id="waChatBox">
+            <div class="wa-chat-top">
+                <div>
+                    <h4 id="txt-wa-title">সরাসরি সাপোর্ট</h4>
+                    <p id="txt-wa-subtitle">সাধারণত সাথে সাথে রিপ্লাই দেওয়া হয়</p>
+                </div>
+                <button onclick="toggleWaChat()" style="background:none; border:none; color:white; cursor:pointer;">
+                    <i data-lucide="x" style="width:18px; height:18px;"></i>
+                </button>
+            </div>
+            <div class="wa-chat-inputs">
+                <input type="text" id="waDirectName" placeholder="আপনার নাম" required>
+                <textarea id="waDirectMsg" rows="3" placeholder="আপনার প্রশ্ন বা মতামত লিখুন..." required></textarea>
+                <button class="btn-send-wa-chat" onclick="sendDirectChatMessage()">
+                    <i data-lucide="send" style="width:14px; height:14px;"></i>
+                    <span id="txt-wa-send-btn">মেসেজ পাঠান</span>
+                </button>
+            </div>
+        </div>
+
+        <button class="wa-round-trigger" onclick="toggleWaChat()" title="Chat with us on WhatsApp">
+            <i data-lucide="message-square" style="width:26px; height:26px;"></i>
+        </button>
+    </div>
+
+    <!-- ================= SCRIPTS ================= -->
+    <script>
+        const MY_WHATSAPP_NUMBER = "8801782416596";
+        let currentLang = 'bn';
+
+        function generatePictureTag({ src, alt = '', className = '', width = '', height = '', sizes = '', isPriority = false }) {
+            const extMatch = src.match(/\.(png|jpe?g)$/i);
+            if (!extMatch) {
+                return `<img src="${src}" alt="${alt}" class="${className}" width="${width}" height="${height}" loading="${isPriority ? 'eager' : 'lazy'}" decoding="async">`;
+            }
+            const basePath = src.slice(0, -extMatch[0].length);
+            const priorityAttr = isPriority ? 'fetchpriority="high" loading="eager"' : 'loading="lazy"';
+            const sizesAttr = sizes ? `sizes="${sizes}"` : '';
+
+            return `
+                <picture class="${className}">
+                    <source type="image/avif" srcset="${basePath}-400.avif 400w, ${basePath}-800.avif 800w, ${basePath}.avif 1200w" ${sizesAttr}>
+                    <source type="image/webp" srcset="${basePath}-400.webp 400w, ${basePath}-800.webp 800w, ${basePath}.webp 1200w" ${sizesAttr}>
+                    <img src="${src}" alt="${alt}" class="${className}" width="${width}" height="${height}" ${priorityAttr} decoding="async" onerror="this.onerror=null; this.src='${src}';">
+                </picture>
+            `;
+        }
+
+        const langData = {
+            bn: {
+                heroTag: "পরার মতো সেরা ডিজাইন",
+                heroHeadline: 'আস্থা রাখার মতো<br>প্রিমিয়াম কোয়ালিটি<span class="dot-accent">.</span>',
+                heroSubtitle: "প্রিমিয়াম প্রিন্ট, আরামদায়ক ফেব্রিক এবং দীর্ঘস্থায়ী ডিজাইন। প্রতিদিনের ব্যবহারের জন্য নিখুঁতভাবে তৈরি।",
+                heroShopBtn: "অর্ডার করুন",
+                heroOffer: "স্পেশাল অফার",
+                heroDelivery: "সারাদেশে দ্রুত ডেলিভারি",
+                heroGuarantee: "কোয়ালিটি গ্যারান্টি",
+
+                nlTitle: "আমাদের নিউজলেটারে যুক্ত থাকুন",
+                nlInputPlaceholder: "আপনার ইমেইল অ্যাড্রেস",
+                nlBtn: "সাবস্ক্রাইব",
+
+                modalStock: "অর্ডার অনুযায়ী আপনার জন্যই যত্নসহকারে তৈরি!",
+                modalSizeLbl: "সাইজ নির্বাচন করুন:",
+                modalSizeGuideBtn: "সাইজ গাইড",
+                modalSizeError: "অনুগ্রহ করে সাইজ নির্বাচন করুন",
+                modalQtyLbl: "পরিমাণ",
+
+                accordionTitle: "কোয়ালিটি গ্যারান্টি ও রিটার্ন পলিসি",
+                accordionP1: "প্রিন্টে কোনো ভুল বা পণ্যে তৈরির সময় কোনো দৃশ্যমান ত্রুটি থাকলে আমাদের জানাবেন। বিষয়টি যাচাই করে আমরা প্রয়োজন অনুযায়ী পণ্য পরিবর্তন অথবা টাকা ফেরতের ব্যবস্থা করব।",
+                accordionP2: "আপনার অর্ডার পাওয়ার পরই প্রতিটি টি-শার্ট আপনার জন্য তৈরি করা হয়। তাই সাইজের অমিল বা পরবর্তীতে পছন্দ পরিবর্তনের কারণে পণ্য ফেরত বা পরিবর্তন করা সম্ভব নয়।",
+                accordionP3: "<strong>অর্ডার করার আগে:</strong> আপনার জন্য সঠিক মাপটি বেছে নিতে সাইজ গাইডটি ভালোভাবে দেখে নিন। এতে পছন্দমতো ফিট বেছে নিতে সুবিধা হবে।",
+
+                formTitle: "অর্ডার কনফার্ম করুন",
+                formSubtitle: "নিচের তথ্যগুলো দিয়ে হোয়াটসঅ্যাপের মাধ্যমে তাৎক্ষণিক অর্ডার নিশ্চিত করুন।",
+                nameLbl: "আপনার পূর্ণ নাম *",
+                namePlaceholder: "যেমন: তানভীর আহমেদ",
+                phoneLbl: "মোবাইল ফোন নম্বর *",
+                phonePlaceholder: "০১XXXXXXXXX",
+                emailLbl: "ইমেইল অ্যাড্রেস",
+                emailPlaceholder: "you@example.com",
+                newsletterText: "নতুন অফার ও আপডেটের তথ্য পেতে চাই",
+                addressLbl: "ডেলিভারি ঠিকানা *",
+                addressPlaceholder: "বাসা, রোড, এলাকা, জেলা/শহর",
+                confirmBtn: "অর্ডার নিশ্চিত করুন",
+
+                waTitle: "সরাসরি সাপোর্ট",
+                waSubtitle: "সাধারণত সাথে সাথে রিপ্লাই দেওয়া হয়",
+                waNamePlaceholder: "আপনার নাম",
+                waMsgPlaceholder: "আপনার প্রশ্ন বা মতামত লিখুন...",
+                waSendBtn: "মেসেজ পাঠান",
+
+                sizeModalTitle: "ইউনিসেক্স টি-শার্ট সাইজ গাইড",
+                sizeTableHeaders: { size: "সাইজ লেবেল", length: "দৈর্ঘ্য", width: "প্রস্থ", sleeve: "হাতার দৈর্ঘ্য" },
+                sizeNotes: `
+                    <p style="margin-bottom: 6px;"><strong>পরিমাপ নির্দেশিকা:</strong> এগুলো টি-শার্টের ফ্ল্যাট পরিমাপ, শরীরের মাপ নয়। সঠিক মাপ পেতে আপনার মানানসই একটি টি-শার্ট সমতল জায়গায় রেখে চার্টের সাথে মিলিয়ে নিন।</p>
+                    <p><strong>A (দৈর্ঘ্য):</strong> কাঁধের সর্বোচ্চ বিন্দু থেকে কলারের পাশ দিয়ে নিচের বর্ডার পর্যন্ত সোজা পরিমাপ।</p>
+                    <p><strong>B (প্রস্থ):</strong> বগলের প্রায় ১ ইঞ্চি নিচ থেকে একপাশের সেলাই থেকে অন্যপাশ পর্যন্ত বুকের প্রস্থ।</p>
+                    <p><strong>C (হাতার দৈর্ঘ্য):</strong> পেছনের গলার মাঝখান থেকে হাতার বর্ডার পর্যন্ত পরিমাপ।</p>
+                    <p style="font-size: 11.5px; margin-top: 6px; opacity: 0.85;">* ফেব্রিক ও সুইং প্রক্রিয়ার কারণে মাপে সামান্য (±১ ইঞ্চি / ±২.৫ সেমি) পার্থক্য হতে পারে।</p>
+                    <p style="font-size: 11.5px; margin-top: 6px; opacity: 0.85;"><strong>ফিটিং:</strong> রেগুলার ফিট। যদি দুটি সাইজের মাঝামাঝি হন, তবে বড় সাইজটি বেছে নেওয়ার পরামর্শ দেওয়া হলো।</p>
+                `
+            },
+            en: {
+                heroTag: "DESIGNS WORTH WEARING",
+                heroHeadline: 'QUALITY YOU<br>CAN TRUST<span class="dot-accent">.</span>',
+                heroSubtitle: "Premium prints, comfortable fabrics, and designs made to last. Crafted with care for everyday wear.",
+                heroShopBtn: "Shop now",
+                heroOffer: "SPECIAL OFFER",
+                heroDelivery: "Fast Delivery Nationwide",
+                heroGuarantee: "Quality Guaranteed",
+
+                nlTitle: "Join our newsletter",
+                nlInputPlaceholder: "Email address",
+                nlBtn: "Subscribe",
+
+                modalStock: "Made to order, just for you!",
+                modalSizeLbl: "Select size:",
+                modalSizeGuideBtn: "Size guide",
+                modalSizeError: "Please select Size",
+                modalQtyLbl: "Quantity",
+
+                accordionTitle: "Quality Guarantee & Returns",
+                accordionP1: "If there's any print error or visible manufacturing defect, let us know. We'll verify and replace the item or issue a full refund.",
+                accordionP2: "Each tee is made to order after your purchase. Returns/exchanges for size mismatch or change of mind are not accepted.",
+                accordionP3: "<strong>Before ordering:</strong> Check the Size Guide carefully to pick the right fit for you.",
+
+                formTitle: "Confirm Your Order",
+                formSubtitle: "Fill in minimal details to instantly confirm via WhatsApp.",
+                nameLbl: "Your Full Name *",
+                namePlaceholder: "e.g. Tanvir Ahmed",
+                phoneLbl: "Contact Phone Number *",
+                phonePlaceholder: "017XXXXXXXX",
+                emailLbl: "Email Address",
+                emailPlaceholder: "you@example.com",
+                newsletterText: "Email me with news and offers",
+                addressLbl: "Delivery Address *",
+                addressPlaceholder: "House, Road, Area, City",
+                confirmBtn: "Confirm",
+
+                waTitle: "Direct Support",
+                waSubtitle: "Typically replies immediately",
+                waNamePlaceholder: "Your Name",
+                waMsgPlaceholder: "Write your question or request...",
+                waSendBtn: "Send Message",
+
+                sizeModalTitle: "Unisex T-Shirt Size Guide",
+                sizeTableHeaders: { size: "Size label", length: "Length", width: "Width", sleeve: "Sleeve length" },
+                sizeNotes: `
+                    <p style="margin-bottom: 6px;"><strong>Measurement Guide:</strong> These are garment measurements (laid flat), not body measurements. For the best fit, lay a T-shirt that fits you well on a flat surface and compare it with the chart.</p>
+                    <p><strong>A (Length):</strong> Measured from the highest point of the shoulder, next to the collar, straight down to the bottom hem.</p>
+                    <p><strong>B (Width):</strong> Measured straight across the chest, from one side seam to the other, about 1 inch (2.5 cm) below the armpit.</p>
+                    <p><strong>C (Sleeve Length):</strong> Measured from the center of the back neck seam to the end of the sleeve hem.</p>
+                    <p style="font-size: 11.5px; margin-top: 6px; opacity: 0.85;">* Measurements may vary by up to ±1 inch (±2.5 cm) due to the manufacturing process and natural fabric relaxation.</p>
+                    <p style="font-size: 11.5px; margin-top: 6px; opacity: 0.85;"><strong>Fit:</strong> Unisex, regular fit. If you are between two sizes, we recommend choosing the larger size.</p>
+                `
+            }
+        };
+
+        const productsData = [
+            { id: 1, name: "No Time for Debate Graphic Tee", category: "bold-statements", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/no_time_for_debates/no_time_for_debate_t_shirt_black_mockup.png", images: ["T_shirts_image/no_time_for_debates/no_time_for_debate_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দর্যই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
+            { id: 2, name: "Dad Mode On Graphic Tee", category: "dad-life", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/dad_mode_on_t_shirt_black_mockup/dad_mode_on_t_shirt_black_mockup.png", images: ["T_shirts_image/dad_mode_on_t_shirt_black_mockup/dad_mode_on_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দর্যই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
+            { id: 3, name: "The Mountains Are Calling Graphic Tee", category: "nature-adventure", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/the_mountains_are_calling_t_shirt_black_mockup/the_mountains_are_calling_t_shirt_black_mockup.png", images: ["T_shirts_image/the_mountains_are_calling_t_shirt_black_mockup/the_mountains_are_calling_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দর্যই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
+            { id: 4, name: "Be The Change Graphic Tee", category: "daily-inspiration", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/be_the_change_t_shirt_black_mockup/be_the_change_t_shirt_black_mockup.png", images: ["T_shirts_image/be_the_change_t_shirt_black_mockup/be_the_change_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দর্যই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
+            { id: 5, name: "Coffee Time Graphic Tee", category: "daily-life", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/coffee_time_t_shirt_black_mockup/coffee_time_t_shirt_black_mockup.png", images: ["T_shirts_image/coffee_time_t_shirt_black_mockup/coffee_time_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দ�ই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
+            { id: 6, name: "Dad Jokes Loading Graphic Tee", category: "dad-life", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/dad_jokes_loading_t_shirt_black_mockup/dad_jokes_loading_t_shirt_black_mockup.png", images: ["T_shirts_image/dad_jokes_loading_t_shirt_black_mockup/dad_jokes_loading_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দর্যই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
+            { id: 7, name: "Papa Duties Never Retire Graphic Tee", category: "dad-life", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/papa_duties_never_retire_t_shirt_black_mockup/papa_duties_never_retire_t_shirt_black_mockup.png", images: ["T_shirts_image/papa_duties_never_retire_t_shirt_black_mockup/papa_duties_never_retire_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দর্যই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
+            { id: 8, name: "Progress Over Perfection Graphic Tee", category: "growth-mindset", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/progress_over_perfection_t_shirt_black_mockup/progress_over_perfection_t_shirt_black_mockup.png", images: ["T_shirts_image/progress_over_perfection_t_shirt_black_mockup/progress_over_perfection_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দর্যই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
+            { id: 9, name: "Proud To Be Cool Dad Graphic Tee", category: "dad-life", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/proud_to_be_cool_dad_t_shirt_black_mockup/proud_to_be_cool_dad_t_shirt_black_mockup.png", images: ["T_shirts_image/proud_to_be_cool_dad_t_shirt_black_mockup/proud_to_be_cool_dad_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দর্যই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
+            { id: 10, name: "Stronger Every Day Graphic Tee", category: "daily-inspiration", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/stronger_every_day_t_shirt_black_mockup/stronger_every_day_t_shirt_black_mockup.png", images: ["T_shirts_image/stronger_every_day_t_shirt_black_mockup/stronger_every_day_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দর্যই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
+            { id: 11, name: "We Are On A Break Graphic Tee", category: "daily-life", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/we_are_on_a_break_t_shirt_black_mockup/we_are_on_a_break_t_shirt_black_mockup.png", images: ["T_shirts_image/we_are_on_a_break_t_shirt_black_mockup/we_are_on_a_break_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দর্যই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
+            { id: 12, name: "Every Step Starts Today Graphic Tee", category: "daily-inspiration", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/every_step_starts_today_t_shirt_black_mockup/every_step_starts_today_t_shirt_black_mockup.png", images: ["T_shirts_image/every_step_starts_today_t_shirt_black_mockup/every_step_starts_today_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দ�ই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
+            { id: 13, name: "Everyday Is A New Chance Graphic Tee", category: "daily-inspiration", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/everyday_is_a_new_chance_t_shirt_black_mockup/everyday_is_a_new_chance_t_shirt_black_mockup.png", images: ["T_shirts_image/everyday_is_a_new_chance_t_shirt_black_mockup/everyday_is_a_new_chance_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দ�ই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
+            { id: 14, name: "Garden Graphic Tee", category: "nature-adventure", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/garden_t_shirt_black_mockup/garden_t_shirt_black_mockup.png", images: ["T_shirts_image/garden_t_shirt_black_mockup/garden_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দযই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
+            { id: 15, name: "Growth And Belive Graphic Tee", category: "growth-mindset", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/growth_and_belive_t_shirt_black_mockup/growth_and_belive_t_shirt_black_mockup.png", images: ["T_shirts_image/growth_and_belive_t_shirt_black_mockup/growth_and_belive_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দযই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
+            { id: 16, name: "Invest In Yourself Graphic Tee", category: "growth-mindset", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/invest_in_yourself_t_shirt_black_mockup/invest_in_yourself_t_shirt_black_mockup.png", images: ["T_shirts_image/invest_in_yourself_t_shirt_black_mockup/invest_in_yourself_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দযই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
+            { id: 17, name: "Never Stop Growing Graphic Tee", category: "growth-mindset", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/never_stop_growing_t_shirt_black_mockup/never_stop_growing_t_shirt_black_mockup.png", images: ["T_shirts_image/never_stop_growing_t_shirt_black_mockup/never_stop_growing_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দযই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] }
+        ];
+
+        let selectedCategory = 'all';
+        let currentModalProduct = null;
+        const gridElem = document.getElementById('productsGrid');
+
+        function renderProducts(items) {
+            gridElem.innerHTML = '';
+            items.forEach(prod => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.setAttribute('data-id', prod.id);
+                card.onclick = () => openOrderModal(prod.id);
+
+                const pictureHtml = generatePictureTag({
+                    src: prod.image,
+                    alt: prod.name,
+                    width: '350',
+                    height: '400',
+                    sizes: '(max-width: 640px) 50vw, (max-width: 1250px) 33vw, 25vw'
+                });
+
+                card.innerHTML = `
+                    <div class="card-thumbnail">${pictureHtml}</div>
+                    <div class="card-info">
+                        <h3 class="card-title">${prod.name}</h3>
+                        <div class="card-price">৳ ${prod.price.toLocaleString()}</div>
+                    </div>
+                `;
+                gridElem.appendChild(card);
+            });
+            if (window.lucide) lucide.createIcons();
+        }
+
+        renderProducts(getRandomProducts(productsData, 16));
+
+        const priceRangeInit = document.getElementById('priceRange');
+        const minInit = parseFloat(priceRangeInit.min);
+        const maxInit = parseFloat(priceRangeInit.max);
+        const valInit = parseFloat(priceRangeInit.value);
+        const progressInit = ((valInit - minInit) / (maxInit - minInit)) * 100;
+        priceRangeInit.style.setProperty('--range-progress', `${progressInit}%`);
+
+        function setCategory(cat, btn) {
+            selectedCategory = cat;
+            document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            else {
+                const targetBtn = document.querySelector(`.cat-chip[data-cat="${cat}"]`);
+                if (targetBtn) targetBtn.classList.add('active');
+            }
+            applyFilters();
+        }
+
+        function getRandomProducts(items, count) {
+            const shuffled = [...items].sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        }
+
+        function applyFilters() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const priceRange = document.getElementById('priceRange');
+            const maxPrice = parseFloat(priceRange.value);
+            document.getElementById('priceDisplay').innerText = maxPrice.toLocaleString();
+
+            const min = parseFloat(priceRange.min);
+            const max = parseFloat(priceRange.max);
+            const progress = ((maxPrice - min) / (max - min)) * 100;
+            priceRange.style.setProperty('--range-progress', `${progress}%`);
+
+            const filtered = productsData.filter(prod => {
+                const matchesCat = (selectedCategory === 'all' || prod.category === selectedCategory);
+                const matchesSearch = prod.name.toLowerCase().includes(query);
+                const matchesPrice = prod.price <= maxPrice;
+                return matchesCat && matchesSearch && matchesPrice;
+            });
+
+            renderProducts(filtered);
+        }
+
+        /* ================= 3D CARD FLOW CAROUSEL ================= */
+        const shuffledProducts = [...productsData].sort(() => Math.random() - 0.5);
+        const bannerProductList = shuffledProducts.slice(0, 7);
+        let flowCurrentIndex = 0;
+        let flowAutoTimer = null;
+        const flowStage = document.getElementById('flowStage');
+
+        function init3DFlowCarousel() {
+            flowStage.innerHTML = '';
+            bannerProductList.forEach((prod, idx) => {
+                const card = document.createElement('div');
+                card.className = 'flow-card';
+                card.setAttribute('data-index', idx);
+
+                const isFirst = (idx === 0);
+                const pictureHtml = generatePictureTag({
+                    src: prod.image,
+                    alt: prod.name,
+                    className: 'flow-card-img',
+                    width: '220',
+                    height: '270',
+                    isPriority: isFirst
+                });
+
+                card.innerHTML = pictureHtml;
+                card.onclick = () => {
+                    if (idx === flowCurrentIndex) {
+                        openOrderModal(prod.id);
+                    } else {
+                        flowCurrentIndex = idx;
+                        update3DFlowPositions();
+                        resetFlowTimer();
+                    }
+                };
+                flowStage.appendChild(card);
+            });
+
+            update3DFlowPositions();
+            startFlowTimer();
+            initTouchSwipe();
+        }
+
+        function update3DFlowPositions() {
+            const cards = document.querySelectorAll('.flow-card');
+            const total = cards.length;
+            const isMobile = window.innerWidth <= 640;
+            const stepX = isMobile ? 80 : 115;
+
+            cards.forEach((card, idx) => {
+                let diff = (idx - flowCurrentIndex) % total;
+                if (diff > total / 2) diff -= total;
+                if (diff < -total / 2) diff += total;
+
+                if (diff === 0) {
+                    card.style.transform = `translateX(0px) translateZ(${isMobile ? '30px' : '55px'}) scale(1.06) rotateY(0deg)`;
+                    card.style.zIndex = '10'; card.style.opacity = '1';
+                    card.style.filter = 'drop-shadow(0 20px 30px rgba(0,0,0,0.22))'; card.style.pointerEvents = 'auto';
+                } else if (diff === 1) {
+                    card.style.transform = `translateX(${stepX}px) translateZ(0px) scale(${isMobile ? 0.82 : 0.86}) rotateY(-6deg)`;
+                    card.style.zIndex = '8'; card.style.opacity = '0.92';
+                    card.style.filter = 'brightness(0.96)'; card.style.pointerEvents = 'auto';
+                } else if (diff === -1) {
+                    card.style.transform = `translateX(-${stepX}px) translateZ(0px) scale(${isMobile ? 0.82 : 0.86}) rotateY(6deg)`;
+                    card.style.zIndex = '8'; card.style.opacity = '0.92';
+                    card.style.filter = 'brightness(0.96)'; card.style.pointerEvents = 'auto';
+                } else if (diff === 2) {
+                    card.style.transform = `translateX(${stepX * 1.85}px) translateZ(-50px) scale(${isMobile ? 0.65 : 0.72}) rotateY(-12deg)`;
+                    card.style.zIndex = '6'; card.style.opacity = isMobile ? '0.35' : '0.65';
+                    card.style.filter = 'brightness(0.9)'; card.style.pointerEvents = 'auto';
+                } else if (diff === -2) {
+                    card.style.transform = `translateX(-${stepX * 1.85}px) translateZ(-50px) scale(${isMobile ? 0.65 : 0.72}) rotateY(12deg)`;
+                    card.style.zIndex = '6'; card.style.opacity = isMobile ? '0.35' : '0.65';
+                    card.style.filter = 'brightness(0.9)'; card.style.pointerEvents = 'auto';
+                } else {
+                    const dir = diff > 0 ? 1 : -1;
+                    card.style.transform = `translateX(${dir * stepX * 2.6}px) scale(0.5)`;
+                    card.style.zIndex = '1'; card.style.opacity = '0'; card.style.pointerEvents = 'none';
+                }
+            });
+        }
+
+        function nextFlowCard() { flowCurrentIndex = (flowCurrentIndex + 1) % bannerProductList.length; update3DFlowPositions(); resetFlowTimer(); }
+        function prevFlowCard() { flowCurrentIndex = (flowCurrentIndex - 1 + bannerProductList.length) % bannerProductList.length; update3DFlowPositions(); resetFlowTimer(); }
+        function startFlowTimer() { clearTimeout(flowAutoTimer); clearInterval(flowAutoTimer); flowAutoTimer = setTimeout(() => { nextFlowCard(); flowAutoTimer = setInterval(nextFlowCard, 5000); }, 3000); }
+        function resetFlowTimer() { clearTimeout(flowAutoTimer); clearInterval(flowAutoTimer); startFlowTimer(); }
+
+        const bannerElem = document.getElementById('heroFlowBanner');
+        bannerElem.addEventListener('mouseenter', () => { clearTimeout(flowAutoTimer); clearInterval(flowAutoTimer); });
+        bannerElem.addEventListener('mouseleave', startFlowTimer);
+
+        function initTouchSwipe() {
+            let startX = 0;
+            bannerElem.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, { passive: true });
+            bannerElem.addEventListener('touchend', (e) => {
+                const endX = e.changedTouches[0].clientX;
+                const diff = startX - endX;
+                if (Math.abs(diff) > 40) {
+                    if (diff > 0) nextFlowCard();
+                    else prevFlowCard();
+                }
+            }, { passive: true });
+        }
+
+        window.addEventListener('resize', update3DFlowPositions);
+        init3DFlowCarousel();
+
+        let selectedSize = null;
+
+        function changeLanguage(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+            });
+
+            const d = langData[lang];
+
+            document.getElementById('txt-hero-tag').innerText = d.heroTag;
+            document.getElementById('txt-hero-headline').innerHTML = d.heroHeadline;
+            document.getElementById('txt-hero-subtitle').innerText = d.heroSubtitle;
+            document.getElementById('txt-hero-shopbtn').innerText = d.heroShopBtn;
+            document.getElementById('txt-hero-offer').innerText = d.heroOffer;
+            document.getElementById('txt-hero-delivery').innerText = d.heroDelivery;
+            document.getElementById('txt-hero-guarantee').innerText = d.heroGuarantee;
+
+            document.getElementById('txt-nl-title').innerText = d.nlTitle;
+            document.getElementById('newsletterEmailInput').placeholder = d.nlInputPlaceholder;
+            document.getElementById('txt-nl-btn').innerText = d.nlBtn;
+
+            document.getElementById('txt-modal-stock').innerText = d.modalStock;
+            document.getElementById('txt-modal-size-lbl').innerText = d.modalSizeLbl;
+            document.getElementById('txt-modal-sizeguide-btn').innerText = d.modalSizeGuideBtn;
+            document.getElementById('sizeErrorMsg').innerText = d.modalSizeError;
+            document.getElementById('txt-modal-qty-lbl').innerText = d.modalQtyLbl;
+
+            document.getElementById('txt-accordion-title').innerText = d.accordionTitle;
+            document.getElementById('accordionBodyContent').innerHTML = `
+                <ul>
+                    <li>${d.accordionP1}</li>
+                    <li>${d.accordionP2}</li>
+                    <li>${d.accordionP3}</li>
+                </ul>
+            `;
+
+            document.getElementById('txt-form-title').innerText = d.formTitle;
+            document.getElementById('txt-form-subtitle').innerText = d.formSubtitle;
+            document.getElementById('lbl-custName').innerText = d.nameLbl;
+            document.getElementById('custName').placeholder = d.namePlaceholder;
+            document.getElementById('lbl-custPhone').innerText = d.phoneLbl;
+            document.getElementById('custPhone').placeholder = d.phonePlaceholder;
+            document.getElementById('lbl-custEmail').innerText = d.emailLbl;
+            document.getElementById('custEmail').placeholder = d.emailPlaceholder;
+            document.getElementById('txt-custNewsletter').innerText = d.newsletterText;
+            document.getElementById('lbl-custAddress').innerText = d.addressLbl;
+            document.getElementById('custAddress').placeholder = d.addressPlaceholder;
+            document.getElementById('txt-confirm-btn').innerText = d.confirmBtn;
+
+            document.getElementById('txt-wa-title').innerText = d.waTitle;
+            document.getElementById('txt-wa-subtitle').innerText = d.waSubtitle;
+            document.getElementById('waDirectName').placeholder = d.waNamePlaceholder;
+            document.getElementById('waDirectMsg').placeholder = d.waMsgPlaceholder;
+            document.getElementById('txt-wa-send-btn').innerText = d.waSendBtn;
+
+            document.getElementById('sizeGuideModalTitle').innerText = d.sizeModalTitle;
+            document.getElementById('sizeMeasureNotes').innerHTML = d.sizeNotes;
+            renderSizeTable(currentSizeUnit);
+
+            if (currentModalProduct) {
+                document.getElementById('modalProductDesc').innerText =
+                    (currentLang === 'bn' && currentModalProduct.desc_bn) ? currentModalProduct.desc_bn : currentModalProduct.desc;
+            }
+
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function openOrderModal(productId) {
+            const prod = productsData.find(p => p.id === productId);
+            if (!prod) return;
+
+            currentModalProduct = prod;
+            selectedSize = null;
+
+            document.getElementById('orderForm').reset();
+            document.getElementById('selectedSize').value = '';
+            document.getElementById('modalQty').value = 1;
+            document.getElementById('sizeErrorMsg').style.display = 'none';
+
+            const acc = document.getElementById('qualityAccordion');
+            acc.classList.remove('active');
+            document.getElementById('accordionIcon').innerText = '+';
+
+            document.getElementById('modalProductTitle').innerText = prod.name;
+            document.getElementById('modalProductCategory').innerText = prod.category.charAt(0).toUpperCase() + prod.category.slice(1);
+            document.getElementById('modalProductDesc').innerText = (currentLang === 'bn' && prod.desc_bn) ? prod.desc_bn : prod.desc;
+            document.getElementById('modalProductPrice').innerText = prod.price.toLocaleString();
+            document.getElementById('modalProductOldPrice').innerText = prod.oldPrice.toLocaleString();
+            document.getElementById('modalDiscount').innerText = prod.discount;
+            document.getElementById('modalDiscountBadge').innerText = prod.discount;
+
+            const mainContainer = document.getElementById('modalMainPictureContainer');
+            mainContainer.innerHTML = generatePictureTag({
+                src: prod.image, alt: prod.name, className: 'modal-main-image',
+                width: '520', height: '520', isPriority: true
+            });
+
+            const thumbContainer = document.getElementById('modalThumbnails');
+            thumbContainer.innerHTML = '';
+            if (prod.images && prod.images.length > 0) {
+                prod.images.forEach((imgSrc, index) => {
+                    const thumb = document.createElement('div');
+                    thumb.className = 'modal-thumb' + (index === 0 ? ' active' : '');
+                    thumb.innerHTML = `<img src="${imgSrc}" alt="${prod.name} - View ${index + 1}" width="76" height="76" loading="lazy" decoding="async">`;
+                    thumb.onclick = () => switchMainImage(imgSrc, thumb);
+                    thumb.onmouseenter = () => switchMainImage(imgSrc, thumb);
+                    thumbContainer.appendChild(thumb);
+                });
+            }
+
+            const sizeRow = document.getElementById('sizeRow');
+            const sizeButtons = document.getElementById('modalSizeButtons');
+            if (prod.sizes && prod.sizes.length > 0) {
+                sizeRow.style.display = 'flex';
+                sizeButtons.innerHTML = '';
+                prod.sizes.forEach((size) => {
+                    const btn = document.createElement('button');
+                    btn.type = 'button'; btn.className = 'modal-size-btn'; btn.innerText = size;
+                    btn.onclick = () => selectSize(size, btn);
+                    sizeButtons.appendChild(btn);
+                });
+            } else {
+                sizeRow.style.display = 'none';
+            }
+
+            const variantLabel = document.getElementById('dynamicVariantLabel');
+            const variantSelect = document.getElementById('dynamicVariantSelect');
+            const variantRow = document.getElementById('variantRow');
+
+            variantLabel.innerText = `Select ${prod.variantType} *`;
+            variantSelect.innerHTML = '';
+            if (prod.variants && prod.variants.length > 0) {
+                prod.variants.forEach(variant => {
+                    const opt = document.createElement('option');
+                    opt.value = variant; opt.innerText = variant;
+                    variantSelect.appendChild(opt);
+                });
+            }
+
+            variantRow.style.display = prod.sizes ? 'none' : 'block';
+            setupDarazZoom(prod.image);
+
+            document.getElementById('orderModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function switchMainImage(src, thumbEl) {
+            const mainContainer = document.getElementById('modalMainPictureContainer');
+            mainContainer.innerHTML = generatePictureTag({
+                src: src, alt: 'Product View', className: 'modal-main-image',
+                width: '520', height: '520', isPriority: true
+            });
+
+            document.querySelectorAll('.modal-thumb').forEach(t => t.classList.remove('active'));
+            thumbEl.classList.add('active');
+
+            const zoomResult = document.getElementById('zoomResult');
+            if (zoomResult) {
+                const avifSrc = src.replace(/\.(png|jpe?g)$/i, '.avif');
+                zoomResult.style.backgroundImage = `url("${avifSrc}"), url("${src}")`;
+            }
+        }
+
+        function selectSize(size, btnEl) {
+            selectedSize = size;
+            document.getElementById('selectedSize').value = size;
+            document.querySelectorAll('.modal-size-btn').forEach(b => b.classList.remove('active'));
+            btnEl.classList.add('active');
+            document.getElementById('sizeErrorMsg').style.display = 'none';
+            document.getElementById('confirmOrderBtn').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            updateVariantSelect();
+        }
+
+        function updateVariantSelect() {
+            const variantSelect = document.getElementById('dynamicVariantSelect');
+            const variantRow = document.getElementById('variantRow');
+            if (variantRow.style.display !== 'none') return;
+
+            let variantParts = [];
+            if (selectedSize) variantParts.push(`Size: ${selectedSize}`);
+            const combined = variantParts.join(' / ') || currentModalProduct.variants[0];
+
+            variantSelect.innerHTML = '';
+            const opt = document.createElement('option');
+            opt.value = combined; opt.innerText = combined; opt.selected = true;
+            variantSelect.appendChild(opt);
+        }
+
+        function toggleQualityAccordion() {
+            const acc = document.getElementById('qualityAccordion');
+            const icon = document.getElementById('accordionIcon');
+            acc.classList.toggle('active');
+            icon.innerText = acc.classList.contains('active') ? '−' : '+';
+        }
+
+        const sizeDataCM = [
+            { size: "S", length: "68", width: "46", sleeve: "41" },
+            { size: "M", length: "71", width: "52", sleeve: "45" },
+            { size: "L", length: "75", width: "56", sleeve: "48" },
+            { size: "XL", length: "78", width: "61", sleeve: "52" },
+            { size: "2XL", length: "80", width: "66", sleeve: "55" },
+            { size: "3XL", length: "83", width: "71", sleeve: "59" },
+            { size: "4XL", length: "85", width: "76", sleeve: "62" }
+        ];
+
+        const sizeDataIN = [
+            { size: "S", length: "26.6", width: "18.3", sleeve: "16.3" },
+            { size: "M", length: "28.0", width: "20.3", sleeve: "17.8" },
+            { size: "L", length: "29.4", width: "22.0", sleeve: "19.0" },
+            { size: "XL", length: "30.8", width: "24.0", sleeve: "20.5" },
+            { size: "2XL", length: "31.6", width: "26.0", sleeve: "21.8" },
+            { size: "3XL", length: "32.5", width: "27.8", sleeve: "23.3" },
+            { size: "4XL", length: "33.5", width: "29.8", sleeve: "24.6" }
+        ];
+
+        let currentSizeUnit = 'in';
+
+        function renderSizeTable(unit) {
+            const table = document.getElementById('sizeGuideTable');
+            const data = (unit === 'in') ? sizeDataIN : sizeDataCM;
+            const unitLabel = (unit === 'in') ? '(in)' : '(cm)';
+            const h = langData[currentLang].sizeTableHeaders;
+
+            let html = `
+                <thead>
+                    <tr>
+                        <th>${h.size}</th>
+                        <th>${h.length} ${unitLabel}</th>
+                        <th>${h.width} ${unitLabel}</th>
+                        <th>${h.sleeve} ${unitLabel}</th>
+                    </tr>
+                </thead>
+                <tbody>
+            `;
+            data.forEach(row => {
+                html += `<tr><td><strong>${row.size}</strong></td><td>${row.length}</td><td>${row.width}</td><td>${row.sleeve}</td></tr>`;
+            });
+            html += `</tbody>`;
+            table.innerHTML = html;
+        }
+
+        function setSizeUnit(unit) {
+            currentSizeUnit = unit;
+            document.getElementById('unitInBtn').classList.toggle('active', unit === 'in');
+            document.getElementById('unitCmBtn').classList.toggle('active', unit === 'cm');
+            renderSizeTable(unit);
+        }
+
+        function openSizeGuideModal() {
+            renderSizeTable(currentSizeUnit);
+            document.getElementById('sizeGuideModal').classList.add('active');
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function closeSizeGuideModal() { document.getElementById('sizeGuideModal').classList.remove('active'); }
+        function closeSizeGuideOnOverlay(e) { if (e.target.id === 'sizeGuideModal') closeSizeGuideModal(); }
+
+        function setupDarazZoom(imageSrc) {
+            const wrapper = document.getElementById('mainImageWrapper');
+            const zoomLens = document.getElementById('zoomLens');
+            const zoomResult = document.getElementById('zoomResult');
+            if (!wrapper || !zoomLens || !zoomResult) return;
+
+            if (window.innerWidth <= 900 || ('ontouchstart' in window)) {
+                zoomLens.style.display = 'none';
+                zoomResult.style.display = 'none';
+                return;
+            }
+
+            zoomLens.style.display = 'block';
+            wrapper.onmouseenter = () => {
+                if (window.innerWidth <= 900) return;
+                const avifSrc = imageSrc.replace(/\.(png|jpe?g)$/i, '.avif');
+                zoomResult.style.display = 'block';
+                zoomLens.style.opacity = '1';
+                zoomResult.style.backgroundImage = `url("${avifSrc}"), url("${imageSrc}")`;
+            };
+
+            wrapper.onmouseleave = () => { zoomResult.style.display = 'none'; zoomLens.style.opacity = '0'; };
+
+            wrapper.onmousemove = (e) => {
+                if (window.innerWidth <= 900) return;
+                const rect = wrapper.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const lensW = zoomLens.offsetWidth || 130;
+                const lensH = zoomLens.offsetHeight || 130;
+
+                let posX = x - (lensW / 2);
+                let posY = y - (lensH / 2);
+                if (posX < 0) posX = 0;
+                if (posY < 0) posY = 0;
+                if (posX > rect.width - lensW) posX = rect.width - lensW;
+                if (posY > rect.height - lensH) posY = rect.height - lensH;
+
+                zoomLens.style.left = posX + 'px';
+                zoomLens.style.top = posY + 'px';
+
+                const mainImg = wrapper.querySelector('img');
+                const nw = mainImg ? (mainImg.naturalWidth || rect.width) : rect.width;
+                const nh = mainImg ? (mainImg.naturalHeight || rect.height) : rect.height;
+                const imgRatio = nw / nh;
+                const containerRatio = rect.width / rect.height;
+
+                let renderedW, renderedH, renderLeft, renderTop;
+                if (imgRatio > containerRatio) {
+                    renderedW = rect.width;
+                    renderedH = rect.width / imgRatio;
+                    renderLeft = 0;
+                    renderTop = (rect.height - renderedH) / 2;
+                } else {
+                    renderedH = rect.height;
+                    renderedW = rect.height * imgRatio;
+                    renderTop = 0;
+                    renderLeft = (rect.width - renderedW) / 2;
+                }
+
+                const zoomW = zoomResult.offsetWidth || 480;
+                const zoomH = zoomResult.offsetHeight || 480;
+                const magX = zoomW / lensW;
+                const magY = zoomH / lensH;
+
+                const bgW = renderedW * magX;
+                const bgH = renderedH * magY;
+                zoomResult.style.backgroundSize = `${bgW}px ${bgH}px`;
+                const bgPosX = (posX - renderLeft) * magX;
+                const bgPosY = (posY - renderTop) * magY;
+                zoomResult.style.backgroundPosition = `-${bgPosX}px -${bgPosY}px`;
+            };
+        }
+
+        function changeQty(delta) {
+            const qtyInput = document.getElementById('modalQty');
+            let val = parseInt(qtyInput.value) + delta;
+            if (val < 1) val = 1;
+            if (val > 99) val = 99;
+            qtyInput.value = val;
+        }
+
+        function closeOrderModal() {
+            document.getElementById('orderModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+            const zoomResult = document.getElementById('zoomResult');
+            if (zoomResult) zoomResult.style.display = 'none';
+        }
+
+        document.getElementById('orderModal').addEventListener('click', (e) => {
+            if (e.target.id === 'orderModal') closeOrderModal();
+        });
+
+        function handleOrderSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('custName').value.trim();
+            const phone = document.getElementById('custPhone').value.trim();
+            const email = document.getElementById('custEmail').value.trim();
+            const newsletter = document.getElementById('custNewsletter').checked;
+            const selectedVariant = document.getElementById('dynamicVariantSelect').value;
+            const address = document.getElementById('custAddress').value.trim();
+            const qty = document.getElementById('modalQty').value;
+            const size = document.getElementById('selectedSize').value;
+
+            if (!size) {
+                const sizeRow = document.getElementById('sizeRow');
+                const sizeErrorMsg = document.getElementById('sizeErrorMsg');
+                sizeErrorMsg.style.display = 'block';
+                sizeRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+
+            document.getElementById('sizeErrorMsg').style.display = 'none';
+            const variantDetails = size ? `Size: ${size}` : selectedVariant;
+            const totalPrice = currentModalProduct.price * qty;
+            const orderDate = new Date().toLocaleString('en-BD', { timeZone: 'Asia/Dhaka' });
+
+            const whatsappMessage = `🛍️ *NEW ORDER - SAJID FASHION*
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+📦 *PRODUCT DETAILS*
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+🏷️ *Product:* ${currentModalProduct.name}
+📂 *Category:* ${currentModalProduct.category.charAt(0).toUpperCase() + currentModalProduct.category.slice(1)}
+💰 *Price:* ৳ ${currentModalProduct.price.toLocaleString()} (Original: ৳${currentModalProduct.oldPrice.toLocaleString()})
+🎨 *${currentModalProduct.variantType}:* ${variantDetails}
+🔢 *Quantity:* ${qty}
+💵 *Subtotal:* ৳ ${totalPrice.toLocaleString()}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+👤 *CUSTOMER INFORMATION*
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+👤 *Name:* ${name}
+📱 *Phone:* ${phone}
+📧 *Email:* ${email || 'Not provided'}
+📬 *Newsletter:* ${newsletter ? '✅ Subscribed' : '❌ Not subscribed'}
+📍 *Address:* ${address}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+📅 *ORDER METADATA*
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+🕐 *Order Time:* ${orderDate}
+🌐 *Source:* SAJID FASHION Website
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ *Please confirm availability & delivery schedule.*`;
+
+            const whatsappUrl = `https://wa.me/${MY_WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
+            window.open(whatsappUrl, '_blank');
+            showSuccessAlert();
+            closeOrderModal();
+            document.getElementById('orderForm').reset();
+        }
+
+        function handleNewsletterSubmit(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('newsletterEmailInput');
+            const emailVal = emailInput.value.trim();
+            if (!emailVal) return;
+
+            const nlMessage = `📬 *NEW NEWSLETTER SUBSCRIPTION*\n\n` +
+                `Hello Sajid Fashion, I would like to subscribe to your newsletter for new offers and merch updates.\n\n` +
+                `📧 *Subscriber Email:* ${emailVal}`;
+
+            const waLink = `https://wa.me/${MY_WHATSAPP_NUMBER}?text=${encodeURIComponent(nlMessage)}`;
+            window.open(waLink, '_blank');
+            emailInput.value = '';
+            alert(currentLang === 'bn'
+                ? 'ধন্যবাদ! আপনার নিউজলেটার সাবস্ক্রিপশন নিশ্চিত করতে হোয়াটসঅ্যাপ ওপেন হয়েছে।'
+                : 'Thank you! WhatsApp opened to confirm your newsletter subscription.');
+        }
+
+        function showSuccessAlert() {
+            const alert = document.createElement('div');
+            alert.className = 'order-success-alert';
+            alert.innerHTML = `
+                <div class="alert-content">
+                    <div class="alert-icon"><i data-lucide="check-circle" style="width:48px;height:48px;"></i></div>
+                    <h3>${currentLang === 'bn' ? 'অর্ডার সফলভাবে সম্পন্ন হয়েছে!' : 'Order Placed Successfully!'}</h3>
+                    <p>${currentLang === 'bn' ? 'অর্ডারের বিবরণসহ হোয়াটসঅ্যাপ ওপেন হয়েছে। সম্পন্ন করতে Send বাটনে চাপ দিন।' : 'WhatsApp opened with your order details. Click <strong>Send</strong> to complete.'}</p>
+                    <button onclick="this.closest('.order-success-alert').remove()">${currentLang === 'bn' ? 'ঠিক আছে' : 'Got It'}</button>
+                </div>
+            `;
+            document.body.appendChild(alert);
+            if (window.lucide) lucide.createIcons();
+            setTimeout(() => { if (alert.parentNode) alert.remove(); }, 5000);
+        }
+
+        function toggleWaChat() { document.getElementById('waChatBox').classList.toggle('active'); }
+
+        function sendDirectChatMessage() {
+            const name = document.getElementById('waDirectName').value.trim();
+            const msg = document.getElementById('waDirectMsg').value.trim();
+            if (!name || !msg) {
+                alert(currentLang === 'bn' ? "দয়া করে নাম এবং মেসেজ উভয়ই পূরণ করুন।" : "Please fill both name and inquiry message.");
+                return;
+            }
+            const queryText = `💬 *CUSTOMER GENERAL INQUIRY*\n------------------------------------\n👤 *Name:* ${name}\n📝 *Message:* ${msg}\n------------------------------------`;
+            window.open(`https://wa.me/${MY_WHATSAPP_NUMBER}?text=${encodeURIComponent(queryText)}`, '_blank');
+            document.getElementById('waDirectMsg').value = '';
+            toggleWaChat();
+        }
+
+        const themeBtn = document.getElementById('themeToggle');
+        const html = document.documentElement;
+
+        themeBtn.addEventListener('click', () => {
+            const current = html.getAttribute('data-theme');
+            const targetTheme = current === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', targetTheme);
+            themeBtn.innerHTML = targetTheme === 'dark' ? '<i data-lucide="sun" style="width:18px; height:18px;"></i>' : '<i data-lucide="moon" style="width:18px; height:18px;"></i>';
+            if (window.lucide) lucide.createIcons();
+        });
+
+        const filterToggle = document.getElementById('filterToggle');
+        const filterSidebar = document.querySelector('.filter-sidebar');
+        const filterOverlay = document.getElementById('filterOverlay');
+
+        filterToggle?.addEventListener('click', () => {
+            const isOpen = filterSidebar.classList.contains('open');
+            if (isOpen) {
+                closeFilterSidebar();
+            } else {
+                filterSidebar.classList.add('open');
+                filterOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+
+        function closeFilterSidebar() {
+            filterSidebar.classList.remove('open');
+            filterOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        filterOverlay?.addEventListener('click', closeFilterSidebar);
+
+        document.querySelectorAll('.cat-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                if (window.innerWidth <= 900) closeFilterSidebar();
+            });
+        });
+
+        function scrollToProducts(e) {
+            e.preventDefault();
+            const target = document.getElementById('productsGrid');
+            if (target) {
+                const header = document.querySelector('header');
+                const headerHeight = header ? header.offsetHeight : 80;
+                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+                window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+            }
+        }
+
+        // পেজ লোড হলে ডিফল্ট বাংলা চালু
+        document.addEventListener('DOMContentLoaded', () => {
+            changeLanguage('bn');
+            if (window.lucide) lucide.createIcons();
+        });
+
+        window.addEventListener('load', () => {
+            if (window.lucide) lucide.createIcons();
+        });
+    </script>
+</body>
+
+</html>

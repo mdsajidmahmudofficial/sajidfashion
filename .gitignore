@@ -1,0 +1,5 @@
+*.psd
+Git/
+Thumbs.db
+desktop.ini
+node_modules/

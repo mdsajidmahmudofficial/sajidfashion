@@ -31,6 +31,7 @@
             --input-bg: #f8fafc;
             --input-text: #000000;
             --primary: #ff6200;
+            --primary-rgb: 255, 98, 0;
             --primary-hover: #e55800;
             --primary-gradient: linear-gradient(135deg, #ff6200 0%, #ff7b29 100%);
             --accent-green: #10b981;
@@ -54,6 +55,7 @@
             --input-bg: #161d2b;
             --input-text: #ffffff;
             --primary: #ff6200;
+            --primary-rgb: 255, 98, 0;
             --primary-hover: #ff751a;
             --primary-gradient: linear-gradient(135deg, #ff6200 0%, #ff8533 100%);
             --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.6);
@@ -90,6 +92,8 @@
             background-color: var(--bg-body);
             color: var(--text-main);
             min-height: 100vh;
+            font-size: 17px;
+            line-height: 1.7;
         }
 
         header {
@@ -1000,11 +1004,11 @@
             align-items: center;
             gap: 8px;
             padding: 12px 16px;
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.2);
+            background: rgba(var(--primary-rgb), 0.1);
+            border: 1px solid rgba(var(--primary-rgb), 0.2);
             border-radius: 10px;
-            color: #10b981;
-            font-size: 13px;
+            color: var(--primary);
+            font-size: 14.5px;
             font-weight: 600;
             margin-top: auto;
         }
@@ -1040,9 +1044,9 @@
         }
 
         .modal-desc {
-            font-size: 13.5px;
+            font-size: 17px;
             color: var(--text-muted);
-            line-height: 1.65;
+            line-height: 1.75;
         }
 
         .modal-price-box {
@@ -1090,25 +1094,39 @@
         }
 
         .size-inline-label {
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 700;
             color: var(--text-main);
         }
 
+        .size-guide-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-start;
+        }
+
+        /* 🔴 সাইজ গাইড: একদম ক্লিন টেক্সট লুক (বাটন নয়) 🔴 */
         .btn-size-guide-link {
             background: none;
             border: none;
             color: var(--text-muted);
-            font-size: 13px;
+            font-size: 15px;
             font-weight: 600;
-            text-decoration: underline;
             cursor: pointer;
             padding: 0;
             transition: color 0.2s;
+            display: inline-flex;
+            align-items: center;
         }
 
         .btn-size-guide-link:hover {
             color: var(--primary);
+        }
+
+        .btn-size-guide-link svg {
+            flex-shrink: 0;
+            color: inherit;
         }
 
         .modal-size-buttons {
@@ -1118,16 +1136,16 @@
         }
 
         .modal-size-btn {
-            padding: 9px 14px;
+            padding: 11px 16px;
             border: 2px solid var(--border-color);
             background: var(--bg-surface);
             color: var(--text-main);
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 600;
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.2s;
-            min-width: 52px;
+            min-width: 56px;
         }
 
         .modal-size-btn:hover,
@@ -1166,8 +1184,8 @@
         .quality-accordion-body {
             display: none;
             padding: 0 4px 18px;
-            font-size: 13.5px;
-            line-height: 1.65;
+            font-size: 16px;
+            line-height: 1.75;
             color: var(--text-main);
         }
 
@@ -1212,7 +1230,7 @@
 
         .modal-section-label {
             display: block;
-            font-size: 12px;
+            font-size: 14.5px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -1266,12 +1284,13 @@
         }
 
         .form-header-title {
-            font-size: 18px;
+            font-size: 24px;
             font-weight: 800;
+            color: var(--primary);
         }
 
         .form-subtitle {
-            font-size: 12.5px;
+            font-size: 16.5px;
             color: var(--text-muted);
             margin-bottom: 6px;
         }
@@ -1282,7 +1301,7 @@
 
         .input-row label {
             display: block;
-            font-size: 11px;
+            font-size: 14.5px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -1299,7 +1318,7 @@
             color: var(--input-text);
             padding: 11px 14px;
             border-radius: 10px;
-            font-size: 13px;
+            font-size: 15px;
             outline: none;
         }
 
@@ -1315,7 +1334,7 @@
             align-items: center;
             gap: 8px;
             cursor: pointer;
-            font-size: 13px;
+            font-size: 14.5px;
             color: var(--text-main);
             font-weight: 500;
         }
@@ -1323,18 +1342,18 @@
         .checkbox-row input[type="checkbox"] {
             width: 16px;
             height: 16px;
-            accent-color: #25d366;
+            accent-color: var(--primary);
             cursor: pointer;
         }
 
         .btn-confirm-wa {
-            background: #25d366;
+            background: var(--primary);
             color: #ffffff;
             border: none;
             width: 100%;
             padding: 15px;
             border-radius: 12px;
-            font-size: 15px;
+            font-size: 16.5px;
             font-weight: 700;
             cursor: pointer;
             display: flex;
@@ -1346,9 +1365,9 @@
         }
 
         .btn-confirm-wa:hover {
-            background: #1eb954;
+            background: var(--primary-hover);
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 10px 30px rgba(255, 98, 0, 0.4);
         }
 
         /* ================= SIZE GUIDE MODAL ================= */
@@ -1489,8 +1508,8 @@
             background: var(--input-bg);
             border-radius: 14px;
             padding: 16px 18px;
-            font-size: 12.8px;
-            line-height: 1.65;
+            font-size: 15.5px;
+            line-height: 1.75;
             color: var(--text-muted);
             border-left: 4px solid var(--primary);
         }
@@ -1625,7 +1644,7 @@
         }
 
         .wa-chat-top {
-            background: #25d366;
+            background: var(--primary);
             color: #ffffff;
             padding: 14px 16px;
             display: flex;
@@ -1663,7 +1682,7 @@
         }
 
         .btn-send-wa-chat {
-            background: #25d366;
+            background: var(--primary);
             color: #ffffff;
             border: none;
             padding: 10px;
@@ -1675,16 +1694,21 @@
             justify-content: center;
             gap: 6px;
             cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-send-wa-chat:hover {
+            background: var(--primary-hover);
         }
 
         .wa-round-trigger {
             width: 58px;
             height: 58px;
-            background: #25d366;
+            background: var(--primary);
             color: #ffffff;
             border: none;
             border-radius: 50%;
-            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 10px 25px rgba(var(--primary-rgb), 0.4);
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -2254,7 +2278,7 @@
         </div>
         <div class="footer-copyright">
             © 2026 Sajid Fashion
-            <div style="margin-top: 8px; font-size: 12px; color: rgba(255, 255, 255, 0.6);">
+            <div style="margin-top: 8px; font-size: 14.5px; color: rgba(255, 255, 255, 0.6);">
                 Designed by <a href="https://www.facebook.com/mdsajidmahmudofficial" target="_blank"
                     style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-weight: 600;">MD SAJID
                     MAHMUD</a>
@@ -2292,7 +2316,6 @@
                 <div class="modal-product-info">
                     <h2 id="modalProductTitle">Product Title</h2>
                     <p class="modal-product-category" id="modalProductCategory">Category</p>
-                    <p id="modalProductDesc" class="modal-desc"></p>
 
                     <div class="modal-price-box">
                         <span class="active-price">৳ <span id="modalProductPrice">0</span></span>
@@ -2302,14 +2325,29 @@
                 </div>
 
                 <div class="size-select-section" id="sizeRow" style="display: none;">
-                    <div class="size-guide-inline-row">
-                        <span class="size-inline-label" id="txt-modal-size-lbl">সাইজ নির্বাচন করুন:</span>
+                    <div class="size-guide-stack">
+                        <!-- 🔴 ছবির মতো স্বাভাবিক টেক্সট স্টাইলে রুলার আইকনসহ সাইজ গাইড 🔴 -->
                         <button type="button" class="btn-size-guide-link" id="txt-modal-sizeguide-btn"
-                            onclick="openSizeGuideModal()">সাইজ গাইড</button>
+                            onclick="openSizeGuideModal()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"
+                                stroke-linejoin="round" style="margin-right: 6px;">
+                                <g transform="rotate(90 12 12)">
+                                    <path
+                                        d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z" />
+                                    <path d="m14.5 12.5 2-2" />
+                                    <path d="m11.5 9.5 2-2" />
+                                    <path d="m8.5 6.5 2-2" />
+                                    <path d="m17.5 15.5 2-2" />
+                                </g>
+                            </svg>
+                            <span id="txt-modal-sizeguide-btn-text">সাইজ গাইড</span>
+                        </button>
+                        <span class="size-inline-label" id="txt-modal-size-lbl">সাইজ</span>
                     </div>
                     <div class="modal-size-buttons" id="modalSizeButtons"></div>
                     <p class="size-error-msg" id="sizeErrorMsg"
-                        style="display: none; color: #ef4444; font-size: 12px; font-weight: 600; margin-top: 8px;">
+                        style="display: none; color: #ef4444; font-size: 14.5px; font-weight: 600; margin-top: 8px;">
                         অনুগ্রহ করে সাইজ নির্বাচন করুন</p>
                 </div>
 
@@ -2392,9 +2430,9 @@
                 <h3 class="size-modal-title" id="sizeGuideModalTitle">Unisex T-Shirt Size Guide</h3>
                 <div style="display: flex; align-items: center; gap: 14px;">
                     <div class="unit-switch-box">
-                        <button type="button" class="unit-switch-btn" id="unitInBtn"
+                        <button type="button" class="unit-switch-btn active" id="unitInBtn"
                             onclick="setSizeUnit('in')">in</button>
-                        <button type="button" class="unit-switch-btn active" id="unitCmBtn"
+                        <button type="button" class="unit-switch-btn" id="unitCmBtn"
                             onclick="setSizeUnit('cm')">cm</button>
                     </div>
                     <button class="modal-close-btn" style="position: static; width:34px; height:34px;"
@@ -2477,14 +2515,14 @@
                 heroShopBtn: "অর্ডার করুন",
                 heroOffer: "স্পেশাল অফার",
                 heroDelivery: "সারাদেশে দ্রুত ডেলিভারি",
-                heroGuarantee: "কোয়ালিটি গ্যারান্টি",
+                heroGuarantee: "প্রিমিয়াম কোয়ালিটি",
 
                 nlTitle: "আমাদের নিউজলেটারে যুক্ত থাকুন",
                 nlInputPlaceholder: "আপনার ইমেইল অ্যাড্রেস",
                 nlBtn: "সাবস্ক্রাইব",
 
                 modalStock: "অর্ডার অনুযায়ী আপনার জন্যই যত্নসহকারে তৈরি!",
-                modalSizeLbl: "সাইজ নির্বাচন করুন:",
+                modalSizeLbl: "সাইজ",
                 modalSizeGuideBtn: "সাইজ গাইড",
                 modalSizeError: "অনুগ্রহ করে সাইজ নির্বাচন করুন",
                 modalQtyLbl: "পরিমাণ",
@@ -2520,8 +2558,8 @@
                     <p><strong>A (দৈর্ঘ্য):</strong> কাঁধের সর্বোচ্চ বিন্দু থেকে কলারের পাশ দিয়ে নিচের বর্ডার পর্যন্ত সোজা পরিমাপ।</p>
                     <p><strong>B (প্রস্থ):</strong> বগলের প্রায় ১ ইঞ্চি নিচ থেকে একপাশের সেলাই থেকে অন্যপাশ পর্যন্ত বুকের প্রস্থ।</p>
                     <p><strong>C (হাতার দৈর্ঘ্য):</strong> পেছনের গলার মাঝখান থেকে হাতার বর্ডার পর্যন্ত পরিমাপ।</p>
-                    <p style="font-size: 11.5px; margin-top: 6px; opacity: 0.85;">* ফেব্রিক ও সুইং প্রক্রিয়ার কারণে মাপে সামান্য (±১ ইঞ্চি / ±২.৫ সেমি) পার্থক্য হতে পারে।</p>
-                    <p style="font-size: 11.5px; margin-top: 6px; opacity: 0.85;"><strong>ফিটিং:</strong> রেগুলার ফিট। যদি দুটি সাইজের মাঝামাঝি হন, তবে বড় সাইজটি বেছে নেওয়ার পরামর্শ দেওয়া হলো।</p>
+                    <p style="font-size: 15px; margin-top: 6px; opacity: 0.85;">* ফেব্রিক ও সুইং প্রক্রিয়ার কারণে মাপে সামান্য (±১ ইঞ্চি / ±২.৫ সেমি) পার্থক্য হতে পারে।</p>
+                    <p style="font-size: 15px; margin-top: 6px; opacity: 0.85;"><strong>ফিটিং:</strong> রেগুলার ফিট। যদি দুটি সাইজের মাঝামাঝি হন, তবে বড় সাইজটি বেছে নেওয়ার পরামর্শ দেওয়া হলো।</p>
                 `
             },
             en: {
@@ -2531,14 +2569,14 @@
                 heroShopBtn: "Shop now",
                 heroOffer: "SPECIAL OFFER",
                 heroDelivery: "Fast Delivery Nationwide",
-                heroGuarantee: "Quality Guaranteed",
+                heroGuarantee: "Premium Quality",
 
                 nlTitle: "Join our newsletter",
                 nlInputPlaceholder: "Email address",
                 nlBtn: "Subscribe",
 
                 modalStock: "Made to order, just for you!",
-                modalSizeLbl: "Select size:",
+                modalSizeLbl: "Size",
                 modalSizeGuideBtn: "Size guide",
                 modalSizeError: "Please select Size",
                 modalQtyLbl: "Quantity",
@@ -2574,8 +2612,8 @@
                     <p><strong>A (Length):</strong> Measured from the highest point of the shoulder, next to the collar, straight down to the bottom hem.</p>
                     <p><strong>B (Width):</strong> Measured straight across the chest, from one side seam to the other, about 1 inch (2.5 cm) below the armpit.</p>
                     <p><strong>C (Sleeve Length):</strong> Measured from the center of the back neck seam to the end of the sleeve hem.</p>
-                    <p style="font-size: 11.5px; margin-top: 6px; opacity: 0.85;">* Measurements may vary by up to ±1 inch (±2.5 cm) due to the manufacturing process and natural fabric relaxation.</p>
-                    <p style="font-size: 11.5px; margin-top: 6px; opacity: 0.85;"><strong>Fit:</strong> Unisex, regular fit. If you are between two sizes, we recommend choosing the larger size.</p>
+                    <p style="font-size: 15px; margin-top: 6px; opacity: 0.85;">* Measurements may vary by up to ±1 inch (±2.5 cm) due to the manufacturing process and natural fabric relaxation.</p>
+                    <p style="font-size: 15px; margin-top: 6px; opacity: 0.85;"><strong>Fit:</strong> Unisex, regular fit. If you are between two sizes, we recommend choosing the larger size.</p>
                 `
             }
         };
@@ -2585,19 +2623,19 @@
             { id: 2, name: "Dad Mode On Graphic Tee", category: "dad-life", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/dad_mode_on_t_shirt_black_mockup/dad_mode_on_t_shirt_black_mockup.png", images: ["T_shirts_image/dad_mode_on_t_shirt_black_mockup/dad_mode_on_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দর্যই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
             { id: 3, name: "The Mountains Are Calling Graphic Tee", category: "nature-adventure", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/the_mountains_are_calling_t_shirt_black_mockup/the_mountains_are_calling_t_shirt_black_mockup.png", images: ["T_shirts_image/the_mountains_are_calling_t_shirt_black_mockup/the_mountains_are_calling_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দর্যই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
             { id: 4, name: "Be The Change Graphic Tee", category: "daily-inspiration", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/be_the_change_t_shirt_black_mockup/be_the_change_t_shirt_black_mockup.png", images: ["T_shirts_image/be_the_change_t_shirt_black_mockup/be_the_change_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দর্যই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
-            { id: 5, name: "Coffee Time Graphic Tee", category: "daily-life", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/coffee_time_t_shirt_black_mockup/coffee_time_t_shirt_black_mockup.png", images: ["T_shirts_image/coffee_time_t_shirt_black_mockup/coffee_time_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দ�ই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
+            { id: 5, name: "Coffee Time Graphic Tee", category: "daily-life", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/coffee_time_t_shirt_black_mockup/coffee_time_t_shirt_black_mockup.png", images: ["T_shirts_image/coffee_time_t_shirt_black_mockup/coffee_time_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দর্যই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
             { id: 6, name: "Dad Jokes Loading Graphic Tee", category: "dad-life", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/dad_jokes_loading_t_shirt_black_mockup/dad_jokes_loading_t_shirt_black_mockup.png", images: ["T_shirts_image/dad_jokes_loading_t_shirt_black_mockup/dad_jokes_loading_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দর্যই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
             { id: 7, name: "Papa Duties Never Retire Graphic Tee", category: "dad-life", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/papa_duties_never_retire_t_shirt_black_mockup/papa_duties_never_retire_t_shirt_black_mockup.png", images: ["T_shirts_image/papa_duties_never_retire_t_shirt_black_mockup/papa_duties_never_retire_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দর্যই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
             { id: 8, name: "Progress Over Perfection Graphic Tee", category: "growth-mindset", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/progress_over_perfection_t_shirt_black_mockup/progress_over_perfection_t_shirt_black_mockup.png", images: ["T_shirts_image/progress_over_perfection_t_shirt_black_mockup/progress_over_perfection_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দর্যই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
             { id: 9, name: "Proud To Be Cool Dad Graphic Tee", category: "dad-life", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/proud_to_be_cool_dad_t_shirt_black_mockup/proud_to_be_cool_dad_t_shirt_black_mockup.png", images: ["T_shirts_image/proud_to_be_cool_dad_t_shirt_black_mockup/proud_to_be_cool_dad_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দর্যই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
             { id: 10, name: "Stronger Every Day Graphic Tee", category: "daily-inspiration", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/stronger_every_day_t_shirt_black_mockup/stronger_every_day_t_shirt_black_mockup.png", images: ["T_shirts_image/stronger_every_day_t_shirt_black_mockup/stronger_every_day_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দর্যই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
             { id: 11, name: "We Are On A Break Graphic Tee", category: "daily-life", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/we_are_on_a_break_t_shirt_black_mockup/we_are_on_a_break_t_shirt_black_mockup.png", images: ["T_shirts_image/we_are_on_a_break_t_shirt_black_mockup/we_are_on_a_break_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দর্যই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
-            { id: 12, name: "Every Step Starts Today Graphic Tee", category: "daily-inspiration", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/every_step_starts_today_t_shirt_black_mockup/every_step_starts_today_t_shirt_black_mockup.png", images: ["T_shirts_image/every_step_starts_today_t_shirt_black_mockup/every_step_starts_today_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দ�ই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
-            { id: 13, name: "Everyday Is A New Chance Graphic Tee", category: "daily-inspiration", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/everyday_is_a_new_chance_t_shirt_black_mockup/everyday_is_a_new_chance_t_shirt_black_mockup.png", images: ["T_shirts_image/everyday_is_a_new_chance_t_shirt_black_mockup/everyday_is_a_new_chance_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দ�ই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
-            { id: 14, name: "Garden Graphic Tee", category: "nature-adventure", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/garden_t_shirt_black_mockup/garden_t_shirt_black_mockup.png", images: ["T_shirts_image/garden_t_shirt_black_mockup/garden_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দযই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
-            { id: 15, name: "Growth And Belive Graphic Tee", category: "growth-mindset", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/growth_and_belive_t_shirt_black_mockup/growth_and_belive_t_shirt_black_mockup.png", images: ["T_shirts_image/growth_and_belive_t_shirt_black_mockup/growth_and_belive_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দযই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
-            { id: 16, name: "Invest In Yourself Graphic Tee", category: "growth-mindset", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/invest_in_yourself_t_shirt_black_mockup/invest_in_yourself_t_shirt_black_mockup.png", images: ["T_shirts_image/invest_in_yourself_t_shirt_black_mockup/invest_in_yourself_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দযই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
-            { id: 17, name: "Never Stop Growing Graphic Tee", category: "growth-mindset", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/never_stop_growing_t_shirt_black_mockup/never_stop_growing_t_shirt_black_mockup.png", images: ["T_shirts_image/never_stop_growing_t_shirt_black_mockup/never_stop_growing_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দযই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] }
+            { id: 12, name: "Every Step Starts Today Graphic Tee", category: "daily-inspiration", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/every_step_starts_today_t_shirt_black_mockup/every_step_starts_today_t_shirt_black_mockup.png", images: ["T_shirts_image/every_step_starts_today_t_shirt_black_mockup/every_step_starts_today_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দর্যই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
+            { id: 13, name: "Everyday Is A New Chance Graphic Tee", category: "daily-inspiration", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/everyday_is_a_new_chance_t_shirt_black_mockup/everyday_is_a_new_chance_t_shirt_black_mockup.png", images: ["T_shirts_image/everyday_is_a_new_chance_t_shirt_black_mockup/everyday_is_a_new_chance_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দর্যই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
+            { id: 14, name: "Garden Graphic Tee", category: "nature-adventure", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/garden_t_shirt_black_mockup/garden_t_shirt_black_mockup.png", images: ["T_shirts_image/garden_t_shirt_black_mockup/garden_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দর্যই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
+            { id: 15, name: "Growth And Belive Graphic Tee", category: "growth-mindset", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/growth_and_belive_t_shirt_black_mockup/growth_and_belive_t_shirt_black_mockup.png", images: ["T_shirts_image/growth_and_belive_t_shirt_black_mockup/growth_and_belive_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দর্যই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
+            { id: 16, name: "Invest In Yourself Graphic Tee", category: "growth-mindset", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/invest_in_yourself_t_shirt_black_mockup/invest_in_yourself_t_shirt_black_mockup.png", images: ["T_shirts_image/invest_in_yourself_t_shirt_black_mockup/invest_in_yourself_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দর্যই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] },
+            { id: 17, name: "Never Stop Growing Graphic Tee", category: "growth-mindset", price: 450, oldPrice: 600, discount: "SAVE 25%", image: "T_shirts_image/never_stop_growing_t_shirt_black_mockup/never_stop_growing_t_shirt_black_mockup.png", images: ["T_shirts_image/never_stop_growing_t_shirt_black_mockup/never_stop_growing_t_shirt_black_mockup.png"], desc: "A T-shirt is more than just something you wear. It's a reflection of your taste, personality, and the way you express yourself. Every design carries its own story and feeling, giving you a chance to show the world who you are, in your own way. Let your style reflect who you are, even in the simplest everyday moments. Because there's something truly special about being yourself.", desc_bn: "একটি টি-শার্ট শুধু পোশাক নয়, এটি আপনার রুচি, ব্যক্তিত্ব আর মনের ভাব প্রকাশের এক অনন্য মাধ্যম। প্রতিটি নকশায় মিশে থাকে আলাদা গল্প, অনুভূতি ও নিজেকে নিজের মতো করে তুলে ধরার ছোঁয়া। প্রতিদিনের সাধারণ মুহূর্তেও আপনার স্টাইল হোক আপনার পরিচয়ের প্রতিচ্ছবি। কারণ, নিজের মতো করে নিজেকে প্রকাশ করার সৌন্দর্যই আলাদা।", variantType: "Color", variants: ["Black"], sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"] }
         ];
 
         let selectedCategory = 'all';
@@ -2808,7 +2846,16 @@
 
             document.getElementById('txt-modal-stock').innerText = d.modalStock;
             document.getElementById('txt-modal-size-lbl').innerText = d.modalSizeLbl;
-            document.getElementById('txt-modal-sizeguide-btn').innerText = d.modalSizeGuideBtn;
+
+            // রুলার আইকন মুছে না দিয়ে শুধু সাইজ গাইডের টেক্সট আপডেট
+            const sgTextElem = document.getElementById('txt-modal-sizeguide-btn-text');
+            if (sgTextElem) {
+                sgTextElem.innerText = d.modalSizeGuideBtn;
+            } else {
+                const sgBtn = document.getElementById('txt-modal-sizeguide-btn');
+                if (sgBtn) sgBtn.innerText = d.modalSizeGuideBtn;
+            }
+
             document.getElementById('sizeErrorMsg').innerText = d.modalSizeError;
             document.getElementById('txt-modal-qty-lbl').innerText = d.modalQtyLbl;
 
@@ -2870,7 +2917,7 @@
 
             document.getElementById('modalProductTitle').innerText = prod.name;
             document.getElementById('modalProductCategory').innerText = prod.category.charAt(0).toUpperCase() + prod.category.slice(1);
-            document.getElementById('modalProductDesc').innerText = (currentLang === 'bn' && prod.desc_bn) ? prod.desc_bn : prod.desc;
+
             document.getElementById('modalProductPrice').innerText = prod.price.toLocaleString();
             document.getElementById('modalProductOldPrice').innerText = prod.oldPrice.toLocaleString();
             document.getElementById('modalDiscount').innerText = prod.discount;
@@ -2906,6 +2953,7 @@
                     btn.onclick = () => selectSize(size, btn);
                     sizeButtons.appendChild(btn);
                 });
+                if (window.lucide) lucide.createIcons();
             } else {
                 sizeRow.style.display = 'none';
             }
